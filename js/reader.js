@@ -15,7 +15,7 @@ function openChapter(id) {
 
   _currentId = id;
 
-  document.getElementById('r-meta').textContent  = ch.tag  || '';
+  document.getElementById('r-meta').innerHTML    = ch.tag  || '';
   document.getElementById('r-title').textContent = ch.title;
   document.getElementById('r-date').textContent  = ch.date || '';
   document.getElementById('r-body').innerHTML    =

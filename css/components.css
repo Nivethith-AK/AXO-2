@@ -60,7 +60,7 @@
 .status-card {
   position: relative;
   border: 1px solid var(--gold-border); max-width: 420px;
-  margin: 0 auto; padding: 40px; background: rgba(14, 14, 14, 0.9);
+  margin: 0 auto; padding: 40px; background: var(--card-bg, rgba(14, 14, 14, 0.9));
 }
 .status-card::before, .status-card::after {
   content: ''; position: absolute; width: 8px; height: 8px; pointer-events: none;
@@ -177,7 +177,7 @@
   align-items: center;
   gap: 12px;
   padding: 8px 20px;
-  background: rgba(14, 14, 14, 0.88);
+  background: var(--card-bg, rgba(14, 14, 14, 0.88));
   border: 1px solid var(--gold-border);
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4), inset 0 0 12px rgba(212, 175, 55, 0.05);
   margin-bottom: 2rem;
@@ -285,7 +285,7 @@
 .infinite-ticker {
   width: 100%;
   overflow: hidden;
-  background: rgba(8, 8, 8, 0.95);
+  background: var(--nav-bg, rgba(8, 8, 8, 0.95));
   border-top: 1px solid var(--gold-line);
   border-bottom: 1px solid var(--gold-line);
   padding: 13px 0;
@@ -350,7 +350,7 @@
 }
 .telemetry-card {
   position: relative;
-  background: rgba(12, 12, 12, 0.88);
+  background: var(--card-bg, rgba(12, 12, 12, 0.88));
   border: 1px solid var(--gold-border);
   padding: 24px 20px;
   text-align: left;

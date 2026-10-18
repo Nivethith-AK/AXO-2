@@ -5,7 +5,7 @@
 #reader-overlay {
   display: none; position: fixed !important; inset: 0 !important;
   width: 100% !important; height: 100vh !important;
-  background: rgba(4,4,4,0.97);
+  background: var(--section-bg, rgba(4,4,4,0.97));
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
   z-index: 9500 !important; overflow-y: auto;
@@ -54,9 +54,9 @@
   position: fixed; top: 24px; right: var(--gutter);
   font-family: var(--font-mono); font-size: 0.82rem;
   font-weight: 600;
-  letter-spacing: 0.25em; color: var(--fg-mid);
+  letter-spacing: 0.25em; color: var(--fg);
   text-transform: uppercase; z-index: 9600;
-  transition: color 0.3s; background: rgba(14,14,14,0.8);
+  transition: color 0.3s; background: var(--card-bg, rgba(14,14,14,0.8));
   border: 1px solid var(--gold-border); padding: 8px 16px; cursor: pointer;
 }
 .reader-close:hover { color: var(--gold); border-color: var(--gold); }
@@ -68,7 +68,7 @@
 }
 .rnav-btn {
   padding: 22px 26px; border: 1px solid var(--gold-border);
-  background: rgba(14,14,14,0.6); cursor: pointer;
+  background: var(--card-bg, rgba(14,14,14,0.6)); cursor: pointer;
   transition: all 0.42s var(--ease); color: var(--fg);
 }
 .rnav-btn:hover { border-color: var(--gold); background: var(--gold-dim); color: var(--gold-bright); }

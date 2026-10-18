@@ -8,7 +8,14 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Roboto+Mono:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet"/>
-    <link rel="stylesheet" href="css/base.css" />
+    <link rel="stylesheet" href="css/base.css?v=20261019" />
+    <!-- Theme pre-hydration to prevent flash -->
+    <script>
+      (function () {
+        var t = localStorage.getItem("theme") || "dark";
+        document.documentElement.setAttribute("data-theme", t);
+      })();
+    </script>
     <style>
       html, body { margin:0; padding:0; background:var(--bg); color:var(--fg); min-height:100vh; overflow-x:hidden; }
 
@@ -17,7 +24,7 @@
         position:fixed; top:0; left:0; right:0; height:64px;
         display:flex; align-items:center; justify-content:space-between;
         padding:0 clamp(16px,5vw,60px);
-        background:rgba(8,8,8,0.95);
+        background:var(--nav-bg);
         border-bottom:1px solid var(--gold-border);
         backdrop-filter:blur(16px); -webkit-backdrop-filter:blur(16px);
         z-index:200;
@@ -130,17 +137,52 @@
         display:flex; align-items:center; justify-content:center;
         gap:14px; padding:0 0 48px; flex-wrap:wrap;
       }
+      /* ── Bottom nav ── */
+      .ch-bottom-nav {
+        display:flex; align-items:center; justify-content:center;
+        gap:14px; padding:0 0 48px; flex-wrap:wrap;
+      }
       .ch-nav-btn {
         font-family:var(--font-display); font-size:0.8rem;
         font-weight:700;
         letter-spacing:0.2em; text-transform:uppercase;
-        color:var(--fg); background:rgba(14,14,14,0.6);
+        color:var(--fg); background:var(--card-bg);
         border:1px solid var(--gold-border);
         padding:14px 28px; cursor:pointer;
         transition:all 0.28s;
       }
       .ch-nav-btn:hover:not([disabled]) { border-color:var(--gold); color:var(--gold-bright); background:var(--gold-dim); }
       .ch-nav-btn[disabled] { opacity:0.3; pointer-events:none; }
+
+      /* ── Theme toggle button (topbar) ───────────────────── */
+      #theme-toggle {
+        display: inline-flex; align-items: center; justify-content: center;
+        width: 32px; height: 32px;
+        background: none; border: none; cursor: pointer;
+        padding: 0; flex-shrink: 0;
+        color: var(--gold); opacity: 0.85;
+        transition: opacity 0.3s, transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), color 0.3s;
+      }
+      #theme-toggle:hover {
+        opacity: 1; transform: rotate(24deg) scale(1.1); color: var(--gold-bright);
+      }
+      #theme-toggle svg {
+        display: block; width: 18px; height: 18px; stroke: currentColor;
+      }
+      :root:not([data-theme="light"]) #theme-toggle .moon-icon,
+      [data-theme="dark"] #theme-toggle .moon-icon {
+        display: none !important;
+      }
+      :root:not([data-theme="light"]) #theme-toggle .sun-icon,
+      [data-theme="dark"] #theme-toggle .sun-icon {
+        display: block !important;
+      }
+      [data-theme="light"] #theme-toggle .sun-icon {
+        display: none !important;
+      }
+      [data-theme="light"] #theme-toggle .moon-icon {
+        display: block !important;
+      }
 
       /* ── Loading / Error ── */
       .ch-loading {
@@ -168,15 +210,33 @@
     <header class="ch-topbar">
       <a href="index.html#archive" class="ch-back">← Archive</a>
       <span class="ch-bar-title" id="bar-title"></span>
-      <span class="ch-page-counter" id="page-counter"></span>
+      <div style="display:flex;align-items:center;gap:1.2rem;">
+        <span class="ch-page-counter" id="page-counter"></span>
+        <button id="theme-toggle" aria-label="Toggle theme" title="Toggle Light / Dark mode">
+          <svg class="theme-icon sun-icon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="5"></circle>
+            <line x1="12" y1="1" x2="12" y2="3"></line>
+            <line x1="12" y1="21" x2="12" y2="23"></line>
+            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+            <line x1="1" y1="12" x2="3" y2="12"></line>
+            <line x1="21" y1="12" x2="23" y2="12"></line>
+            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+          </svg>
+          <svg class="theme-icon moon-icon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+          </svg>
+        </button>
+      </div>
     </header>
 
     <main class="ch-stage" id="ch-stage">
       <div class="ch-loading" id="ch-loading">Accessing Record…</div>
     </main>
 
-    <script src="js/canvas-loading.js"></script>
-    <script src="js/chapters.js"></script>
+    <script src="js/canvas-loading.js?v=20261019"></script>
+    <script src="js/chapters.js?v=20261019"></script>
     <script>
     (function() {
       const params  = new URLSearchParams(window.location.search);
@@ -321,6 +381,17 @@
       // Set src only once here — onerror attached before assignment
       img.onerror = handleImgError;
       img.src = `assets/chapters/${ch.id}/${ch.id}-1.png`;
+
+      /* ── Theme toggle ── */
+      const themeBtn = document.getElementById('theme-toggle');
+      if (themeBtn) {
+        themeBtn.addEventListener('click', () => {
+          const cur = document.documentElement.getAttribute('data-theme') || 'dark';
+          const next = cur === 'dark' ? 'light' : 'dark';
+          document.documentElement.setAttribute('data-theme', next);
+          localStorage.setItem('theme', next);
+        });
+      }
 
     })();
     </script>

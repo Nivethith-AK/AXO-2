@@ -26,7 +26,7 @@
 .form-field input,
 .form-field textarea,
 .form-field select {
-  background: rgba(14, 14, 14, 0.9);
+  background: var(--input-bg, rgba(14, 14, 14, 0.9));
   border: 1px solid var(--gold-border);
   color: var(--fg);
   font-family: var(--font-body);
@@ -41,12 +41,12 @@
   width: 100%;
 }
 .form-field input::placeholder,
-.form-field textarea::placeholder { color: #777777; font-style: normal; }
+.form-field textarea::placeholder { color: var(--fg-dim); font-style: normal; }
 .form-field input:focus,
 .form-field textarea:focus,
 .form-field select:focus {
   border-color: var(--gold);
-  background: rgba(20, 20, 20, 0.95);
+  background: var(--bg-raised, rgba(20, 20, 20, 0.95));
   box-shadow: 0 0 12px rgba(212, 175, 55, 0.2);
 }
 

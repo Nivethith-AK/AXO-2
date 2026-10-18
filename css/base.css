@@ -4,13 +4,13 @@
 
 @import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Roboto+Mono:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&display=swap');
 
-:root {
+:root, [data-theme="dark"] {
   --bg:           #060606;
   --bg-raised:    #0e0e0e;
   --surface:      rgba(255,255,255,0.04);
   --surface-alt:  rgba(255,255,255,0.07);
 
-  /* Boosted fg values for high readability and visibility */
+  /* High contrast dark mode foreground tokens */
   --fg:           #ffffff;
   --fg-mid:       #d2d2d2;
   --fg-dim:       #9a9a9a;
@@ -21,6 +21,11 @@
   --gold-border:  rgba(212,175,55,0.3);
   --gold-line:    rgba(212,175,55,0.16);
   --gold-glow:    rgba(212,175,55,0.35);
+
+  --section-bg:   rgba(8, 8, 8, 0.92);
+  --card-bg:      rgba(12, 12, 12, 0.90);
+  --nav-bg:       rgba(6, 6, 6, 0.88);
+  --input-bg:     rgba(255, 255, 255, 0.03);
 
   --font-display: 'Orbitron', 'Cormorant Garamond', sans-serif;
   --font-sc:      'Orbitron', sans-serif;
@@ -35,6 +40,44 @@
   --ease-in: cubic-bezier(0.4, 0, 1, 1);
 }
 
+/* ── LIGHT MODE (matching theaxolotlmusic.com design tokens) ── */
+[data-theme="light"] {
+  --bg:           #f7f7f9;
+  --bg-raised:    #ffffff;
+  --surface:      rgba(0,0,0,0.03);
+  --surface-alt:  rgba(0,0,0,0.06);
+
+  /* High contrast light mode foreground tokens */
+  --fg:           #0c0c0c;
+  --fg-mid:       #3a3a3a;
+  --fg-dim:       #686868;
+
+  --gold:         #9e7714;
+  --gold-bright:  #805c06;
+  --gold-dim:     rgba(158,119,20,0.10);
+  --gold-border:  rgba(158,119,20,0.35);
+  --gold-line:    rgba(158,119,20,0.20);
+  --gold-glow:    rgba(158,119,20,0.22);
+
+  --section-bg:   rgba(252, 252, 254, 0.95);
+  --card-bg:      rgba(255, 255, 255, 0.96);
+  --nav-bg:       rgba(247, 247, 249, 0.92);
+  --input-bg:     rgba(0, 0, 0, 0.03);
+}
+
+/* Light mode celestial background inversion */
+[data-theme="light"] #cc {
+  opacity: 0.38;
+  filter: invert(0.96) hue-rotate(180deg);
+}
+
+/* Glyph preservation helper */
+.glyph-preserve {
+  text-transform: none !important;
+  font-style: normal;
+  display: inline-block;
+}
+
 *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
 
 html {
@@ -46,6 +89,7 @@ html {
   scroll-behavior: smooth;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  transition: background-color 0.4s ease, color 0.4s ease;
 }
 
 body { min-height: 100vh; overflow-x: hidden; }

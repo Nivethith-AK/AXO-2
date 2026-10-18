@@ -20,7 +20,7 @@ const VOLUMES = [
         id: '0',
         title: 'When We Met',
         date: '2026.11.02',
-        tag: 'Record — Vol. I · α',
+        tag: 'Record — Vol. I · <span class="glyph-preserve">α</span>',
         displayNum: 'α',
         locked: false,
         pages: 2,
@@ -68,13 +68,13 @@ const VOLUMES = [
           <p>"For I am Azrael, the Summoner of Souls, and the Archangel of Death. Thou may address me as… Rae." She finished her introduction in a theatrical way. Her wings then withered out of existence into the black flaming smoke from which they had first erupted from.</p>
           <p>There was a moment of silence; all that could be heard was the hustling wind, and the humming computer. Azrael continued to stare at me with her fixed expression, before raising an eyebrow.</p>
           <p>"Well? Say something," she tilted her head, expecting some kind of reaction from me. While my face — by contrast, looked like the identical twin of a Moyai Statue made of wet concrete.</p>
-          <p>I closed my eyes, letting out a sigh, and turned to my computer to leave it in sleep-mode. I took the long elastic hair tie from my table and wrapped it around my wrist, before finally sluggishly getting off my chair, and walking right passed Azrael.</p>
+          <p>I closed my eyes, letting out a sigh, and turned to my computer to leave it in sleep-mode. I took the long elastic hair tie from my table and wrapped it around my wrist, before finally sluggishly getting off my chair, and walking right past Azrael.</p>
           <p>Her expression turned from confusion to complete shock, staring blankly at where I was sitting moments ago, as I walked past her.</p>
           <p>"W-wait, huh?!" she exclaimed, her voice abandoning its previous calm composure. Now, it was infused with bewildered disbelief, rising in pitch as if she had been physically bitch-slapped in public.</p>
           <p>I slid into my bed, under the sheets of both clean and dirty laundry — which I couldn't tell apart. My eyelids weighed heavy with exhaustion, as Azrael's rants from across the room demanded a response. With a sigh, all I could muster up was a defeated whisper:</p>
           <p><em>"Well, fuck my life."</em></p>
           <p style="text-align:center;color:var(--gold);letter-spacing:0.5em;font-size:0.8rem;">✦ ✦ ✦</p>
-          <p style="text-align:center;font-family:var(--font-mono);font-size:0.5rem;letter-spacing:0.5em;text-transform:uppercase;color:var(--fg-dim);margin-top:2rem;">End of Record α</p>
+          <p style="text-align:center;font-family:var(--font-mono);font-size:0.78rem;letter-spacing:0.35em;text-transform:uppercase;color:var(--fg-dim);margin-top:2rem;">End of Record <span class="glyph-preserve">α</span></p>
         `,
       },
       {
@@ -125,10 +125,10 @@ const VOLUMES = [
           <p>She closed her eyes, and relaxed her face into a gentle smile before answering. "It's like I said, I'm here to make sure you stay alive."</p>
           <p>"Why would the angel of death be here to make sure I'm not going to die?"</p>
           <p>"That's because it's a part of my job too." She said, tilting her head to the side.</p>
-          <p><em>"Do you happened to have a death wish, Adoniel?"</em></p>
+          <p><em>"Do you happen to have a death wish, Adoniel?"</em></p>
           <p>More silence ensued. She said my first name, one that I haven't heard being addressed by in ages.</p>
           <p><em>"If this life you were living till now was peaceful, then was it really something without a death wish?"</em></p>
-          <p style="text-align:center;font-family:var(--font-mono);font-size:0.5rem;letter-spacing:0.5em;text-transform:uppercase;color:var(--fg-dim);margin-top:2rem;">End of Record I</p>
+          <p style="text-align:center;font-family:var(--font-mono);font-size:0.78rem;letter-spacing:0.35em;text-transform:uppercase;color:var(--fg-dim);margin-top:2rem;">End of Record I</p>
         `,
       },
       { id: '2', title: 'Solace in Death', date: '', tag: 'Record — Vol. I · II',  displayNum: 'II',  locked: true, pages: 0 },
