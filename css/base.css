@@ -60,4 +60,4 @@ button { background: none; border: none; cursor: pointer; color: inherit; font-f
 ::-webkit-scrollbar-thumb { background: var(--gold-border); border-radius: 2px; }
 
 #cc { position: fixed; inset: 0; z-index: 0; pointer-events: none; }
-body > *:not(#cc) { position: relative; z-index: 1; }
+body > *:not(#cc):not(.mm-nav):not(#reader-overlay):not(#ls-overlay) { position: relative; z-index: 1; }
