@@ -1,0 +1,62 @@
+/* ============================================================
+   ARCHIVE — chapter list, volume headers
+   ============================================================ */
+
+.vol-header {
+  display: flex; align-items: center; gap: 2rem; margin: 56px 0 32px;
+}
+.vol-label {
+  font-family: var(--font-mono); font-size: 0.82rem;
+  letter-spacing: 0.28em; text-transform: uppercase;
+  color: var(--gold); white-space: nowrap; opacity: 1;
+  font-weight: 600;
+}
+.vol-line {
+  flex: 1; height: 1px;
+  background: linear-gradient(to right, var(--gold-border), transparent);
+}
+
+.ch-list { max-width: 820px; margin: 0 auto; }
+
+.ch-row {
+  display: grid;
+  grid-template-columns: 58px 1fr auto;
+  align-items: center; gap: 1.6rem;
+  padding: 22px 0;
+  border-bottom: 1px solid var(--gold-line);
+  cursor: pointer;
+  transition: background 0.3s;
+}
+.ch-row:first-child { border-top: 1px solid var(--gold-line); }
+.ch-row:not(.locked):hover { background: rgba(201,168,76,0.04); }
+.ch-row:not(.locked):hover .ch-num  { color: var(--gold-bright); }
+.ch-row:not(.locked):hover .ch-name { color: var(--gold); transform: translateX(5px); }
+.ch-row:not(.locked):hover .ch-arr  { opacity: 1; transform: translateX(0); color: var(--gold); }
+.ch-row.locked { opacity: 0.45; pointer-events: none; }
+
+.ch-num {
+  font-family: var(--font-display); font-size: 0.95rem;
+  font-weight: 700;
+  letter-spacing: 0.15em; color: var(--gold);
+  transition: color 0.38s;
+}
+.ch-info { display: flex; flex-direction: column; gap: 6px; }
+.ch-name {
+  font-family: var(--font-display); font-size: 1.2rem;
+  font-weight: 600; letter-spacing: 0.08em; color: var(--fg);
+  transition: color 0.38s var(--ease), transform 0.38s var(--ease);
+}
+.ch-date {
+  font-family: var(--font-mono); font-size: 0.78rem;
+  letter-spacing: 0.15em; color: var(--fg-mid);
+}
+.ch-arr {
+  font-size: 1rem; color: var(--gold);
+  opacity: 0.6; transform: translateX(-4px);
+  transition: all 0.38s var(--ease);
+}
+
+@media (max-width: 600px) {
+  .ch-row { grid-template-columns: 48px 1fr; }
+  .ch-arr { display: none; }
+}

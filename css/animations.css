@@ -1,0 +1,52 @@
+/* ============================================================
+   ANIMATIONS — keyframes, fade-in system
+   ============================================================ */
+
+/* ── FADE-IN ─────────────────────────────────────────────── */
+.fi {
+  opacity: 0; transform: translateY(14px);
+  transition: opacity 0.75s var(--ease), transform 0.75s var(--ease);
+}
+.fi.vis { opacity: 1; transform: translateY(0); }
+.d1{transition-delay:0.06s} .d2{transition-delay:0.12s} .d3{transition-delay:0.18s}
+.d4{transition-delay:0.24s} .d5{transition-delay:0.30s} .d6{transition-delay:0.36s}
+.d7{transition-delay:0.42s}
+
+/* ── ORRERY SPIN ─────────────────────────────────────────── */
+.orrery-spin { animation: orr-spin 110s linear infinite; pointer-events: none; }
+@keyframes orr-spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+
+/* ── HERO ORRERY FADE-IN ─────────────────────────────────── */
+.hero-orrery-wrap {
+  margin-top: 44px; pointer-events: none; opacity: 0;
+  transition: opacity 2.2s 1.2s var(--ease);
+}
+.hero-orrery-wrap.vis { opacity: 0.18; }
+
+/* ── COUNTDOWN FLASH ────────────────────────────────────── */
+@keyframes cd-tick {
+  0%   { transform: translateY(-4px); opacity: 0; }
+  100% { transform: translateY(0);    opacity: 1; }
+}
+.cd-tick { animation: cd-tick 0.22s var(--ease); }
+
+/* ── VIDEO PLACEHOLDER BLINK ─────────────────────────────── */
+@keyframes blink-bracket {
+  0%, 100% { opacity: 0.35; }
+  50%       { opacity: 0.75; }
+}
+
+/* ── LOADING PAGE KEYFRAMES ───────────────────────────────── */
+@keyframes ls-bar-fill {
+  0%   { width: 0%;   opacity: 0.4; }
+  100% { width: 100%; opacity: 1;   }
+}
+@keyframes ls-fade-up {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes ls-pulse-title {
+  0%, 100% { opacity: 0.65; }
+  50%       { opacity: 1; }
+}
+@keyframes sep-pulse { 0%,100%{opacity:1} 50%{opacity:0.08} }

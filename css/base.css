@@ -1,0 +1,63 @@
+/* ============================================================
+   BASE — variables, reset, typography
+   ============================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Roboto+Mono:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&display=swap');
+
+:root {
+  --bg:           #060606;
+  --bg-raised:    #0e0e0e;
+  --surface:      rgba(255,255,255,0.04);
+  --surface-alt:  rgba(255,255,255,0.07);
+
+  /* Boosted fg values for high readability and visibility */
+  --fg:           #ffffff;
+  --fg-mid:       #d2d2d2;
+  --fg-dim:       #9a9a9a;
+
+  --gold:         #d4af37;
+  --gold-bright:  #f3ce65;
+  --gold-dim:     rgba(212,175,55,0.1);
+  --gold-border:  rgba(212,175,55,0.3);
+  --gold-line:    rgba(212,175,55,0.16);
+  --gold-glow:    rgba(212,175,55,0.35);
+
+  --font-display: 'Orbitron', 'Cormorant Garamond', sans-serif;
+  --font-sc:      'Orbitron', sans-serif;
+  --font-body:    'Roboto Mono', monospace;
+  --font-mono:    'Roboto Mono', monospace;
+
+  --nav-h:   72px;
+  --gutter:  clamp(20px, 7vw, 120px);
+  --max-w:   1200px;
+  --read-w:  680px;
+  --ease:    cubic-bezier(0.19, 1, 0.22, 1);
+  --ease-in: cubic-bezier(0.4, 0, 1, 1);
+}
+
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+html {
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--font-body);
+  font-size: 17px;
+  line-height: 1.65;
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body { min-height: 100vh; overflow-x: hidden; }
+
+a      { color: inherit; text-decoration: none; transition: color 0.4s var(--ease), opacity 0.4s; }
+img    { display: block; max-width: 100%; }
+button { background: none; border: none; cursor: pointer; color: inherit; font-family: inherit; }
+
+::selection { background: rgba(201,168,76,0.2); color: var(--fg); }
+::-webkit-scrollbar { width: 3px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--gold-border); border-radius: 2px; }
+
+#cc { position: fixed; inset: 0; z-index: 0; pointer-events: none; }
+body > *:not(#cc) { position: relative; z-index: 1; }

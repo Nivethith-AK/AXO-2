@@ -1,0 +1,650 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Memento Mori</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+SC:wght@300;400&family=Cormorant+Garamond:wght@300;400&family=DM+Mono:wght@300;400&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="css/base.css" />
+    <link rel="stylesheet" href="css/animations.css" />
+    <link rel="stylesheet" href="css/layout.css" />
+    <link rel="stylesheet" href="css/hero.css" />
+    <link rel="stylesheet" href="css/archive.css" />
+    <link rel="stylesheet" href="css/reader.css" />
+    <link rel="stylesheet" href="css/components.css" />
+    <link rel="stylesheet" href="css/forms.css" />
+    <link rel="stylesheet" href="css/loading.css" />
+    <style>
+      #music-toggle {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 32px;
+        height: 32px;
+        background: none;
+        border: none;
+        cursor: pointer;
+        padding: 0;
+        margin-left: 0.4rem;
+        flex-shrink: 0;
+      }
+      .music-icon-wrap {
+        position: relative;
+        width: 19px;
+        height: 19px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .music-icon-wrap img {
+        width: 19px;
+        height: 19px;
+        object-fit: contain;
+        filter: brightness(0) saturate(100%) invert(72%) sepia(44%)
+          saturate(480%) hue-rotate(5deg) brightness(96%);
+        transition:
+          filter 0.3s,
+          opacity 0.3s;
+        display: block;
+        opacity: 0.55;
+      }
+      #music-toggle:hover .music-icon-wrap img {
+        opacity: 1;
+      }
+      #music-toggle.muted .music-icon-wrap img {
+        filter: brightness(0) saturate(0%) invert(55%);
+        opacity: 0.35;
+      }
+      .music-mute-line {
+        position: absolute;
+        inset: 0;
+        pointer-events: none;
+      }
+      .music-mute-line line {
+        stroke: #a8a8a8;
+        stroke-width: 1.8;
+        stroke-linecap: round;
+        opacity: 0;
+        transition: opacity 0.25s;
+      }
+      #music-toggle.muted .music-mute-line line {
+        opacity: 1;
+      }
+      @media (max-width: 880px) {
+        #music-toggle {
+          position: fixed;
+          top: 0;
+          right: calc(var(--gutter) + 38px + 14px);
+          height: var(--nav-h);
+          width: 36px;
+          margin: 0;
+          z-index: 9001;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <canvas id="cc"></canvas>
+
+    <div id="ls-overlay">
+      <span class="ls-presents">Δxolotl &nbsp;&nbsp;presents</span>
+      <h1 class="ls-title" id="ls-title">Memento Mori</h1>
+      <div class="ls-cipher" id="ls-cipher">&nbsp;</div>
+      <div class="ls-bar-wrap"><div class="ls-bar" id="ls-bar"></div></div>
+      <span class="ls-sub" id="ls-sub">Accessing Archives</span>
+    </div>
+
+    <!-- Note: Custom loop logic added via JS, loop attribute removed -->
+    <audio id="bg-audio" preload="auto">
+      <source
+        src="https://res.cloudinary.com/demeossfk/video/upload/v1778352089/To_Eternity_and_After_kp6xtm.m4a"
+        type="audio/mp4"
+      />
+    </audio>
+
+    <nav class="mm-nav" id="mm-nav">
+      <a href="#home" class="nav-mark">Memento Mori</a>
+      <div class="nav-links" id="nav-links">
+        <a href="#about" class="nav-link" data-sec="about">About</a>
+        <a href="#archive" class="nav-link" data-sec="archive">Archive</a>
+        <a href="#soundtracks" class="nav-link" data-sec="soundtracks"
+          >Soundtracks</a
+        >
+        <a href="#shop" class="nav-link" data-sec="shop">Shop</a>
+        <a href="#contact" class="nav-link" data-sec="contact">Contact</a>
+      </div>
+      <button id="music-toggle" aria-label="Toggle music">
+        <span class="music-icon-wrap">
+          <img src="assets/images/music_icon.png" alt="" aria-hidden="true" />
+          <svg
+            class="music-mute-line"
+            viewBox="0 0 19 19"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <line x1="2" y1="17" x2="17" y2="2" />
+          </svg>
+        </span>
+      </button>
+      <button class="nav-tog" id="nav-tog" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </nav>
+
+    <div id="reader-overlay">
+      <button class="reader-close" onclick="closeReader()">
+        ✕ &nbsp;Close
+      </button>
+      <div class="reader-inner">
+        <header class="reader-header">
+          <span class="r-meta" id="r-meta"></span>
+          <h2 class="r-title" id="r-title"></h2>
+          <span class="r-date" id="r-date"></span>
+        </header>
+        <div class="reader-body" id="r-body"></div>
+        <nav class="reader-nav">
+          <button class="rnav-btn prev" id="r-prev" onclick="navChapter(-1)">
+            <span class="dir">← Previous</span
+            ><span class="rtitle" id="r-prev-title">—</span>
+          </button>
+          <button class="rnav-btn next" id="r-next" onclick="navChapter(1)">
+            <span class="dir">Next →</span
+            ><span class="rtitle" id="r-next-title">—</span>
+          </button>
+        </nav>
+      </div>
+    </div>
+
+    <section class="hero" id="home">
+      <div class="fi d1">
+        <span class="hero-eyebrow"
+          >Δxolotl &nbsp;·&nbsp; Sacred Archive &nbsp;·&nbsp; 2026</span
+        >
+      </div>
+      <div class="fi d2">
+        <h1 class="hero-title">Memento<br />Mori</h1>
+      </div>
+      <div class="hero-divider fi d3"></div>
+      <div class="fi d4">
+        <p class="hero-desc">
+          Where the stars fail, memory persists. A chronicle of celestial grief,
+          quiet devotion, and the breathless space between.
+        </p>
+      </div>
+      <div class="fi d5">
+        <a href="#archive" class="btn"><span>Enter the Archive</span></a>
+      </div>
+      <div class="hero-orrery-wrap">
+        <svg class="orrery-spin" width="280" height="280" viewBox="0 0 280 280">
+          <circle
+            cx="140"
+            cy="140"
+            r="136"
+            fill="none"
+            stroke="rgba(201,168,76,1)"
+            stroke-width="0.65"
+            stroke-dasharray="2 13"
+          />
+          <circle
+            cx="140"
+            cy="140"
+            r="97"
+            fill="none"
+            stroke="rgba(201,168,76,1)"
+            stroke-width="0.65"
+          />
+          <circle
+            cx="140"
+            cy="140"
+            r="58"
+            fill="none"
+            stroke="rgba(201,168,76,1)"
+            stroke-width="0.65"
+            stroke-dasharray="1 7"
+          />
+          <circle
+            cx="140"
+            cy="140"
+            r="20"
+            fill="none"
+            stroke="rgba(201,168,76,1)"
+            stroke-width="0.65"
+          />
+          <circle cx="140" cy="4" r="4.2" fill="rgba(201,168,76,1)" />
+          <circle cx="43" cy="140" r="2.4" fill="rgba(201,168,76,1)" />
+          <circle cx="237" cy="140" r="1.8" fill="rgba(201,168,76,1)" />
+        </svg>
+      </div>
+    </section>
+
+    <section class="sec" id="about">
+      <div class="sec-inner">
+        <div class="grid-2-fixed">
+          <div>
+            <div class="fi"><div class="sec-label">The Series</div></div>
+            <div class="fi d1">
+              <h2 class="sec-title">Celestial<br />Sovereignty</h2>
+            </div>
+            <div class="fi d2" style="margin-bottom: 1rem">
+              <span
+                style="
+                  font-family: var(--font-mono);
+                  font-size: 0.48rem;
+                  letter-spacing: 0.44em;
+                  text-transform: uppercase;
+                  color: var(--gold);
+                  opacity: 0.62;
+                "
+                >[ Celestial Record ]</span
+              >
+            </div>
+            <div class="fi d2">
+              <p class="sec-body" style="font-style: italic">
+                "They say that when an Angel dies, a star is extinguished. But
+                you — your breath is a
+                <span style="color: var(--gold); font-style: normal"
+                  >galaxy</span
+                >
+                in the making."
+              </p>
+            </div>
+            <div class="fi d3">
+              <a href="#archive" class="btn"><span>Read the Chronicle</span></a>
+            </div>
+          </div>
+          <div class="fi d2">
+            <div class="video-label">The Visuals</div>
+            <div class="video-wrap">
+              <video id="series-video" autoplay muted loop playsinline></video>
+              <div class="video-placeholder" id="video-ph">
+                <span class="vp-bracket">[ To Be Added ]</span
+                ><span class="vp-sub"
+                  >Celestial Visuals · Pending Transmission</span
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="sec" id="archive">
+      <div class="sec-inner">
+        <div class="fi" style="text-align: center; margin-bottom: 60px">
+          <div class="sec-label c">The Written Chronicle</div>
+          <h2 class="sec-title">Archive</h2>
+          <p class="sec-body" style="margin: 0 auto">
+            Records from the celestial expanse — each chapter a star in the
+            void.
+          </p>
+        </div>
+        <div id="ch-volumes"></div>
+      </div>
+    </section>
+
+    <section class="sec" id="soundtracks">
+      <div class="sec-inner center">
+        <div class="fi">
+          <div class="sec-label c">Transmission</div>
+          <div class="cs-badge" style="margin-bottom: 1.6rem">
+            <span>Coming Soon</span>
+          </div>
+          <h2 class="sec-title">Soundtracks</h2>
+          <p class="sec-body" style="margin: 0 auto 3rem">
+            The celestial frequencies are being composed. Original scores will
+            transmit upon release.
+          </p>
+          <div class="status-card">
+            <div class="s-label">
+              Status &nbsp;·&nbsp; Composition In Progress
+            </div>
+            <div class="s-rule"></div>
+            <div class="s-val">Incoming</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="sec" id="shop">
+      <div class="sec-inner center">
+        <div class="fi">
+          <div class="sec-label c">The Collection</div>
+          <div class="cs-badge"><span>Coming Soon</span></div>
+          <h2 class="sec-title">Shop</h2>
+          <p class="sec-body" style="margin: 0 auto">
+            The archive's physical collection is being assembled. Prints,
+            manuscripts, and artefacts available upon launch.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="sec" id="contact">
+      <div class="sec-inner">
+        <div class="fi" style="text-align: center; margin-bottom: 52px">
+          <div class="sec-label c">Transmit</div>
+          <h2 class="sec-title">Contact</h2>
+          <p class="sec-body" style="margin: 0 auto">
+            Send a signal into the void. All transmissions are received and
+            considered.
+          </p>
+        </div>
+        <form class="contact-form" id="contact-form" novalidate>
+          <div class="form-row">
+            <div class="form-field">
+              <label for="cf-name">Name</label
+              ><input
+                id="cf-name"
+                type="text"
+                name="name"
+                placeholder="Your name"
+                required
+              />
+            </div>
+            <div class="form-field">
+              <label for="cf-email">Email</label
+              ><input
+                id="cf-email"
+                type="email"
+                name="email"
+                placeholder="your@email.com"
+                required
+              />
+            </div>
+          </div>
+          <div style="height: 2px"></div>
+          <div class="form-field">
+            <label for="cf-subject">Subject</label
+            ><input
+              id="cf-subject"
+              type="text"
+              name="subject"
+              placeholder="Inquiry, collaboration, licensing…"
+            />
+          </div>
+          <div style="height: 2px"></div>
+          <div class="form-field">
+            <label for="cf-message">Message</label
+            ><textarea
+              id="cf-message"
+              name="message"
+              placeholder="Your transmission…"
+              required
+            ></textarea>
+          </div>
+          <div class="form-bottom">
+            <span class="form-note">Required fields must be completed.</span>
+            <button type="submit" class="btn">
+              <span>Send Transmission</span>
+            </button>
+          </div>
+        </form>
+        <div class="form-success" id="form-success">
+          <div class="fs-icon">✦</div>
+          <div class="fs-title">Transmission Received</div>
+          <div class="fs-sub">
+            We'll respond through the celestial relay shortly.
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer class="mm-footer">
+      <div class="footer-copy">©THEAXOLOTLMUSIC // ALL RIGHTS RESERVED</div>
+      <div class="footer-build">
+        BUILT BY ΔXOLOTL &nbsp;//&nbsp; LAST_UPDATED: 2026.04.05
+      </div>
+    </footer>
+
+    <script>
+      window.geomReady = false;
+      document.getElementById("cc").style.zIndex = "9990";
+    </script>
+
+    <!-- Loading screen logic -->
+    <script>
+      (function () {
+        const GLYPHS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789ΔΨΩΞΛΘΦΣΠαβγδ∞◈✦⬡";
+        const CIPHER_MSGS = [
+          "INITIALIZING CELESTIAL RELAY ",
+          "DECRYPTING ARCHIVE RECORDS   ",
+          "ALIGNING ORBITAL PARAMETERS  ",
+          "ACCESSING SACRED GEOMETRY    ",
+        ];
+        const TITLE_RAW = "MEMENTO MORI";
+        const TITLE_DONE = "Memento Mori";
+
+        const cipherEl = document.getElementById("ls-cipher");
+        const barEl = document.getElementById("ls-bar");
+        const subEl = document.getElementById("ls-sub");
+        const titleEl = document.getElementById("ls-title");
+        const overlay = document.getElementById("ls-overlay");
+        const DUR = 3200;
+        const tStart = performance.now();
+
+        titleEl.textContent = TITLE_DONE;
+
+        let titlePhase = 0;
+        let decIdx = 0;
+
+        const scrambleTitle = () => {
+          if (titlePhase !== 1) return;
+          titleEl.textContent = TITLE_RAW.split("")
+            .map((c) =>
+              c === " "
+                ? " "
+                : GLYPHS[Math.floor(Math.random() * GLYPHS.length)],
+            )
+            .join("");
+          setTimeout(() => requestAnimationFrame(scrambleTitle), 50);
+        };
+
+        const decryptTitle = () => {
+          titleEl.textContent = TITLE_RAW.split("")
+            .map((c, i) => {
+              if (c === " ") return " ";
+              return i < decIdx
+                ? c
+                : GLYPHS[Math.floor(Math.random() * GLYPHS.length)];
+            })
+            .join("");
+          decIdx += 0.45;
+          if (decIdx < TITLE_RAW.length) {
+            requestAnimationFrame(decryptTitle);
+          } else {
+            titleEl.textContent = TITLE_DONE;
+          }
+        };
+
+        let msgIdx = 0,
+          charIdx = 0,
+          cfr = 0,
+          cipherRunning = true;
+        const scrambleMsg = (str) =>
+          str
+            .split("")
+            .map((c, i) => {
+              if (c === " ") return " ";
+              return i < charIdx
+                ? c
+                : GLYPHS[Math.floor(Math.random() * GLYPHS.length)];
+            })
+            .join("");
+        const runCipher = () => {
+          if (!cipherRunning) {
+            cipherEl.textContent = "";
+            return;
+          }
+          const t = CIPHER_MSGS[msgIdx % CIPHER_MSGS.length];
+          cfr++;
+          if (cfr % 3 === 0) charIdx++;
+          if (charIdx > t.length + 4) {
+            charIdx = 0;
+            msgIdx++;
+            if (msgIdx >= CIPHER_MSGS.length) cipherRunning = false;
+          }
+          cipherEl.textContent = scrambleMsg(t);
+          requestAnimationFrame(runCipher);
+        };
+
+        const fillBar = (now) => {
+          const p = Math.min(1, (now - tStart) / DUR);
+          barEl.style.width = p * 100 + "%";
+
+          if (p >= 0.2 && titlePhase === 0) {
+            titlePhase = 1;
+            scrambleTitle();
+          }
+          if (p >= 0.55 && titlePhase === 1) {
+            titlePhase = 2;
+            decryptTitle();
+          }
+
+          if (p >= 0.72) subEl.classList.add("show");
+          if (p < 1) {
+            requestAnimationFrame(fillBar);
+            return;
+          }
+          setTimeout(dismiss, 380);
+        };
+
+        const dismiss = () => {
+          overlay.classList.add("exit");
+          if (window.triggerMusicPlay) window.triggerMusicPlay();
+          setTimeout(() => {
+            overlay.style.display = "none";
+            document.getElementById("cc").style.zIndex = "";
+            window.geomReady = true;
+            // Call the newly wrapped index animation observer from ui.js
+            if (window.initScrollAnimations) window.initScrollAnimations();
+          }, 1050);
+        };
+
+        setTimeout(() => {
+          runCipher();
+          requestAnimationFrame(fillBar);
+        }, 300);
+      })();
+    </script>
+
+    <script src="js/canvas.js"></script>
+    <script src="js/nav.js"></script>
+    <script src="js/chapters.js"></script>
+    <script src="js/reader.js"></script>
+    <script src="js/ui.js"></script>
+
+    <script>
+      /* Audio System - Custom Seamless Fading Loop */
+      (function () {
+        const PREF_KEY = "mm_music_muted",
+          TARGET_VOL = 0.6,
+          FADE_STEPS = 40,
+          FADE_INTERVAL_MS = 40;
+        const bgAudio = document.getElementById("bg-audio"),
+          musicBtn = document.getElementById("music-toggle");
+        if (!musicBtn || !bgAudio) return;
+
+        let isMuted = localStorage.getItem(PREF_KEY) === "1";
+        bgAudio.volume = 0;
+        let fadeInterval;
+        let isFadingOut = false;
+
+        const fadeIn = () => {
+          clearInterval(fadeInterval);
+          isFadingOut = false;
+          let step = 0;
+          fadeInterval = setInterval(() => {
+            step++;
+            bgAudio.volume = Math.min(
+              TARGET_VOL,
+              (step / FADE_STEPS) * TARGET_VOL,
+            );
+            if (step >= FADE_STEPS) clearInterval(fadeInterval);
+          }, FADE_INTERVAL_MS);
+        };
+
+        const fadeOut = (callback) => {
+          clearInterval(fadeInterval);
+          isFadingOut = true;
+          let step = FADE_STEPS;
+          const currentVol = bgAudio.volume;
+          fadeInterval = setInterval(() => {
+            step--;
+            bgAudio.volume = Math.max(0, (step / FADE_STEPS) * currentVol);
+            if (step <= 0) {
+              clearInterval(fadeInterval);
+              if (callback) callback();
+            }
+          }, FADE_INTERVAL_MS);
+        };
+
+        bgAudio.addEventListener("timeupdate", () => {
+          if (!isMuted && bgAudio.duration > 0) {
+            const timeLeft = bgAudio.duration - bgAudio.currentTime;
+            if (
+              timeLeft <= (FADE_STEPS * FADE_INTERVAL_MS) / 1000 &&
+              !isFadingOut
+            ) {
+              fadeOut(() => {
+                bgAudio.currentTime = 0;
+                bgAudio
+                  .play()
+                  .then(fadeIn)
+                  .catch(() => {});
+              });
+            }
+          }
+        });
+
+        window.triggerMusicPlay = () => {
+          if (isMuted) {
+            musicBtn.classList.add("muted");
+            return;
+          }
+          bgAudio
+            .play()
+            .then(fadeIn)
+            .catch(() => {
+              const tryPlay = () => {
+                if (!isMuted)
+                  bgAudio
+                    .play()
+                    .then(fadeIn)
+                    .catch(() => {});
+              };
+              document.addEventListener("click", tryPlay, { once: true });
+              document.addEventListener("keydown", tryPlay, { once: true });
+              document.addEventListener("touchstart", tryPlay, { once: true });
+            });
+        };
+
+        const apply = () => {
+          if (isMuted) {
+            clearInterval(fadeInterval);
+            bgAudio.pause();
+            bgAudio.currentTime = 0;
+            musicBtn.classList.add("muted");
+          } else {
+            bgAudio.currentTime = 0;
+            bgAudio.volume = 0;
+            bgAudio
+              .play()
+              .then(fadeIn)
+              .catch(() => {});
+            musicBtn.classList.remove("muted");
+          }
+        };
+
+        musicBtn.addEventListener("click", () => {
+          isMuted = !isMuted;
+          localStorage.setItem(PREF_KEY, isMuted ? "1" : "0");
+          apply();
+        });
+      })();
+    </script>
+  </body>
+</html>

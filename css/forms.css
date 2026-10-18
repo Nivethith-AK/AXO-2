@@ -1,0 +1,82 @@
+/* ============================================================
+   FORMS — contact form
+   ============================================================ */
+
+.contact-form {
+  max-width: 640px; margin: 0 auto;
+  display: flex; flex-direction: column; gap: 2px;
+}
+
+.form-row {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 2px;
+}
+@media (max-width: 600px) { .form-row { grid-template-columns: 1fr; } }
+
+.form-field {
+  display: flex; flex-direction: column; gap: 10px;
+}
+
+.form-field label {
+  font-family: var(--font-mono); font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.22em; text-transform: uppercase; color: var(--fg-mid);
+  padding-left: 2px;
+}
+
+.form-field input,
+.form-field textarea,
+.form-field select {
+  background: rgba(14, 14, 14, 0.9);
+  border: 1px solid var(--gold-border);
+  color: var(--fg);
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  padding: 16px 20px;
+  outline: none;
+  transition: border-color 0.38s var(--ease), background 0.38s, box-shadow 0.38s;
+  resize: none;
+  appearance: none;
+  -webkit-appearance: none;
+  border-radius: 0;
+  width: 100%;
+}
+.form-field input::placeholder,
+.form-field textarea::placeholder { color: #777777; font-style: normal; }
+.form-field input:focus,
+.form-field textarea:focus,
+.form-field select:focus {
+  border-color: var(--gold);
+  background: rgba(20, 20, 20, 0.95);
+  box-shadow: 0 0 12px rgba(212, 175, 55, 0.2);
+}
+
+.form-field textarea { min-height: 160px; }
+
+.form-spacer { height: 28px; }
+
+.form-bottom {
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 2rem; flex-wrap: wrap; margin-top: 26px;
+}
+.form-note {
+  font-family: var(--font-mono); font-size: 0.75rem;
+  letter-spacing: 0.15em; color: var(--fg-mid); text-transform: uppercase;
+}
+
+/* Success state */
+.form-success {
+  display: none; text-align: center; padding: 60px 40px;
+  border: 1px solid var(--gold-border); background: rgba(14, 14, 14, 0.95);
+}
+.form-success.show { display: block; }
+.form-success .fs-icon {
+  font-size: 2rem; margin-bottom: 1.4rem; color: var(--gold); opacity: 0.9;
+}
+.form-success .fs-title {
+  font-family: var(--font-display);
+  font-size: 1.8rem; font-weight: 700; color: var(--fg); margin-bottom: 0.8rem;
+}
+.form-success .fs-sub {
+  font-family: var(--font-mono); font-size: 0.82rem;
+  letter-spacing: 0.18em; text-transform: uppercase; color: var(--fg-mid);
+}

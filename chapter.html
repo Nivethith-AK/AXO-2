@@ -1,0 +1,328 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Chapter — Memento Mori</title>
+    <link rel="icon" href="assets/images/favicon.png" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Roboto+Mono:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet"/>
+    <link rel="stylesheet" href="css/base.css" />
+    <style>
+      html, body { margin:0; padding:0; background:var(--bg); color:var(--fg); min-height:100vh; overflow-x:hidden; }
+
+      /* ── Top bar ── */
+      .ch-topbar {
+        position:fixed; top:0; left:0; right:0; height:64px;
+        display:flex; align-items:center; justify-content:space-between;
+        padding:0 clamp(16px,5vw,60px);
+        background:rgba(8,8,8,0.95);
+        border-bottom:1px solid var(--gold-border);
+        backdrop-filter:blur(16px); -webkit-backdrop-filter:blur(16px);
+        z-index:200;
+      }
+      .ch-back {
+        font-family:var(--font-mono); font-size:0.78rem;
+        font-weight:600;
+        letter-spacing:0.25em; text-transform:uppercase;
+        color:var(--fg-mid); text-decoration:none;
+        transition:color 0.3s; display:flex; align-items:center; gap:0.5rem;
+      }
+      .ch-back:hover { color:var(--gold); }
+      .ch-bar-title {
+        font-family:var(--font-display); font-size:1.05rem;
+        font-weight:700;
+        letter-spacing:0.12em; color:var(--fg);
+        position:absolute; left:50%; transform:translateX(-50%);
+        white-space:nowrap; pointer-events:none;
+      }
+      .ch-page-counter {
+        font-family:var(--font-mono); font-size:0.78rem;
+        letter-spacing:0.2em; color:var(--gold);
+        font-weight:600;
+      }
+
+      /* ── Stage ── */
+      .ch-stage {
+        padding-top:64px; min-height:100vh;
+        display:flex; flex-direction:column; align-items:center;
+      }
+
+      /* ── Chapter heading ── */
+      .ch-heading {
+        text-align:center;
+        padding:52px clamp(16px,7vw,80px) 36px;
+        width:100%;
+      }
+      .ch-meta {
+        font-family:var(--font-mono); font-size:0.8rem;
+        font-weight:600;
+        letter-spacing:0.3em; text-transform:uppercase;
+        color:var(--gold); opacity:1; display:block; margin-bottom:1.2rem;
+      }
+      .ch-title {
+        font-family:var(--font-display);
+        font-size:clamp(2rem,5vw,3.6rem);
+        font-weight:700; letter-spacing:0.14em; text-transform:uppercase;
+        color:var(--fg); line-height:1.15; margin-bottom:0.7rem;
+      }
+      .ch-date {
+        font-family:var(--font-mono); font-size:0.78rem;
+        letter-spacing:0.2em; color:var(--fg-mid);
+      }
+      .ch-divider {
+        width:1px; height:40px;
+        background:linear-gradient(to bottom, transparent, var(--gold-border), transparent);
+        margin:24px auto 0;
+      }
+
+      /* ── Viewer ── */
+      .ch-viewer {
+        position:relative; width:100%;
+        max-width:860px; margin:0 auto;
+        padding:0 clamp(16px,5vw,60px) 48px;
+        display:flex; align-items:stretch; justify-content:center;
+      }
+
+      /* Image */
+      .ch-page-img {
+        width:100%; max-height:82vh;
+        object-fit:contain; display:block;
+        border:1px solid var(--gold-line);
+        background:var(--bg-raised);
+        transition:opacity 0.28s ease;
+        user-select:none; -webkit-user-drag:none;
+      }
+      .ch-page-img.fade { opacity:0; }
+
+      /* Hover arrow zones */
+      .ch-arrow {
+        position:absolute; top:0; bottom:48px;
+        width:16%; display:flex; align-items:center;
+        cursor:pointer; opacity:0; transition:opacity 0.25s; z-index:10;
+      }
+      .ch-arrow:hover { opacity:1; }
+      .ch-arrow.prev { left:clamp(16px,5vw,60px); justify-content:flex-start; }
+      .ch-arrow.next { right:clamp(16px,5vw,60px); justify-content:flex-end; }
+      .ch-arrow-chip {
+        font-family:var(--font-mono); font-size:0.75rem;
+        font-weight:600;
+        letter-spacing:0.2em; text-transform:uppercase;
+        color:var(--gold); background:rgba(4,4,4,0.9);
+        border:1px solid var(--gold-border); padding:10px 16px;
+        backdrop-filter:blur(8px);
+      }
+
+      /* ── Page dots ── */
+      .ch-dots {
+        display:flex; align-items:center; gap:7px;
+        padding:0 0 28px; justify-content:center;
+      }
+      .ch-dot {
+        width:7px; height:7px; background:var(--gold-line);
+        border-radius:50%; transition:background 0.3s, transform 0.3s; cursor:pointer;
+      }
+      .ch-dot.active { background:var(--gold); transform:scale(1.5); }
+
+      /* ── Bottom nav ── */
+      .ch-bottom-nav {
+        display:flex; align-items:center; justify-content:center;
+        gap:14px; padding:0 0 48px; flex-wrap:wrap;
+      }
+      .ch-nav-btn {
+        font-family:var(--font-display); font-size:0.8rem;
+        font-weight:700;
+        letter-spacing:0.2em; text-transform:uppercase;
+        color:var(--fg); background:rgba(14,14,14,0.6);
+        border:1px solid var(--gold-border);
+        padding:14px 28px; cursor:pointer;
+        transition:all 0.28s;
+      }
+      .ch-nav-btn:hover:not([disabled]) { border-color:var(--gold); color:var(--gold-bright); background:var(--gold-dim); }
+      .ch-nav-btn[disabled] { opacity:0.3; pointer-events:none; }
+
+      /* ── Loading / Error ── */
+      .ch-loading {
+        font-family:var(--font-mono); font-size:0.82rem;
+        font-weight:600;
+        letter-spacing:0.25em; text-transform:uppercase;
+        color:var(--gold); padding:100px 0; text-align:center; width:100%;
+      }
+      .ch-fallback {
+        padding:48px; text-align:center;
+        font-family:var(--font-mono); font-size:0.82rem;
+        letter-spacing:0.2em; text-transform:uppercase; color:var(--fg-mid);
+        border:1px dashed var(--gold-border); width:100%;
+      }
+
+      @media (max-width:600px) {
+        .ch-bar-title { display:none; }
+        .ch-arrow { width:12%; }
+      }
+    </style>
+  </head>
+  <body>
+    <canvas id="cc" style="position:fixed;inset:0;z-index:0;pointer-events:none;"></canvas>
+
+    <header class="ch-topbar">
+      <a href="index.html#archive" class="ch-back">← Archive</a>
+      <span class="ch-bar-title" id="bar-title"></span>
+      <span class="ch-page-counter" id="page-counter"></span>
+    </header>
+
+    <main class="ch-stage" id="ch-stage">
+      <div class="ch-loading" id="ch-loading">Accessing Record…</div>
+    </main>
+
+    <script src="js/canvas-loading.js"></script>
+    <script src="js/chapters.js"></script>
+    <script>
+    (function() {
+      const params  = new URLSearchParams(window.location.search);
+      const chId    = params.get('id');
+      const all     = VOLUMES.flatMap(v => v.chapters);
+      const ch      = all.find(c => c.id === chId);
+
+      const stage   = document.getElementById('ch-stage');
+      const loading = document.getElementById('ch-loading');
+      const barTitle = document.getElementById('bar-title');
+      const pageCtr  = document.getElementById('page-counter');
+
+      /* ── Not found / locked ── */
+      if (!ch || ch.locked) {
+        loading.textContent = '';
+        stage.innerHTML = `
+          <div style="text-align:center;padding:100px clamp(16px,5vw,60px);">
+            <p style="font-family:var(--font-body);font-size:1rem;color:var(--fg-mid);margin-bottom:1.6rem;">This record is encrypted or does not exist.</p>
+            <a href="index.html#archive" class="ch-nav-btn" style="display:inline-block;">← Return to Archive</a>
+          </div>`;
+        return;
+      }
+
+      document.title = ch.title + ' — Memento Mori';
+      if (barTitle) barTitle.textContent = ch.title;
+
+      /* ── State ── */
+      let page       = 1;
+      const total    = ch.pages || 1;
+      let fallbackShown = false; // guard against onerror firing multiple times
+
+      /* ── Build initial DOM ── */
+      loading.style.display = 'none';
+      stage.innerHTML = `
+        <div class="ch-heading">
+          <span class="ch-meta">${ch.tag || ''}</span>
+          <h1 class="ch-title">${ch.title}</h1>
+          ${ch.date ? `<span class="ch-date">${ch.date}</span>` : ''}
+          <div class="ch-divider"></div>
+        </div>
+        <div class="ch-viewer" id="ch-viewer">
+          <div class="ch-arrow prev" id="arr-prev" onclick="chNav(-1)">
+            <span class="ch-arrow-chip">← Prev</span>
+          </div>
+          <img id="ch-img" class="ch-page-img" src="" alt="Chapter page" draggable="false"/>
+          <div class="ch-arrow next" id="arr-next" onclick="chNav(1)">
+            <span class="ch-arrow-chip">Next →</span>
+          </div>
+        </div>
+        <div class="ch-dots" id="ch-dots"></div>
+        <div class="ch-bottom-nav">
+          <button class="ch-nav-btn" id="btn-prev" onclick="chNav(-1)">← Previous Page</button>
+          <button class="ch-nav-btn" id="btn-next" onclick="chNav(1)">Next Page →</button>
+        </div>
+      `;
+
+      const img     = document.getElementById('ch-img');
+      const dotsEl  = document.getElementById('ch-dots');
+      const btnPrev = document.getElementById('btn-prev');
+      const btnNext = document.getElementById('btn-next');
+      const arrPrev = document.getElementById('arr-prev');
+      const arrNext = document.getElementById('arr-next');
+
+      /* ── Dots ── */
+      function buildDots() {
+        dotsEl.innerHTML = '';
+        if (total <= 1) return;
+        for (let i = 1; i <= total; i++) {
+          const d = document.createElement('div');
+          d.className = 'ch-dot' + (i === page ? ' active' : '');
+          d.onclick = () => goTo(i);
+          dotsEl.appendChild(d);
+        }
+      }
+      function updateDots() {
+        dotsEl.querySelectorAll('.ch-dot').forEach((d,i) => d.classList.toggle('active', i+1===page));
+      }
+
+      /* ── Navigation ── */
+      function goTo(p) {
+        if (p < 1 || p > total) return;
+        img.classList.add('fade');
+        setTimeout(() => {
+          page = p;
+          // Remove old onerror before setting new src to prevent duplicate firings
+          img.onerror = null;
+          img.src = `assets/chapters/${ch.id}/${ch.id}-${page}.png`;
+          img.onerror = handleImgError;
+          img.classList.remove('fade');
+          updateDots();
+          sync();
+          window.scrollTo({ top: 0, behavior: 'smooth' });
+        }, 260);
+      }
+
+      function sync() {
+        btnPrev.disabled = page <= 1;
+        btnNext.disabled = page >= total;
+        arrPrev.style.display = page <= 1   ? 'none' : 'flex';
+        arrNext.style.display = page >= total ? 'none' : 'flex';
+        if (pageCtr) pageCtr.textContent = `${page} / ${total}`;
+      }
+
+      window.chNav = dir => goTo(page + dir);
+
+      /* ── Image error fallback (fires only once) ── */
+      function handleImgError() {
+        if (fallbackShown) return;
+        fallbackShown = true;
+        img.style.display = 'none';
+        // Remove arrow zones — nothing to navigate into
+        if (arrPrev) arrPrev.remove();
+        if (arrNext) arrNext.remove();
+        const fb = document.createElement('div');
+        fb.className = 'ch-fallback';
+        fb.textContent = 'Page image not yet uploaded';
+        document.getElementById('ch-viewer').appendChild(fb);
+      }
+
+      /* ── Keyboard ── */
+      document.addEventListener('keydown', e => {
+        if (e.key === 'ArrowRight' || e.key === 'ArrowDown') goTo(page + 1);
+        if (e.key === 'ArrowLeft'  || e.key === 'ArrowUp')   goTo(page - 1);
+      });
+
+      /* ── Touch swipe ── */
+      let tx = 0, ty = 0;
+      document.addEventListener('touchstart', e => { tx = e.touches[0].clientX; ty = e.touches[0].clientY; }, { passive: true });
+      document.addEventListener('touchend', e => {
+        const dx = e.changedTouches[0].clientX - tx;
+        const dy = e.changedTouches[0].clientY - ty;
+        if (Math.abs(dx) > 40 && Math.abs(dx) > Math.abs(dy)) {
+          dx < 0 ? goTo(page + 1) : goTo(page - 1);
+        } else if (Math.abs(dy) > 60 && Math.abs(dy) > Math.abs(dx)) {
+          dy < 0 ? goTo(page + 1) : goTo(page - 1);
+        }
+      }, { passive: true });
+
+      /* ── Init ── */
+      buildDots();
+      sync();
+      // Set src only once here — onerror attached before assignment
+      img.onerror = handleImgError;
+      img.src = `assets/chapters/${ch.id}/${ch.id}-1.png`;
+
+    })();
+    </script>
+  </body>
+</html>

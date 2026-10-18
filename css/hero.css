@@ -1,0 +1,48 @@
+/* ============================================================
+   HERO — homepage title section
+   ============================================================ */
+
+.hero {
+  min-height: 100vh;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  text-align: center;
+  padding: var(--nav-h) var(--gutter) 60px;
+  gap: 0;
+}
+
+.hero-eyebrow {
+  font-family: var(--font-mono);
+  font-size: 0.8rem; letter-spacing: 0.35em;
+  text-transform: uppercase; color: var(--gold);
+  opacity: 1; margin-bottom: 1.8rem; display: block;
+  font-weight: 600;
+}
+
+/* Title in Orbitron */
+.hero-title {
+  font-family: var(--font-display);
+  font-size: clamp(2.4rem, 7vw, 5.5rem);
+  font-weight: 700; letter-spacing: 0.14em;
+  text-transform: uppercase; line-height: 1.1;
+  margin-bottom: 0; color: var(--fg);
+}
+
+.hero-divider {
+  width: 1px; height: 54px;
+  background: linear-gradient(to bottom, transparent, var(--gold-border), transparent);
+  margin: 1.8rem auto;
+}
+
+.hero-desc {
+  max-width: 580px; color: var(--fg-mid);
+  font-family: var(--font-body);
+  font-size: 1.05rem; line-height: 1.85;
+  letter-spacing: 0.04em; margin-bottom: 2.4rem;
+}
+
+.hero-orrery-wrap {
+  margin-top: 48px; pointer-events: none; opacity: 0;
+  transition: opacity 2.5s 1.8s var(--ease);
+}
+.hero-orrery-wrap.vis { opacity: 0.16; }
