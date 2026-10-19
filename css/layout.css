@@ -81,9 +81,10 @@
   }
   .nav-links.open { display: flex; }
   .nav-links .nav-link {
-    padding: 14px 0; width: 100%;
+    padding: 16px 0; width: 100%;
     border-bottom: 1px solid var(--gold-line);
-    font-size: 0.65rem; color: var(--fg-mid);
+    font-size: 0.88rem; color: var(--fg-mid);
+    letter-spacing: 0.2em;
   }
   .nav-links .nav-link:hover,
   .nav-links .nav-link.active { color: var(--gold); }

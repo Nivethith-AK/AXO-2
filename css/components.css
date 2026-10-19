@@ -253,19 +253,19 @@
     margin-bottom: 1.4rem;
   }
   .hud-status {
-    font-size: 0.62rem;
+    font-size: 0.70rem;
     letter-spacing: 0.16em;
   }
   .hud-metric {
-    font-size: 0.62rem;
+    font-size: 0.70rem;
     letter-spacing: 0.14em;
   }
   .hud-time {
-    font-size: 0.62rem;
+    font-size: 0.70rem;
     letter-spacing: 0.12em;
   }
   .hud-sep {
-    font-size: 0.62rem;
+    font-size: 0.70rem;
   }
 }
 @media (max-width: 440px) {
@@ -411,7 +411,7 @@
 }
 .tc-sub {
   font-family: var(--font-mono);
-  font-size: 0.68rem;
+  font-size: 0.75rem;
   letter-spacing: 0.14em;
   text-transform: uppercase;
   color: var(--fg-mid);
