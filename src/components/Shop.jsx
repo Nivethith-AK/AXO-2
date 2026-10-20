@@ -3,10 +3,10 @@ import React from 'react';
 export default function Shop() {
   return (
     <section className="sec" id="shop">
-      <div className="sec-inner center">
+      <div className="sec-inner center cl-reveal">
         <div className="fi vis">
           <div className="sec-label c">Shop</div>
-          <div className="cs-badge">
+          <div className="cs-badge cl-float">
             <span>Coming Soon</span>
           </div>
           <h2 className="sec-title">Shop</h2>

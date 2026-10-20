@@ -24,7 +24,7 @@ export default function Contact() {
   return (
     <section className="sec" id="contact">
       <div className="sec-inner">
-        <div className="fi vis" style={{ textAlign: 'center', marginBottom: '52px' }}>
+        <div className="fi vis cl-reveal" style={{ textAlign: 'center', marginBottom: '52px' }}>
           <div className="sec-label c">Transmit</div>
           <h2 className="sec-title">Contact</h2>
           <p className="sec-body" style={{ margin: '0 auto' }}>
@@ -33,7 +33,7 @@ export default function Contact() {
         </div>
 
         {!submitted ? (
-          <form className="contact-form" onSubmit={handleSubmit} noValidate>
+          <form className="contact-form cl-reveal cl-stagger-1" onSubmit={handleSubmit} noValidate>
             <div className="form-row">
               <div className="form-field">
                 <label htmlFor="cf-name">Name</label>

@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { useTheme } from '../context/ThemeContext';
 import { useAudio } from '../context/AudioContext';
+import { useLenis } from './SmoothScroll';
 
 const SECTIONS = ['about', 'archive', 'soundtracks', 'shop', 'contact'];
 
@@ -12,6 +13,7 @@ export default function Navbar() {
   const [activeSec, setActiveSec] = useState('');
   const [menuOpen, setMenuOpen] = useState(false);
   const navRef = useRef(null);
+  const lenis = useLenis();
 
   useEffect(() => {
     const onScroll = () => {
@@ -49,14 +51,22 @@ export default function Navbar() {
     setMenuOpen(false);
     const el = document.getElementById(id);
     if (el) {
-      el.scrollIntoView({ behavior: 'smooth' });
+      if (lenis) {
+        lenis.scrollTo(el, { offset: -75, duration: 1.4 });
+      } else {
+        el.scrollIntoView({ behavior: 'smooth' });
+      }
     }
   };
 
   const scrollToTop = (e) => {
     e.preventDefault();
     setMenuOpen(false);
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    if (lenis) {
+      lenis.scrollTo(0, { duration: 1.4 });
+    } else {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
   };
 
   return (

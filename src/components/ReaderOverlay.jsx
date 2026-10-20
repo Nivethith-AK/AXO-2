@@ -27,7 +27,7 @@ export default function ReaderOverlay({ chapterId, onClose, onSelectChapter }) {
   if (!chapter) return null;
 
   return (
-    <div id="reader-overlay" className="open">
+    <div id="reader-overlay" className="open" data-lenis-prevent="true">
       <button className="reader-close" onClick={onClose} aria-label="Close reader">
         ✕ &nbsp;Close
       </button>

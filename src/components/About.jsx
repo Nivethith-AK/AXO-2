@@ -1,4 +1,5 @@
 import React from 'react';
+import { useLenis } from './SmoothScroll';
 
 const TELEMETRY_DATA = [
   {
@@ -28,16 +29,22 @@ const TELEMETRY_DATA = [
 ];
 
 export default function About() {
+  const lenis = useLenis();
+
   const scrollToArchive = (e) => {
     e.preventDefault();
     const el = document.getElementById('archive');
-    if (el) el.scrollIntoView({ behavior: 'smooth' });
+    if (el && lenis) {
+      lenis.scrollTo(el, { offset: -75, duration: 1.4 });
+    } else if (el) {
+      el.scrollIntoView({ behavior: 'smooth' });
+    }
   };
 
   return (
     <section className="sec" id="about">
       <div className="sec-inner">
-        <div className="grid-2-fixed">
+        <div className="grid-2-fixed cl-reveal">
           <div>
             <div className="fi vis">
               <div className="sec-label">The Series</div>
@@ -84,7 +91,7 @@ export default function About() {
               </p>
             </div>
             <div className="fi vis d3">
-              <a href="#archive" className="btn" onClick={scrollToArchive}>
+              <a href="#archive" className="btn cl-btn-magnetic" onClick={scrollToArchive}>
                 <span>Access Archives</span>
               </a>
             </div>
@@ -92,7 +99,7 @@ export default function About() {
 
           <div className="fi vis d2">
             <div className="video-label">The Visuals</div>
-            <div className="video-wrap">
+            <div className="video-wrap cl-interactive-card">
               <video id="series-video" autoPlay muted loop playsInline />
               <div className="video-placeholder" id="video-ph">
                 <span className="vp-bracket">[ To Be Added ]</span>
@@ -106,9 +113,9 @@ export default function About() {
         </div>
 
         {/* Chronicle Telemetry Stat Grid */}
-        <div className="telemetry-grid fi vis d3">
+        <div className="telemetry-grid fi vis cl-reveal cl-stagger-2">
           {TELEMETRY_DATA.map((t, idx) => (
-            <div key={idx} className="telemetry-card">
+            <div key={idx} className={`telemetry-card cl-interactive-card cl-reveal cl-stagger-${idx + 1}`}>
               <div className="tc-corner tl" />
               <div className="tc-corner tr" />
               <div className="tc-corner bl" />

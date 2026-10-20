@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useCallback } from 'react';
 import Navbar from '../components/Navbar';
 import Hero from '../components/Hero';
 import InfiniteTicker from '../components/InfiniteTicker';
@@ -16,10 +16,14 @@ export default function HomePage() {
   const [loadingDone, setLoadingDone] = useState(false);
   const [selectedChapterId, setSelectedChapterId] = useState(null);
 
+  const handleLoadingDone = useCallback(() => {
+    setLoadingDone(true);
+  }, []);
+
   return (
     <>
       <CelestialCanvas geomReady={loadingDone} />
-      <LoadingScreen onDismiss={() => setLoadingDone(true)} />
+      <LoadingScreen onDismiss={handleLoadingDone} />
       <Navbar />
 
       <main>

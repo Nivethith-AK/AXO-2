@@ -1,13 +1,13 @@
 /* ============================================================
-   LOADING OVERLAY — shared by cover.html and index.html
+   LOADING OVERLAY — Cinematic Cryptographic Curtain
    ============================================================ */
 
 #ls-overlay {
   position: fixed !important;
   inset: 0;
   width: 100%; height: 100%;
-  z-index: 9999 !important; /* FIX 3: Protect z-index from base.css */
-  background: transparent;
+  z-index: 9999 !important;
+  background: var(--bg, #0a0a0a);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -15,16 +15,33 @@
   gap: 0;
   padding: 20px;
   opacity: 1;
-  transition: opacity 1s cubic-bezier(0.19,1,0.22,1);
+  cursor: pointer;
+  user-select: none;
+  transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.5s;
   transform: none !important;
   top: 0 !important; left: 0 !important;
 }
-#ls-overlay.exit { opacity: 0; pointer-events: none; }
 
-/* FIX 3: Fade up animations (migrated from cover.html) */
+#ls-overlay::before {
+  content: '';
+  position: absolute;
+  width: 360px;
+  height: 360px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(232, 159, 94, 0.09) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+#ls-overlay.exit {
+  opacity: 0 !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
+}
+
+/* Fade up animations */
 @keyframes lsup {
-  from { opacity:0; transform:translateY(10px); }
-  to   { opacity:1; transform:translateY(0); }
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
 }
 
 /* "Δxolotl presents" */
@@ -37,7 +54,7 @@
   color: var(--gold);
   margin-bottom: 1.8rem;
   opacity: 0;
-  animation: lsup 0.9s 0.35s cubic-bezier(0.19,1,0.22,1) forwards;
+  animation: lsup 0.6s 0.1s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
 /* Title — JS drives decrypt */
@@ -50,10 +67,10 @@
   color: var(--fg);
   text-align: center;
   white-space: nowrap;
-  margin-bottom: 2.4rem;
+  margin-bottom: 2.2rem;
   min-height: 1.15em;
   opacity: 0;
-  animation: lsup 1s 0.55s cubic-bezier(0.19,1,0.22,1) forwards;
+  animation: lsup 0.7s 0.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
 /* Cipher / decode line */
@@ -70,7 +87,7 @@
   overflow: hidden;
   min-width: 30ch;
   opacity: 0;
-  animation: lsup 1s 0.55s cubic-bezier(0.19,1,0.22,1) forwards;
+  animation: lsup 0.7s 0.25s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
 /* Progress bar */
@@ -81,12 +98,13 @@
   overflow: hidden;
   margin-bottom: 1.4rem;
   opacity: 0;
-  animation: lsup 0.8s 0.85s cubic-bezier(0.19,1,0.22,1) forwards;
+  animation: lsup 0.6s 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 .ls-bar {
   height: 100%;
   background: var(--gold-bright);
   width: 0%;
+  transition: width 0.08s linear;
 }
 
 /* Sub label */
@@ -98,6 +116,35 @@
   color: var(--fg-mid);
   text-align: center;
   opacity: 0;
-  transition: opacity 0.7s cubic-bezier(0.19,1,0.22,1);
+  transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1);
 }
 .ls-sub.show { opacity: 1; }
+
+/* Skip button */
+.ls-skip-btn {
+  position: absolute;
+  bottom: 2.5rem;
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  color: var(--fg-mid);
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid var(--border-subtle);
+  padding: 8px 18px;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  opacity: 0;
+  animation: lsup 0.6s 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+.ls-skip-btn:hover {
+  color: var(--gold-bright);
+  border-color: var(--gold-border);
+  background: rgba(232, 159, 94, 0.12);
+  transform: translateY(-1px);
+}

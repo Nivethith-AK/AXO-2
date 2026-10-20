@@ -1,0 +1,171 @@
+/* ============================================================
+   CLARIO INTERACTIVE ANIMATIONS & SPRING PHYSICS
+   Derived from https://clario.framer.website/
+   ============================================================ */
+
+/* ── Scroll Reveals (Framer-style Appear) ──────────────────── */
+.cl-reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.85s cubic-bezier(0.16, 1, 0.3, 1),
+              transform 0.85s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform;
+}
+
+.cl-reveal.is-revealed {
+  opacity: 1 !important;
+  transform: translateY(0) !important;
+}
+
+/* Stagger delays */
+.cl-stagger-1 { transition-delay: 0.08s; }
+.cl-stagger-2 { transition-delay: 0.16s; }
+.cl-stagger-3 { transition-delay: 0.24s; }
+.cl-stagger-4 { transition-delay: 0.32s; }
+.cl-stagger-5 { transition-delay: 0.40s; }
+.cl-stagger-6 { transition-delay: 0.48s; }
+
+/* ── Interactive Spotlight Cards ───────────────────────────── */
+.cl-interactive-card,
+.cl-step-card,
+.cl-bento-card,
+.cl-edition-card,
+.archive-card,
+.track-card,
+.shop-card {
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+              border-color 0.4s cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+
+/* Radial spotlight following cursor */
+.cl-interactive-card::before,
+.cl-step-card::before,
+.cl-bento-card::before,
+.cl-edition-card::before,
+.archive-card::before,
+.track-card::before,
+.shop-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  background: radial-gradient(
+    520px circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
+    rgba(232, 159, 94, 0.12),
+    transparent 45%
+  );
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  z-index: 1;
+}
+
+.cl-interactive-card:hover::before,
+.cl-step-card:hover::before,
+.cl-bento-card:hover::before,
+.cl-edition-card:hover::before,
+.archive-card:hover::before,
+.track-card:hover::before,
+.shop-card:hover::before {
+  opacity: 1;
+}
+
+/* Hover elevation lift and delicate border shimmer */
+.cl-interactive-card:hover,
+.cl-step-card:hover,
+.cl-bento-card:hover,
+.cl-edition-card:hover,
+.archive-card:hover,
+.track-card:hover,
+.shop-card:hover {
+  transform: translateY(-4px) scale(1.006);
+  border-color: rgba(232, 159, 94, 0.45) !important;
+  box-shadow: 0 1px 0 0 rgba(232, 159, 94, 0.22) inset,
+              0 18px 40px -10px rgba(0, 0, 0, 0.55) !important;
+}
+
+/* ── Magnetic / Spring Hover Buttons ──────────────────────── */
+.cl-btn-magnetic,
+.btn-primary,
+.cl-btn-primary,
+.nav-cta-btn,
+.hero-cta,
+.btn-hero-primary {
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+              background 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+              border-color 0.3s cubic-bezier(0.16, 1, 0.3, 1) !important;
+  cursor: pointer;
+}
+
+.cl-btn-magnetic:hover,
+.btn-primary:hover,
+.cl-btn-primary:hover,
+.nav-cta-btn:hover,
+.btn-hero-primary:hover {
+  transform: translateY(-2px) scale(1.025) !important;
+  box-shadow: 0 0 24px -2px rgba(232, 159, 94, 0.38) !important;
+}
+
+.cl-btn-magnetic:active,
+.btn-primary:active,
+.cl-btn-primary:active,
+.nav-cta-btn:active,
+.btn-hero-primary:active {
+  transform: translateY(0) scale(0.97) !important;
+}
+
+/* ── Floating Ambient Badges (Clario Floating Motion) ──────── */
+@keyframes clarioFloat {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-5px);
+  }
+}
+
+.cl-float,
+.hero-artist-badge,
+.cl-hero-badge {
+  animation: clarioFloat 4s ease-in-out infinite;
+}
+
+/* ── Accordion Micro-interactions ─────────────────────────── */
+.cl-faq-item {
+  transition: border-color 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+              background-color 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.cl-faq-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+              color 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.cl-faq-item.active .cl-faq-icon {
+  transform: rotate(45deg);
+  color: var(--gold-bright);
+}
+
+.cl-faq-answer {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.38s cubic-bezier(0.16, 1, 0.3, 1),
+              opacity 0.38s cubic-bezier(0.16, 1, 0.3, 1);
+  opacity: 0;
+}
+
+.cl-faq-item.active .cl-faq-answer {
+  grid-template-rows: 1fr;
+  opacity: 1;
+}
+
+.cl-faq-answer-inner {
+  overflow: hidden;
+}

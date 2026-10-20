@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useTheme } from '../context/ThemeContext';
 import { useAudio } from '../context/AudioContext';
+import { useLenis } from '../components/SmoothScroll';
 import CelestialCanvas from '../components/CelestialCanvas';
 import ReaderOverlay from '../components/ReaderOverlay';
 import SoundtrackPlayer from '../components/SoundtrackPlayer';
@@ -92,6 +93,7 @@ export default function ClarioPage() {
   const { isMuted, toggleMute, togglePlay, isPlaying } = useAudio();
   const [selectedChapterId, setSelectedChapterId] = useState(null);
   const [openFaqIdx, setOpenFaqIdx] = useState(0);
+  const lenis = useLenis();
 
   const handleReadAlpha = (e) => {
     e?.preventDefault();
@@ -101,7 +103,11 @@ export default function ClarioPage() {
   const scrollTo = (e, id) => {
     e.preventDefault();
     const el = document.getElementById(id);
-    if (el) el.scrollIntoView({ behavior: 'smooth' });
+    if (el && lenis) {
+      lenis.scrollTo(el, { offset: -75, duration: 1.4 });
+    } else if (el) {
+      el.scrollIntoView({ behavior: 'smooth' });
+    }
   };
 
   return (
@@ -139,7 +145,7 @@ export default function ClarioPage() {
         </div>
 
         <div className="nav-actions">
-          <button className="nav-cta-btn desktop-only" onClick={handleReadAlpha}>
+          <button className="nav-cta-btn cl-btn-magnetic desktop-only" onClick={handleReadAlpha}>
             <span>Read Chapter α</span>
           </button>
 
@@ -164,28 +170,32 @@ export default function ClarioPage() {
       {/* Clario Hero Section */}
       <section className="clario-hero-section" id="hero">
         <div className="sec-inner" style={{ textAlign: 'center' }}>
-          <div className="hero-artist-badge" style={{ margin: '0 auto 24px' }}>
+          <div className="hero-artist-badge cl-float" style={{ margin: '0 auto 24px' }}>
             <span className="artist-spark">✦</span>
             <span>AN ORIGINAL WEB NOVEL &amp; SOUNDTRACK BY ΔXOLOTL</span>
           </div>
 
-          <h1 className="clario-main-headline">
+          <h1 className="clario-main-headline cl-reveal">
             Experience the novel and music — with clarity
           </h1>
 
-          <p className="clario-hero-sub">
+          <p className="clario-hero-sub cl-reveal cl-stagger-1">
             All your chapters, illustrated panels, and original master soundtracks in one place — read, listen, and follow the universe with ease.
           </p>
 
-          <div className="hero-cta-row" style={{ marginBottom: '48px' }}>
-            <button className="btn cta-btn-primary" onClick={handleReadAlpha}>
+          <div className="hero-cta-row cl-reveal cl-stagger-2" style={{ marginBottom: '48px' }}>
+            <button className="btn cta-btn-primary cl-btn-magnetic" onClick={handleReadAlpha}>
               <span>Read Chapter α Free</span>
             </button>
             <button
-              className="btn cta-btn-secondary"
+              className="btn cta-btn-secondary cl-btn-magnetic"
               onClick={() => {
                 const el = document.getElementById('music');
-                if (el) el.scrollIntoView({ behavior: 'smooth' });
+                if (el && lenis) {
+                  lenis.scrollTo(el, { offset: -75, duration: 1.4 });
+                } else if (el) {
+                  el.scrollIntoView({ behavior: 'smooth' });
+                }
                 if (!isPlaying) togglePlay();
               }}
             >
@@ -194,7 +204,7 @@ export default function ClarioPage() {
           </div>
 
           {/* Clario Dashboard/Centerpiece Preview Card */}
-          <div className="clario-centerpiece-card">
+          <div className="clario-centerpiece-card cl-interactive-card cl-reveal cl-stagger-3">
             <div className="centerpiece-topbar">
               <span className="window-dot red" />
               <span className="window-dot yellow" />
@@ -207,7 +217,7 @@ export default function ClarioPage() {
                 <h3 className="cp-title">Track Ω: To Eternity and After</h3>
                 <p className="cp-artist">Composed &amp; Produced by Δxolotl · Chapter α Official Score</p>
               </div>
-              <button className="btn cp-play-btn" onClick={togglePlay}>
+              <button className="btn cp-play-btn cl-btn-magnetic" onClick={togglePlay}>
                 <span>{isPlaying ? '❚❚ Pause Track' : '▶ Play Track'}</span>
               </button>
             </div>
@@ -219,16 +229,16 @@ export default function ClarioPage() {
       <section className="sec" id="how-it-works">
         <div className="sec-inner">
           <div style={{ textAlign: 'center', marginBottom: '56px' }}>
-            <div className="sec-label c">Step-by-Step Experience</div>
-            <h2 className="sec-title">How Memento Mori Works</h2>
-            <p className="sec-body" style={{ margin: '0 auto', maxWidth: '640px' }}>
+            <div className="sec-label c cl-reveal">Step-by-Step Experience</div>
+            <h2 className="sec-title cl-reveal cl-stagger-1">How Memento Mori Works</h2>
+            <p className="sec-body cl-reveal cl-stagger-2" style={{ margin: '0 auto', maxWidth: '640px' }}>
               Designed for immersion. Move effortlessly between reading the story and listening to the music.
             </p>
           </div>
 
           <div className="clario-steps-grid">
             {HOW_STEPS.map((s, idx) => (
-              <div key={idx} className="clario-step-card">
+              <div key={idx} className={`clario-step-card cl-interactive-card cl-reveal cl-stagger-${idx + 1}`}>
                 <div className="step-card-header">
                   <span className="step-badge">{s.step}</span>
                   <span className="step-num">0{idx + 1}</span>
@@ -248,50 +258,50 @@ export default function ClarioPage() {
       <section className="sec" id="bento">
         <div className="sec-inner">
           <div style={{ textAlign: 'center', marginBottom: '56px' }}>
-            <div className="sec-label c">Chronicle Showcase</div>
-            <h2 className="sec-title">Explore the Universe in Real Time</h2>
-            <p className="sec-body" style={{ margin: '0 auto', maxWidth: '640px' }}>
+            <div className="sec-label c cl-reveal">Chronicle Showcase</div>
+            <h2 className="sec-title cl-reveal cl-stagger-1">Explore the Universe in Real Time</h2>
+            <p className="sec-body cl-reveal cl-stagger-2" style={{ margin: '0 auto', maxWidth: '640px' }}>
               Visual previews, released chapter manuscripts, and master soundtrack audio at your fingertips.
             </p>
           </div>
 
           <div className="clario-bento-grid">
-            <div className="bento-card bento-large">
+            <div className="bento-card bento-large cl-interactive-card cl-reveal cl-stagger-1">
               <span className="bento-badge">ACTIVE RECORD</span>
               <h3 className="bento-title">Chapter α: When We Met</h3>
               <p className="bento-desc">
                 Adoniel Togami sits before a frozen compiler screen late past midnight. An accidental syntax confession interrupts everything.
               </p>
-              <button className="btn" style={{ alignSelf: 'flex-start' }} onClick={handleReadAlpha}>
+              <button className="btn cl-btn-magnetic" style={{ alignSelf: 'flex-start' }} onClick={handleReadAlpha}>
                 <span>Read Chapter α</span>
               </button>
             </div>
 
-            <div className="bento-card bento-small">
+            <div className="bento-card bento-small cl-interactive-card cl-reveal cl-stagger-2">
               <span className="bento-badge">CHAPTER I</span>
               <h3 className="bento-title">A Death Wish</h3>
               <p className="bento-desc">The encounter with Azrael deepens on the moonlit balcony.</p>
-              <button className="btn" style={{ alignSelf: 'flex-start' }} onClick={() => setSelectedChapterId('1')}>
+              <button className="btn cl-btn-magnetic" style={{ alignSelf: 'flex-start' }} onClick={() => setSelectedChapterId('1')}>
                 <span>Read Chapter I</span>
               </button>
             </div>
 
-            <div className="bento-card bento-small">
+            <div className="bento-card bento-small cl-interactive-card cl-reveal cl-stagger-3">
               <span className="bento-badge">AUDIO ARCHIVE</span>
               <h3 className="bento-title">Master Soundtrack</h3>
               <p className="bento-desc">Lossless audio score produced by Δxolotl to accompany your reading.</p>
-              <button className="btn" style={{ alignSelf: 'flex-start' }} onClick={togglePlay}>
+              <button className="btn cl-btn-magnetic" style={{ alignSelf: 'flex-start' }} onClick={togglePlay}>
                 <span>{isPlaying ? 'Pause Score' : 'Play Score'}</span>
               </button>
             </div>
 
-            <div className="bento-card bento-large">
+            <div className="bento-card bento-large cl-interactive-card cl-reveal cl-stagger-4">
               <span className="bento-badge">VISUAL RELAY</span>
               <h3 className="bento-title">Illustrated Manga Panels &amp; Trailers</h3>
               <p className="bento-desc">
                 Concept art and illustrated manga pages crafted in collaboration with Project Eden.
               </p>
-              <Link to="/chapter?id=0" className="btn" style={{ alignSelf: 'flex-start' }}>
+              <Link to="/chapter?id=0" className="btn cl-btn-magnetic" style={{ alignSelf: 'flex-start' }}>
                 <span>Open Illustrated Viewer ↗</span>
               </Link>
             </div>
@@ -300,7 +310,7 @@ export default function ClarioPage() {
       </section>
 
       {/* Full Integrated Soundtrack Player Section */}
-      <div id="music">
+      <div id="music" className="cl-reveal">
         <SoundtrackPlayer />
       </div>
 
@@ -308,16 +318,16 @@ export default function ClarioPage() {
       <section className="sec" id="features">
         <div className="sec-inner">
           <div style={{ textAlign: 'center', marginBottom: '56px' }}>
-            <div className="sec-label c">Creative Design</div>
-            <h2 className="sec-title">Built for Story &amp; Music</h2>
-            <p className="sec-body" style={{ margin: '0 auto', maxWidth: '640px' }}>
+            <div className="sec-label c cl-reveal">Creative Design</div>
+            <h2 className="sec-title cl-reveal cl-stagger-1">Built for Story &amp; Music</h2>
+            <p className="sec-body cl-reveal cl-stagger-2" style={{ margin: '0 auto', maxWidth: '640px' }}>
               Every feature exists to serve the story and the music without digital friction.
             </p>
           </div>
 
           <div className="clario-features-grid">
             {FEATURES.map((feat, idx) => (
-              <div key={idx} className="feature-card">
+              <div key={idx} className={`feature-card cl-interactive-card cl-reveal cl-stagger-${(idx % 3) + 1}`}>
                 <span className="feature-spark">✦</span>
                 <h4 className="feature-title">{feat.title}</h4>
                 <p className="feature-desc">{feat.desc}</p>
@@ -330,7 +340,7 @@ export default function ClarioPage() {
       {/* Clario Testimonial Section */}
       <section className="sec">
         <div className="sec-inner">
-          <div className="clario-testimonial-card">
+          <div className="clario-testimonial-card cl-interactive-card cl-reveal">
             <div className="testimonial-eyebrow">
               <span className="dot-pulse" />
               <span>READER &amp; LISTENER COMMUNITY</span>
@@ -354,15 +364,15 @@ export default function ClarioPage() {
       <section className="sec" id="editions">
         <div className="sec-inner">
           <div style={{ textAlign: 'center', marginBottom: '56px' }}>
-            <div className="sec-label c">Access &amp; Formats</div>
-            <h2 className="sec-title">Simple Access Plans</h2>
-            <p className="sec-body" style={{ margin: '0 auto', maxWidth: '640px' }}>
+            <div className="sec-label c cl-reveal">Access &amp; Formats</div>
+            <h2 className="sec-title cl-reveal cl-stagger-1">Simple Access Plans</h2>
+            <p className="sec-body cl-reveal cl-stagger-2" style={{ margin: '0 auto', maxWidth: '640px' }}>
               Free online reading for everyone, streaming music on all platforms, and upcoming physical collectibles.
             </p>
           </div>
 
           <div className="clario-pricing-grid">
-            <div className="clario-pricing-card">
+            <div className="clario-pricing-card cl-interactive-card cl-reveal cl-stagger-1">
               <span className="pricing-badge">ACTIVE ACCESS</span>
               <h3 className="pricing-tier">Web Novel</h3>
               <div className="pricing-price-row">
@@ -376,12 +386,12 @@ export default function ClarioPage() {
                 <li className="pricing-feat-item"><span className="feat-check">✦</span>Zero logins or advertisements</li>
                 <li className="pricing-feat-item"><span className="feat-check">✦</span>Mobile &amp; desktop responsive</li>
               </ul>
-              <button className="btn" style={{ width: '100%', justifyContent: 'center', marginTop: '24px' }} onClick={handleReadAlpha}>
+              <button className="btn cl-btn-magnetic" style={{ width: '100%', justifyContent: 'center', marginTop: '24px' }} onClick={handleReadAlpha}>
                 <span>Read Free Now</span>
               </button>
             </div>
 
-            <div className="clario-pricing-card popular">
+            <div className="clario-pricing-card popular cl-interactive-card cl-reveal cl-stagger-2">
               <div className="pricing-badge-popular">MOST STREAMED</div>
               <span className="pricing-badge">STREAMING NOW</span>
               <h3 className="pricing-tier">Original Soundtrack</h3>
@@ -396,12 +406,12 @@ export default function ClarioPage() {
                 <li className="pricing-feat-item"><span className="feat-check">✦</span>Available on Spotify &amp; YouTube</li>
                 <li className="pricing-feat-item"><span className="feat-check">✦</span>Full companion score to novel</li>
               </ul>
-              <button className="btn btn-primary-highlight" style={{ width: '100%', justifyContent: 'center', marginTop: '24px' }} onClick={togglePlay}>
+              <button className="btn btn-primary-highlight cl-btn-magnetic" style={{ width: '100%', justifyContent: 'center', marginTop: '24px' }} onClick={togglePlay}>
                 <span>{isPlaying ? 'Pause Audio' : 'Play Master Score'}</span>
               </button>
             </div>
 
-            <div className="clario-pricing-card">
+            <div className="clario-pricing-card cl-interactive-card cl-reveal cl-stagger-3">
               <span className="pricing-badge">COMING SOON</span>
               <h3 className="pricing-tier">Collector’s Bundle</h3>
               <div className="pricing-price-row">
@@ -415,7 +425,7 @@ export default function ClarioPage() {
                 <li className="pricing-feat-item"><span className="feat-check">✦</span>180g heavyweight obsidian vinyl</li>
                 <li className="pricing-feat-item"><span className="feat-check">✦</span>Author signed print by Δxolotl</li>
               </ul>
-              <button className="btn" style={{ width: '100%', justifyContent: 'center', marginTop: '24px' }} onClick={(e) => scrollTo(e, 'faq')}>
+              <button className="btn cl-btn-magnetic" style={{ width: '100%', justifyContent: 'center', marginTop: '24px' }} onClick={(e) => scrollTo(e, 'faq')}>
                 <span>View Details</span>
               </button>
             </div>
@@ -427,9 +437,9 @@ export default function ClarioPage() {
       <section className="sec" id="faq">
         <div className="sec-inner">
           <div style={{ textAlign: 'center', marginBottom: '56px' }}>
-            <div className="sec-label c">Questions &amp; Answers</div>
-            <h2 className="sec-title">Frequently Asked Questions</h2>
-            <p className="sec-body" style={{ margin: '0 auto', maxWidth: '640px' }}>
+            <div className="sec-label c cl-reveal">Questions &amp; Answers</div>
+            <h2 className="sec-title cl-reveal cl-stagger-1">Frequently Asked Questions</h2>
+            <p className="sec-body cl-reveal cl-stagger-2" style={{ margin: '0 auto', maxWidth: '640px' }}>
               Everything you need to know about the music, chapter release schedules, and novel lore.
             </p>
           </div>
@@ -438,17 +448,21 @@ export default function ClarioPage() {
             {FAQS.map((faq, idx) => {
               const isOpen = openFaqIdx === idx;
               return (
-                <div key={faq.num} className={`faq-item ${isOpen ? 'open' : ''}`} onClick={() => setOpenFaqIdx(isOpen ? -1 : idx)}>
+                <div
+                  key={faq.num}
+                  className={`cl-faq-item faq-item ${isOpen ? 'active open' : ''} cl-reveal cl-stagger-${(idx % 3) + 1}`}
+                  onClick={() => setOpenFaqIdx(isOpen ? -1 : idx)}
+                >
                   <div className="faq-question-row">
                     <span className="faq-num">{faq.num}</span>
                     <h3 className="faq-question">{faq.q}</h3>
-                    <span className="faq-toggle-icon">{isOpen ? '−' : '+'}</span>
+                    <span className="cl-faq-icon faq-toggle-icon">{isOpen ? '×' : '+'}</span>
                   </div>
-                  {isOpen && (
-                    <div className="faq-answer-wrap">
+                  <div className="cl-faq-answer">
+                    <div className="cl-faq-answer-inner faq-answer-wrap">
                       <p className="faq-answer">{faq.a}</p>
                     </div>
-                  )}
+                  </div>
                 </div>
               );
             })}
@@ -459,7 +473,7 @@ export default function ClarioPage() {
       {/* Clario Pre-Footer CTA Card */}
       <section className="sec clario-cta-section">
         <div className="sec-inner">
-          <div className="clario-cta-card">
+          <div className="clario-cta-card cl-interactive-card cl-reveal">
             <div className="cta-corner tl" /><div className="cta-corner tr" /><div className="cta-corner bl" /><div className="cta-corner br" />
             <div className="cta-badge">
               <span className="dot-pulse" />
@@ -470,10 +484,10 @@ export default function ClarioPage() {
               Chapter <span className="glyph-preserve">α</span> is waiting. Stream the official soundtrack and immerse yourself in Volume I.
             </p>
             <div className="cta-actions">
-              <button className="btn cta-btn-primary" onClick={handleReadAlpha}>
+              <button className="btn cta-btn-primary cl-btn-magnetic" onClick={handleReadAlpha}>
                 <span>Read Chapter α Free</span>
               </button>
-              <Link to="/" className="btn cta-btn-secondary">
+              <Link to="/" className="btn cta-btn-secondary cl-btn-magnetic">
                 <span>View Classic Home Page</span>
               </Link>
             </div>

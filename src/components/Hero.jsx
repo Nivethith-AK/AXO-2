@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react';
+import { useLenis } from './SmoothScroll';
 
 export default function Hero() {
   const [utcTime, setUtcTime] = useState('');
   const [scrollY, setScrollY] = useState(0);
+  const lenis = useLenis();
 
   useEffect(() => {
     const tick = () => {
@@ -31,7 +33,11 @@ export default function Hero() {
   const scrollToArchive = (e) => {
     e.preventDefault();
     const el = document.getElementById('archive');
-    if (el) el.scrollIntoView({ behavior: 'smooth' });
+    if (el && lenis) {
+      lenis.scrollTo(el, { offset: -75, duration: 1.4 });
+    } else if (el) {
+      el.scrollIntoView({ behavior: 'smooth' });
+    }
   };
 
   return (
@@ -45,7 +51,7 @@ export default function Hero() {
       }}
     >
       <div className="fi vis d1">
-        <div className="hud-pill">
+        <div className="hud-pill cl-float">
           <span className="hud-dot" />
           <span className="hud-status">TRANSMISSION: ACTIVE</span>
           <span className="hud-sep">//</span>
@@ -78,7 +84,7 @@ export default function Hero() {
       </div>
 
       <div className="fi vis d5">
-        <a href="#archive" className="btn" onClick={scrollToArchive}>
+        <a href="#archive" className="btn cl-btn-magnetic" onClick={scrollToArchive}>
           <span>Access Archives</span>
         </a>
       </div>

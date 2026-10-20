@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState, useRef, useCallback } from 'react';
 import { useAudio } from '../context/AudioContext';
 
 const GLYPHS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789ΔΨΩΞΛΘΦΣΠαβγδ∞◈✦⬡';
@@ -10,7 +10,8 @@ const CIPHER_MSGS = [
 ];
 const TITLE_RAW = 'MEMENTO MORI';
 const TITLE_DONE = 'Memento Mori';
-const DURATION = 3200;
+const DURATION = 1800;
+const SESSION_KEY = 'memento_mori_loaded';
 
 export default function LoadingScreen({ onDismiss }) {
   const { autostart } = useAudio();
@@ -19,9 +20,60 @@ export default function LoadingScreen({ onDismiss }) {
   const [subVisible, setSubVisible] = useState(false);
   const [progress, setProgress] = useState(0);
   const [isExiting, setIsExiting] = useState(false);
-  const [isHidden, setIsHidden] = useState(false);
+  const [isHidden, setIsHidden] = useState(() => {
+    try {
+      return sessionStorage.getItem(SESSION_KEY) === 'true';
+    } catch (e) {
+      return false;
+    }
+  });
+
+  const onDismissRef = useRef(onDismiss);
+  onDismissRef.current = onDismiss;
+
+  const autostartRef = useRef(autostart);
+  autostartRef.current = autostart;
+
+  const dismissedRef = useRef(false);
+  const animIdsRef = useRef([]);
+  const timersRef = useRef([]);
+  const exitTimerRef = useRef(null);
+
+  const dismiss = useCallback(() => {
+    if (dismissedRef.current) return;
+    dismissedRef.current = true;
+
+    try {
+      sessionStorage.setItem(SESSION_KEY, 'true');
+    } catch (e) {}
+
+    // Unlock interactions immediately
+    if (onDismissRef.current) onDismissRef.current();
+    try {
+      autostartRef.current();
+    } catch (e) {}
+
+    setIsExiting(true);
+
+    if (exitTimerRef.current) clearTimeout(exitTimerRef.current);
+    exitTimerRef.current = setTimeout(() => {
+      setIsHidden(true);
+    }, 520);
+  }, []);
 
   useEffect(() => {
+    if (isHidden) {
+      if (onDismissRef.current) onDismissRef.current();
+      return;
+    }
+
+    const handleKeyDown = (e) => {
+      if (e.key === 'Escape' || e.key === ' ' || e.key === 'Enter') {
+        dismiss();
+      }
+    };
+    window.addEventListener('keydown', handleKeyDown);
+
     const tStart = performance.now();
     let titlePhase = 0;
     let decIdx = 0;
@@ -29,7 +81,6 @@ export default function LoadingScreen({ onDismiss }) {
     let charIdx = 0;
     let cfr = 0;
     let cipherRunning = true;
-    let animId;
 
     const scrambleMsg = (str) =>
       str
@@ -38,10 +89,7 @@ export default function LoadingScreen({ onDismiss }) {
         .join('');
 
     const runCipher = () => {
-      if (!cipherRunning) {
-        setCipherText('');
-        return;
-      }
+      if (!cipherRunning || dismissedRef.current) return;
       const t = CIPHER_MSGS[msgIdx % CIPHER_MSGS.length];
       cfr++;
       if (cfr % 3 === 0) charIdx++;
@@ -51,83 +99,96 @@ export default function LoadingScreen({ onDismiss }) {
         if (msgIdx >= CIPHER_MSGS.length) cipherRunning = false;
       }
       setCipherText(scrambleMsg(t));
-      if (cipherRunning) {
-        animId = requestAnimationFrame(runCipher);
+      if (cipherRunning && !dismissedRef.current) {
+        const id = requestAnimationFrame(runCipher);
+        animIdsRef.current.push(id);
       }
     };
 
     const scrambleTitle = () => {
-      if (titlePhase !== 1) return;
+      if (titlePhase !== 1 || dismissedRef.current) return;
       setTitleText(
         TITLE_RAW.split('')
           .map((c) => (c === ' ' ? ' ' : GLYPHS[Math.floor(Math.random() * GLYPHS.length)]))
           .join('')
       );
-      setTimeout(() => requestAnimationFrame(scrambleTitle), 50);
+      const timer = setTimeout(() => {
+        if (!dismissedRef.current) {
+          const id = requestAnimationFrame(scrambleTitle);
+          animIdsRef.current.push(id);
+        }
+      }, 45);
+      timersRef.current.push(timer);
     };
 
     const decryptTitle = () => {
+      if (dismissedRef.current) return;
       setTitleText(
         TITLE_RAW.split('')
           .map((c, i) => (c === ' ' ? ' ' : i < decIdx ? c : GLYPHS[Math.floor(Math.random() * GLYPHS.length)]))
           .join('')
       );
-      decIdx += 0.45;
+      decIdx += 0.55;
       if (decIdx < TITLE_RAW.length) {
-        requestAnimationFrame(decryptTitle);
+        const id = requestAnimationFrame(decryptTitle);
+        animIdsRef.current.push(id);
       } else {
         setTitleText(TITLE_DONE);
       }
     };
 
     const fillBar = (now) => {
+      if (dismissedRef.current) return;
       const p = Math.min(1, (now - tStart) / DURATION);
       setProgress(p * 100);
 
-      if (p >= 0.2 && titlePhase === 0) {
+      if (p >= 0.15 && titlePhase === 0) {
         titlePhase = 1;
         scrambleTitle();
       }
-      if (p >= 0.55 && titlePhase === 1) {
+      if (p >= 0.5 && titlePhase === 1) {
         titlePhase = 2;
         decryptTitle();
       }
-      if (p >= 0.72) {
+      if (p >= 0.7) {
         setSubVisible(true);
       }
       if (p < 1) {
-        requestAnimationFrame(fillBar);
+        const id = requestAnimationFrame(fillBar);
+        animIdsRef.current.push(id);
         return;
       }
 
-      setTimeout(dismiss, 380);
-    };
-
-    const dismiss = () => {
-      setIsExiting(true);
-      autostart();
-      setTimeout(() => {
-        setIsHidden(true);
-        if (onDismiss) onDismiss();
-      }, 1050);
+      const endTimer = setTimeout(dismiss, 160);
+      timersRef.current.push(endTimer);
     };
 
     const startTimer = setTimeout(() => {
       runCipher();
-      requestAnimationFrame(fillBar);
-    }, 300);
+      const id = requestAnimationFrame(fillBar);
+      animIdsRef.current.push(id);
+    }, 120);
+    timersRef.current.push(startTimer);
 
     return () => {
-      clearTimeout(startTimer);
-      cancelAnimationFrame(animId);
+      window.removeEventListener('keydown', handleKeyDown);
       cipherRunning = false;
+      timersRef.current.forEach(clearTimeout);
+      animIdsRef.current.forEach(cancelAnimationFrame);
     };
-  }, []);
+  }, [dismiss, isHidden]);
 
   if (isHidden) return null;
 
   return (
-    <div id="ls-overlay" className={isExiting ? 'exit' : ''}>
+    <div
+      id="ls-overlay"
+      className={isExiting ? 'exit' : ''}
+      onClick={dismiss}
+      role="button"
+      tabIndex={0}
+      title="Click or press ESC to enter"
+    >
       <span className="ls-presents">&#916;xolotl Presents</span>
       <h1 className="ls-title" id="ls-title">
         {titleText}
@@ -141,6 +202,17 @@ export default function LoadingScreen({ onDismiss }) {
       <span className={`ls-sub ${subVisible ? 'show' : ''}`} id="ls-sub">
         Accessing Archives
       </span>
+
+      <button
+        type="button"
+        className="ls-skip-btn"
+        onClick={(e) => {
+          e.stopPropagation();
+          dismiss();
+        }}
+      >
+        Skip &rarr;
+      </button>
     </div>
   );
 }

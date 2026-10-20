@@ -39,7 +39,7 @@ export default function SoundtrackPlayer() {
   return (
     <section className="sec" id="soundtracks">
       <div className="sec-inner">
-        <div className="fi vis" style={{ textAlign: 'center', marginBottom: '52px' }}>
+        <div className="fi vis cl-reveal" style={{ textAlign: 'center', marginBottom: '52px' }}>
           <div className="sec-label c">Transmission</div>
           <h2 className="sec-title">Soundtracks</h2>
           <p className="sec-body" style={{ margin: '0 auto 0' }}>
@@ -47,7 +47,7 @@ export default function SoundtrackPlayer() {
           </p>
         </div>
 
-        <div className="player-shell fi vis d1">
+        <div className="player-shell fi vis cl-interactive-card cl-reveal d1">
           {/* Top: orrery | track info + controls */}
           <div className="player-top">
             {/* Orrery */}
