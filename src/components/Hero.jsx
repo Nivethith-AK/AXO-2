@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 
-export default function Hero() {
+export default function Hero({ onReadChapter }) {
   const [utcTime, setUtcTime] = useState('');
   const [scrollY, setScrollY] = useState(0);
 
@@ -32,6 +32,11 @@ export default function Hero() {
     e.preventDefault();
     const el = document.getElementById('archive');
     if (el) el.scrollIntoView({ behavior: 'smooth' });
+  };
+
+  const handleReadAlpha = (e) => {
+    e.preventDefault();
+    if (onReadChapter) onReadChapter('0');
   };
 
   return (
@@ -73,14 +78,17 @@ export default function Hero() {
 
       <div className="fi vis d4">
         <p className="hero-desc">
-          Welcome to the Official Website of the web-novel by &#916;xolotl!
+          A chronicle of celestial grief, quiet devotion, and the breathless space between Adoniel and the Archangel of Death.
         </p>
       </div>
 
-      <div className="fi vis d5">
-        <a href="#archive" className="btn" onClick={scrollToArchive}>
+      <div className="fi vis d5 hero-cta-row">
+        <a href="#archive" className="btn btn-hero-primary" onClick={scrollToArchive}>
           <span>Access Archives</span>
         </a>
+        <button className="btn btn-hero-secondary" onClick={handleReadAlpha}>
+          <span>Read Chapter α</span>
+        </button>
       </div>
     </section>
   );
