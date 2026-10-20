@@ -1,5 +1,6 @@
 import React, { useEffect, useState, useRef, useCallback } from 'react';
 import { useAudio } from '../context/AudioContext';
+import { useLenis } from './SmoothScroll';
 
 const GLYPHS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789ΔΨΩΞΛΘΦΣΠαβγδ∞◈✦⬡';
 const CIPHER_MSGS = [
@@ -10,23 +11,18 @@ const CIPHER_MSGS = [
 ];
 const TITLE_RAW = 'MEMENTO MORI';
 const TITLE_DONE = 'Memento Mori';
-const DURATION = 1800;
-const SESSION_KEY = 'memento_mori_loaded';
+const DURATION = 2400;
 
 export default function LoadingScreen({ onDismiss }) {
   const { autostart } = useAudio();
+  const lenis = useLenis();
+
   const [cipherText, setCipherText] = useState('');
-  const [titleText, setTitleText] = useState(TITLE_DONE);
+  const [titleText, setTitleText] = useState('◈◈◈◈◈◈ ◈◈◈◈');
   const [subVisible, setSubVisible] = useState(false);
   const [progress, setProgress] = useState(0);
   const [isExiting, setIsExiting] = useState(false);
-  const [isHidden, setIsHidden] = useState(() => {
-    try {
-      return sessionStorage.getItem(SESSION_KEY) === 'true';
-    } catch (e) {
-      return false;
-    }
-  });
+  const [isHidden, setIsHidden] = useState(false);
 
   const onDismissRef = useRef(onDismiss);
   onDismissRef.current = onDismiss;
@@ -37,36 +33,36 @@ export default function LoadingScreen({ onDismiss }) {
   const dismissedRef = useRef(false);
   const animIdsRef = useRef([]);
   const timersRef = useRef([]);
-  const exitTimerRef = useRef(null);
 
   const dismiss = useCallback(() => {
     if (dismissedRef.current) return;
     dismissedRef.current = true;
 
-    try {
-      sessionStorage.setItem(SESSION_KEY, 'true');
-    } catch (e) {}
+    // 1. Unlock interactions & scroll
+    document.body.style.overflow = '';
+    if (lenis) lenis.start();
 
-    // Unlock interactions immediately
+    // 2. Trigger parent ready state and audio autostart immediately
     if (onDismissRef.current) onDismissRef.current();
     try {
       autostartRef.current();
     } catch (e) {}
 
+    // 3. Begin smooth curtain exit fade
     setIsExiting(true);
 
-    if (exitTimerRef.current) clearTimeout(exitTimerRef.current);
-    exitTimerRef.current = setTimeout(() => {
+    const exitTimer = setTimeout(() => {
       setIsHidden(true);
-    }, 520);
-  }, []);
+    }, 650);
+    timersRef.current.push(exitTimer);
+  }, [lenis]);
 
   useEffect(() => {
-    if (isHidden) {
-      if (onDismissRef.current) onDismissRef.current();
-      return;
-    }
+    // Lock scroll during loading screen
+    document.body.style.overflow = 'hidden';
+    if (lenis) lenis.stop();
 
+    // Interactive skip on keypress (ESC, Space, Enter)
     const handleKeyDown = (e) => {
       if (e.key === 'Escape' || e.key === ' ' || e.key === 'Enter') {
         dismiss();
@@ -75,12 +71,11 @@ export default function LoadingScreen({ onDismiss }) {
     window.addEventListener('keydown', handleKeyDown);
 
     const tStart = performance.now();
-    let titlePhase = 0;
-    let decIdx = 0;
     let msgIdx = 0;
     let charIdx = 0;
     let cfr = 0;
     let cipherRunning = true;
+    let lastScramble = 0;
 
     const scrambleMsg = (str) =>
       str
@@ -105,78 +100,74 @@ export default function LoadingScreen({ onDismiss }) {
       }
     };
 
-    const scrambleTitle = () => {
-      if (titlePhase !== 1 || dismissedRef.current) return;
-      setTitleText(
-        TITLE_RAW.split('')
-          .map((c) => (c === ' ' ? ' ' : GLYPHS[Math.floor(Math.random() * GLYPHS.length)]))
-          .join('')
-      );
-      const timer = setTimeout(() => {
-        if (!dismissedRef.current) {
-          const id = requestAnimationFrame(scrambleTitle);
-          animIdsRef.current.push(id);
-        }
-      }, 45);
-      timersRef.current.push(timer);
-    };
-
-    const decryptTitle = () => {
+    const updateLoop = (now) => {
       if (dismissedRef.current) return;
-      setTitleText(
-        TITLE_RAW.split('')
-          .map((c, i) => (c === ' ' ? ' ' : i < decIdx ? c : GLYPHS[Math.floor(Math.random() * GLYPHS.length)]))
-          .join('')
-      );
-      decIdx += 0.55;
-      if (decIdx < TITLE_RAW.length) {
-        const id = requestAnimationFrame(decryptTitle);
-        animIdsRef.current.push(id);
-      } else {
-        setTitleText(TITLE_DONE);
-      }
-    };
-
-    const fillBar = (now) => {
-      if (dismissedRef.current) return;
-      const p = Math.min(1, (now - tStart) / DURATION);
+      const elapsed = now - tStart;
+      const p = Math.min(1, elapsed / DURATION);
       setProgress(p * 100);
 
-      if (p >= 0.15 && titlePhase === 0) {
-        titlePhase = 1;
-        scrambleTitle();
+      // Phase 1: 0% to 45% — rhythmic cipher scramble
+      if (p < 0.45) {
+        if (now - lastScramble > 45) {
+          lastScramble = now;
+          setTitleText(
+            TITLE_RAW.split('')
+              .map((c) => (c === ' ' ? ' ' : GLYPHS[Math.floor(Math.random() * GLYPHS.length)]))
+              .join('')
+          );
+        }
       }
-      if (p >= 0.5 && titlePhase === 1) {
-        titlePhase = 2;
-        decryptTitle();
+      // Phase 2: 45% to 88% — smooth left-to-right character decryption
+      else if (p < 0.88) {
+        const decProgress = (p - 0.45) / (0.88 - 0.45);
+        const charsDecrypted = Math.floor(decProgress * TITLE_RAW.length);
+        setTitleText(
+          TITLE_RAW.split('')
+            .map((c, i) => {
+              if (c === ' ') return ' ';
+              if (i < charsDecrypted) return c;
+              return GLYPHS[Math.floor(Math.random() * GLYPHS.length)];
+            })
+            .join('')
+        );
       }
+      // Phase 3: 88% to 100% — fully decrypted "Memento Mori"
+      else {
+        setTitleText(TITLE_DONE);
+      }
+
       if (p >= 0.7) {
         setSubVisible(true);
       }
+
       if (p < 1) {
-        const id = requestAnimationFrame(fillBar);
+        const id = requestAnimationFrame(updateLoop);
         animIdsRef.current.push(id);
         return;
       }
 
-      const endTimer = setTimeout(dismiss, 160);
+      // 100% Complete — brief hold then smooth exit
+      setTitleText(TITLE_DONE);
+      const endTimer = setTimeout(dismiss, 180);
       timersRef.current.push(endTimer);
     };
 
     const startTimer = setTimeout(() => {
       runCipher();
-      const id = requestAnimationFrame(fillBar);
+      const id = requestAnimationFrame(updateLoop);
       animIdsRef.current.push(id);
-    }, 120);
+    }, 100);
     timersRef.current.push(startTimer);
 
     return () => {
+      document.body.style.overflow = '';
+      if (lenis) lenis.start();
       window.removeEventListener('keydown', handleKeyDown);
       cipherRunning = false;
       timersRef.current.forEach(clearTimeout);
       animIdsRef.current.forEach(cancelAnimationFrame);
     };
-  }, [dismiss, isHidden]);
+  }, [dismiss, lenis]);
 
   if (isHidden) return null;
 

@@ -1,13 +1,13 @@
-import React, { createContext, useContext, useEffect, useRef } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { useLocation } from 'react-router-dom';
 import Lenis from 'lenis';
+import { SmoothScrollContext, useLenis } from '../context/SmoothScrollContext';
 import '../styles/lenis.css';
 
-const SmoothScrollContext = createContext(null);
-
-export const useLenis = () => useContext(SmoothScrollContext);
+export { useLenis };
 
 export default function SmoothScroll({ children }) {
+  const [lenisInstance, setLenisInstance] = useState(null);
   const lenisRef = useRef(null);
   const location = useLocation();
 
@@ -25,6 +25,7 @@ export default function SmoothScroll({ children }) {
     });
 
     lenisRef.current = lenis;
+    setLenisInstance(lenis);
 
     // Animation frame loop
     let rafId;
@@ -83,6 +84,7 @@ export default function SmoothScroll({ children }) {
       cancelAnimationFrame(rafId);
       lenis.destroy();
       lenisRef.current = null;
+      setLenisInstance(null);
     };
   }, []);
 
@@ -116,7 +118,7 @@ export default function SmoothScroll({ children }) {
   }, [location.pathname]);
 
   return (
-    <SmoothScrollContext.Provider value={lenisRef.current}>
+    <SmoothScrollContext.Provider value={lenisInstance}>
       {children}
     </SmoothScrollContext.Provider>
   );

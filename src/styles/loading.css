@@ -5,7 +5,8 @@
 #ls-overlay {
   position: fixed !important;
   inset: 0;
-  width: 100%; height: 100%;
+  width: 100vw;
+  height: 100vh;
   z-index: 9999 !important;
   background: var(--bg, #0a0a0a);
   display: flex;
@@ -17,18 +18,28 @@
   opacity: 1;
   cursor: pointer;
   user-select: none;
-  transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.5s;
+  transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.7s;
   transform: none !important;
-  top: 0 !important; left: 0 !important;
+  top: 0 !important;
+  left: 0 !important;
 }
 
+/* Ambient celestial glow behind decrypting title */
 #ls-overlay::before {
   content: '';
   position: absolute;
-  width: 360px;
-  height: 360px;
+  width: 460px;
+  height: 460px;
   border-radius: 50%;
-  background: radial-gradient(circle, rgba(232, 159, 94, 0.09) 0%, transparent 70%);
+  background: radial-gradient(circle, rgba(232, 159, 94, 0.12) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+#ls-overlay::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at center, transparent 45%, rgba(0, 0, 0, 0.35) 100%);
   pointer-events: none;
 }
 
@@ -40,12 +51,20 @@
 
 /* Fade up animations */
 @keyframes lsup {
-  from { opacity: 0; transform: translateY(8px); }
-  to   { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 /* "Δxolotl presents" */
 .ls-presents {
+  position: relative;
+  z-index: 2;
   font-family: var(--font-mono);
   font-size: clamp(0.72rem, 1.4vw, 0.85rem);
   font-weight: 600;
@@ -59,6 +78,8 @@
 
 /* Title — JS drives decrypt */
 .ls-title {
+  position: relative;
+  z-index: 2;
   font-family: var(--font-display);
   font-weight: 700;
   font-size: clamp(1.8rem, 4.5vw, 3.2rem);
@@ -75,6 +96,8 @@
 
 /* Cipher / decode line */
 .ls-cipher {
+  position: relative;
+  z-index: 2;
   font-family: var(--font-mono);
   font-size: clamp(0.68rem, 1.2vw, 0.82rem);
   letter-spacing: 0.25em;
@@ -85,14 +108,16 @@
   text-align: center;
   white-space: nowrap;
   overflow: hidden;
-  min-width: 30ch;
+  min-width: 32ch;
   opacity: 0;
   animation: lsup 0.7s 0.25s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
 
 /* Progress bar */
 .ls-bar-wrap {
-  width: min(260px, 55vw);
+  position: relative;
+  z-index: 2;
+  width: min(280px, 55vw);
   height: 2px;
   background: var(--gold-border);
   overflow: hidden;
@@ -100,6 +125,7 @@
   opacity: 0;
   animation: lsup 0.6s 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
+
 .ls-bar {
   height: 100%;
   background: var(--gold-bright);
@@ -109,6 +135,8 @@
 
 /* Sub label */
 .ls-sub {
+  position: relative;
+  z-index: 2;
   font-family: var(--font-mono);
   font-size: clamp(0.7rem, 1.2vw, 0.82rem);
   letter-spacing: 0.35em;
@@ -118,21 +146,25 @@
   opacity: 0;
   transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1);
 }
-.ls-sub.show { opacity: 1; }
+
+.ls-sub.show {
+  opacity: 1;
+}
 
 /* Skip button */
 .ls-skip-btn {
   position: absolute;
   bottom: 2.5rem;
+  z-index: 10;
   font-family: var(--font-mono);
-  font-size: 0.7rem;
+  font-size: 0.72rem;
   font-weight: 500;
   letter-spacing: 0.25em;
   text-transform: uppercase;
   color: var(--fg-mid);
   background: rgba(255, 255, 255, 0.04);
   border: 1px solid var(--border-subtle);
-  padding: 8px 18px;
+  padding: 8px 20px;
   border-radius: 999px;
   cursor: pointer;
   transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
@@ -140,11 +172,13 @@
   align-items: center;
   gap: 6px;
   opacity: 0;
-  animation: lsup 0.6s 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  animation: lsup 0.6s 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }
+
 .ls-skip-btn:hover {
   color: var(--gold-bright);
   border-color: var(--gold-border);
-  background: rgba(232, 159, 94, 0.12);
-  transform: translateY(-1px);
+  background: rgba(232, 159, 94, 0.15);
+  transform: translateY(-2px);
+  box-shadow: 0 0 16px -2px rgba(232, 159, 94, 0.35);
 }

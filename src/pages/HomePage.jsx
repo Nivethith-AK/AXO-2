@@ -24,19 +24,29 @@ export default function HomePage() {
     <>
       <CelestialCanvas geomReady={loadingDone} />
       <LoadingScreen onDismiss={handleLoadingDone} />
-      <Navbar />
 
-      <main>
-        <Hero />
-        <InfiniteTicker />
-        <About />
-        <Archive onOpenChapter={(id) => setSelectedChapterId(id)} />
-        <SoundtrackPlayer />
-        <Shop />
-        <Contact />
-      </main>
+      <div
+        className="home-page-content"
+        style={{
+          opacity: loadingDone ? 1 : 0,
+          pointerEvents: loadingDone ? 'auto' : 'none',
+          transition: 'opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1)',
+        }}
+      >
+        <Navbar />
 
-      <Footer />
+        <main>
+          <Hero />
+          <InfiniteTicker />
+          <About />
+          <Archive onOpenChapter={(id) => setSelectedChapterId(id)} />
+          <SoundtrackPlayer />
+          <Shop />
+          <Contact />
+        </main>
+
+        <Footer />
+      </div>
 
       <ReaderOverlay
         chapterId={selectedChapterId}
