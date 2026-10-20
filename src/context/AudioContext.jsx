@@ -122,6 +122,19 @@ export function AudioProvider({ children }) {
     }
   };
 
+  const selectTrack = (idx) => {
+    if (idx === currentIdx) {
+      togglePlay();
+    } else {
+      setCurrentIdx(idx);
+      if (isPlaying) {
+        setTimeout(playAudio, 50);
+      } else {
+        playAudio();
+      }
+    }
+  };
+
   const toggleShuffle = () => {
     setShuffle(prev => !prev);
   };
@@ -222,6 +235,7 @@ export function AudioProvider({ children }) {
         volume,
         shuffle,
         togglePlay,
+        selectTrack,
         playAudio,
         pauseAudio,
         toggleMute,

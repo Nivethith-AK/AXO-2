@@ -17,6 +17,7 @@ export default function SoundtrackPlayer() {
     volume,
     shuffle,
     togglePlay,
+    selectTrack,
     prevTrack,
     nextTrack,
     toggleShuffle,
@@ -241,7 +242,7 @@ export default function SoundtrackPlayer() {
               <div
                 key={t.id || idx}
                 className={`tl-row ${idx === currentIdx ? 'active' : ''}`}
-                onClick={togglePlay}
+                onClick={() => selectTrack(idx)}
               >
                 <span className="tl-num">{String(idx + 1).padStart(2, '0')}</span>
                 <span className="tl-name">{t.title}</span>
