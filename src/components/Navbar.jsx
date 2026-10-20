@@ -1,19 +1,11 @@
 import React, { useState, useEffect, useRef } from 'react';
+import { Link } from 'react-router-dom';
 import { useTheme } from '../context/ThemeContext';
 import { useAudio } from '../context/AudioContext';
 
-const NAV_ITEMS = [
-  { id: 'about', label: 'Series' },
-  { id: 'journey', label: 'Journey' },
-  { id: 'archive', label: 'Archive' },
-  { id: 'soundtracks', label: 'Soundtrack' },
-  { id: 'lore', label: 'Paradox' },
-  { id: 'shop', label: 'Editions' },
-  { id: 'faq', label: 'FAQ' },
-  { id: 'contact', label: 'Contact' },
-];
+const SECTIONS = ['about', 'archive', 'soundtracks', 'shop', 'contact'];
 
-export default function Navbar({ onReadChapter }) {
+export default function Navbar() {
   const { theme, toggleTheme } = useTheme();
   const { isMuted, toggleMute } = useAudio();
   const [isScrolled, setIsScrolled] = useState(false);
@@ -26,7 +18,7 @@ export default function Navbar({ onReadChapter }) {
       setIsScrolled(window.scrollY > 44);
 
       let current = '';
-      NAV_ITEMS.forEach(({ id }) => {
+      SECTIONS.forEach((id) => {
         const el = document.getElementById(id);
         if (el && window.scrollY >= el.offsetTop - 140) {
           current = id;
@@ -67,12 +59,6 @@ export default function Navbar({ onReadChapter }) {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
-  const handleReadAlpha = (e) => {
-    e.preventDefault();
-    setMenuOpen(false);
-    if (onReadChapter) onReadChapter('0');
-  };
-
   return (
     <nav
       ref={navRef}
@@ -89,98 +75,87 @@ export default function Navbar({ onReadChapter }) {
       </a>
 
       <div className={`nav-links ${menuOpen ? 'open' : ''}`} id="nav-links">
-        {NAV_ITEMS.map((item) => (
+        {SECTIONS.map((sec) => (
           <a
-            key={item.id}
-            href={`#${item.id}`}
-            className={`nav-link ${activeSec === item.id ? 'active' : ''}`}
-            onClick={(e) => scrollToSection(e, item.id)}
+            key={sec}
+            href={`#${sec}`}
+            className={`nav-link ${activeSec === sec ? 'active' : ''}`}
+            onClick={(e) => scrollToSection(e, sec)}
           >
-            {item.label}
+            {sec.charAt(0).toUpperCase() + sec.slice(1)}
           </a>
         ))}
-        {/* Mobile quick read button */}
-        <button className="nav-cta-btn mobile-only" onClick={handleReadAlpha}>
-          <span>Read Chapter α</span>
-        </button>
+        <Link to="/clario" className="nav-link" style={{ color: 'var(--gold-bright)' }}>
+          Clario View ↗
+        </Link>
       </div>
 
-      <div className="nav-actions">
-        <button
-          className="nav-cta-btn desktop-only"
-          onClick={handleReadAlpha}
-          title="Read Chapter α"
+      <button
+        id="theme-toggle"
+        aria-label="Toggle theme"
+        title="Toggle Light / Dark mode"
+        onClick={toggleTheme}
+      >
+        <svg
+          className="theme-icon sun-icon"
+          viewBox="0 0 24 24"
+          width="18"
+          height="18"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="2"
+          strokeLinecap="round"
+          strokeLinejoin="round"
         >
-          <span>Read Chapter α</span>
-        </button>
+          <circle cx="12" cy="12" r="5" />
+          <line x1="12" y1="1" x2="12" y2="3" />
+          <line x1="12" y1="21" x2="12" y2="23" />
+          <line x1="4.22" y1="4.22" x2="5.64" y2="5.64" />
+          <line x1="18.36" y1="18.36" x2="19.78" y2="19.78" />
+          <line x1="1" y1="12" x2="3" y2="12" />
+          <line x1="21" y1="12" x2="23" y2="12" />
+          <line x1="4.22" y1="19.78" x2="5.64" y2="18.36" />
+          <line x1="18.36" y1="5.64" x2="19.78" y2="4.22" />
+        </svg>
+        <svg
+          className="theme-icon moon-icon"
+          viewBox="0 0 24 24"
+          width="18"
+          height="18"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="2"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        >
+          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
+        </svg>
+      </button>
 
-        <button
-          id="theme-toggle"
-          aria-label="Toggle theme"
-          title="Toggle Light / Dark mode"
-          onClick={toggleTheme}
-        >
-          <svg
-            className="theme-icon sun-icon"
-            viewBox="0 0 24 24"
-            width="18"
-            height="18"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          >
-            <circle cx="12" cy="12" r="5" />
-            <line x1="12" y1="1" x2="12" y2="3" />
-            <line x1="12" y1="21" x2="12" y2="23" />
-            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64" />
-            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78" />
-            <line x1="1" y1="12" x2="3" y2="12" />
-            <line x1="21" y1="12" x2="23" y2="12" />
-            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36" />
-            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22" />
+      <button
+        id="music-toggle"
+        className={isMuted ? 'muted' : ''}
+        aria-label="Toggle music"
+        onClick={toggleMute}
+      >
+        <span className="music-icon-wrap">
+          <img src="/assets/images/music_icon.png" alt="" aria-hidden="true" />
+          <svg className="music-mute-line" viewBox="0 0 19 19">
+            <line x1="2" y1="17" x2="17" y2="2" />
           </svg>
-          <svg
-            className="theme-icon moon-icon"
-            viewBox="0 0 24 24"
-            width="18"
-            height="18"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          >
-            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
-          </svg>
-        </button>
+        </span>
+      </button>
 
-        <button
-          id="music-toggle"
-          className={isMuted ? 'muted' : ''}
-          aria-label="Toggle music"
-          onClick={toggleMute}
-        >
-          <span className="music-icon-wrap">
-            <img src="/assets/images/music_icon.png" alt="" aria-hidden="true" />
-            <svg className="music-mute-line" viewBox="0 0 19 19">
-              <line x1="2" y1="17" x2="17" y2="2" />
-            </svg>
-          </span>
-        </button>
-
-        <button
-          className={`nav-tog ${menuOpen ? 'open' : ''}`}
-          id="nav-tog"
-          aria-label="Menu"
-          onClick={() => setMenuOpen((prev) => !prev)}
-        >
-          <span />
-          <span />
-          <span />
-        </button>
-      </div>
+      <button
+        className={`nav-tog ${menuOpen ? 'open' : ''}`}
+        id="nav-tog"
+        aria-label="Menu"
+        onClick={() => setMenuOpen((prev) => !prev)}
+      >
+        <span />
+        <span />
+        <span />
+      </button>
     </nav>
   );
 }

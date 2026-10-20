@@ -840,3 +840,230 @@
     grid-template-columns: 1fr;
   }
 }
+
+/* ── CLARIO HERO & CENTERPIECE CARD ──────────────────────── */
+.clario-hero-section {
+  padding: calc(var(--nav-h) + 60px) var(--gutter) 80px;
+  position: relative;
+  z-index: 1;
+}
+
+.clario-main-headline {
+  font-family: var(--font-display);
+  font-size: clamp(2.4rem, 6vw, 4.4rem);
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--fg);
+  line-height: 1.15;
+  max-width: 900px;
+  margin: 0 auto 20px;
+}
+
+.clario-hero-sub {
+  font-family: var(--font-body);
+  font-size: clamp(1rem, 2vw, 1.15rem);
+  line-height: 1.8;
+  color: var(--fg-mid);
+  max-width: 660px;
+  margin: 0 auto 36px;
+}
+
+.clario-centerpiece-card {
+  max-width: 900px;
+  margin: 0 auto;
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4), 0 0 24px var(--gold-dim);
+  backdrop-filter: blur(16px);
+  text-align: left;
+}
+
+.centerpiece-topbar {
+  padding: 14px 20px;
+  background: rgba(0, 0, 0, 0.25);
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.window-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+}
+.window-dot.red { background: #ff5f56; }
+.window-dot.yellow { background: #ffbd2e; }
+.window-dot.green { background: #27c93f; }
+
+.centerpiece-title {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.15em;
+  color: var(--fg-mid);
+  margin-left: 10px;
+}
+
+.centerpiece-content {
+  padding: 36px 32px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+
+.centerpiece-track-meta {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.cp-badge {
+  font-family: var(--font-mono);
+  font-size: 0.70rem;
+  letter-spacing: 0.2em;
+  color: var(--gold);
+  font-weight: 600;
+}
+
+.cp-title {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--fg);
+  margin: 0;
+}
+
+.cp-artist {
+  font-family: var(--font-body);
+  font-size: 0.88rem;
+  color: var(--fg-mid);
+  margin: 0;
+}
+
+.cp-play-btn {
+  padding: 12px 28px;
+  background: var(--gold) !important;
+  color: #0a0a0a !important;
+  font-weight: 800 !important;
+  border-radius: 8px;
+}
+.cp-play-btn:hover {
+  background: var(--gold-bright) !important;
+  transform: translateY(-2px);
+}
+
+/* ── CLARIO BENTO GRID ───────────────────────────────────── */
+.clario-bento-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+.bento-card {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 36px 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  transition: transform 0.3s var(--ease), border-color 0.3s;
+}
+.bento-card:hover {
+  transform: translateY(-3px);
+  border-color: var(--gold-border);
+}
+.bento-large {
+  grid-column: span 2;
+}
+.bento-small {
+  grid-column: span 1;
+}
+
+.bento-badge {
+  font-family: var(--font-mono);
+  font-size: 0.70rem;
+  letter-spacing: 0.18em;
+  color: var(--gold);
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.bento-title {
+  font-family: var(--font-display);
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: var(--fg);
+  margin: 0;
+}
+
+.bento-desc {
+  font-family: var(--font-body);
+  font-size: 0.92rem;
+  line-height: 1.7;
+  color: var(--fg-mid);
+  margin: 0 0 12px;
+  flex: 1;
+}
+
+@media (max-width: 880px) {
+  .bento-large, .bento-small {
+    grid-column: span 3;
+  }
+}
+
+/* ── CLARIO FEATURES GRID ────────────────────────────────── */
+.clario-features-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+.feature-card {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 32px 26px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  transition: transform 0.3s var(--ease), border-color 0.3s;
+}
+.feature-card:hover {
+  transform: translateY(-3px);
+  border-color: var(--gold-border);
+}
+
+.feature-spark {
+  color: var(--gold);
+  font-size: 1.1rem;
+}
+
+.feature-title {
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--fg);
+  margin: 0;
+}
+
+.feature-desc {
+  font-family: var(--font-body);
+  font-size: 0.88rem;
+  line-height: 1.65;
+  color: var(--fg-mid);
+  margin: 0;
+}
+
+@media (max-width: 880px) {
+  .clario-features-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
