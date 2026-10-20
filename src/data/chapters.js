@@ -1,17 +1,11 @@
 /* ============================================================
-   chapters.js — Chapter data + archive DOM builder
+   chapters.js — Chapter data
    
-   Chapter pages live at: assets/chapters/{id}/{id}-{page}.png
-   e.g. assets/chapters/0/0-1.png, 0-2.png ...
-   
-   Chapter α = id '0', displayed as "α"
-   Subsequent chapters: id '1','2',... displayed as '1','2',...
-   
-   To add a chapter: push entry into the relevant volume's
-   chapters array and set locked: false when ready.
+   Chapter pages live at: /assets/chapters/{id}/{id}-{page}.png
+   e.g. /assets/chapters/0/0-1.png, 0-2.png ...
    ============================================================ */
 
-const VOLUMES = [
+export const VOLUMES = [
   {
     id: 'vol-1',
     label: 'Vol. I — The Awakening',
@@ -131,60 +125,10 @@ const VOLUMES = [
           <p style="text-align:center;font-family:var(--font-mono);font-size:0.78rem;letter-spacing:0.35em;text-transform:uppercase;color:var(--fg-dim);margin-top:2rem;">End of Record I</p>
         `,
       },
-      { id: '2', title: 'Solace in Death', date: '', tag: 'Record — Vol. I · II',  displayNum: 'II',  locked: true, pages: 0 },
-      { id: '3', title: 'Manna',           date: '', tag: 'Record — Vol. I · III', displayNum: 'III', locked: true, pages: 0 },
-    ]
+      { id: '2', title: 'Solace in Death', date: '', tag: 'Record — Vol. I · II', displayNum: 'II', locked: true, pages: 0 },
+      { id: '3', title: 'Manna', date: '', tag: 'Record — Vol. I · III', displayNum: 'III', locked: true, pages: 0 },
+    ],
   },
 ];
 
-// Archive section DOM
-(function buildArchive() {
-  document.addEventListener('DOMContentLoaded', () => {
-    const container = document.getElementById('ch-volumes');
-    if (!container) return;
-
-    let html = '';
-    VOLUMES.forEach((vol, vi) => {
-      html += `
-        <div class="fi d${Math.min(vi + 1, 6)}">
-          <div class="vol-header">
-            <span class="vol-label">${vol.label}</span>
-            <div class="vol-line"></div>
-          </div>
-          <div class="ch-list">`;
-
-      vol.chapters.forEach((ch) => {
-        if (ch.locked) {
-          html += `
-            <div class="ch-row locked">
-              <span class="ch-num">${ch.displayNum}</span>
-              <div class="ch-info">
-                <span class="ch-name">${ch.title}</span>
-                <span class="ch-date" style="opacity:0.5;">Encrypted</span>
-              </div>
-              <span class="ch-arr">—</span>
-            </div>`;
-        } else {
-          html += `
-            <div class="ch-row" onclick="openChapter('${ch.id}')">
-              <span class="ch-num">${ch.displayNum}</span>
-              <div class="ch-info">
-                <span class="ch-name">${ch.title}</span>
-                <span class="ch-date">${ch.date || ''}</span>
-              </div>
-              <span class="ch-arr">→</span>
-            </div>`;
-        }
-      });
-      html += `</div></div>`;
-    });
-
-    container.innerHTML = html;
-
-    // Re-observe new .fi elements
-    const obs = new IntersectionObserver(entries => {
-      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('vis'); });
-    }, { threshold: 0.05 });
-    container.querySelectorAll('.fi').forEach(el => obs.observe(el));
-  });
-})();
+export const ALL_CHAPTERS = VOLUMES.flatMap(v => v.chapters);
