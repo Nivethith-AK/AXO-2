@@ -28,7 +28,7 @@
   transition: background 0.3s;
 }
 .ch-row:first-child { border-top: 1px solid var(--gold-line); }
-.ch-row:not(.locked):hover { background: rgba(201,168,76,0.04); }
+.ch-row:not(.locked):hover { background: var(--gold-dim); }
 .ch-row:not(.locked):hover .ch-num  { color: var(--gold-bright); }
 .ch-row:not(.locked):hover .ch-name { color: var(--gold); transform: translateX(5px); }
 .ch-row:not(.locked):hover .ch-arr  { opacity: 1; transform: translateX(0); color: var(--gold); }

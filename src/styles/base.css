@@ -1,36 +1,54 @@
 /* ============================================================
    BASE — variables, reset, typography
+   Fonts & colors inspired by oneko.dhrv.pw (Geist, GeistPixelSquare, Warm Palette)
    ============================================================ */
 
-@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;600;700;800;900&family=Roboto+Mono:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&display=swap');
+@font-face {
+  font-family: 'GeistPixelSquare';
+  src: url('/assets/fonts/GeistPixel_Square.woff2') format('woff2');
+  font-weight: 400 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'GeistPixelGrid';
+  src: url('/assets/fonts/GeistPixel_Grid.woff2') format('woff2');
+  font-weight: 400 900;
+  font-style: normal;
+  font-display: swap;
+}
 
 :root, [data-theme="dark"] {
-  --bg:           #060606;
-  --bg-raised:    #0e0e0e;
-  --surface:      rgba(255,255,255,0.04);
-  --surface-alt:  rgba(255,255,255,0.07);
+  --bg:           #0a0a0a;
+  --bg-raised:    #14100e;
+  --surface:      rgba(245, 237, 228, 0.04);
+  --surface-alt:  rgba(245, 237, 228, 0.07);
 
-  /* High contrast dark mode foreground tokens */
-  --fg:           #ffffff;
-  --fg-mid:       #d2d2d2;
-  --fg-dim:       #9a9a9a;
+  /* Oneko Dark Palette tokens */
+  --fg:           #f5ede4;
+  --fg-mid:       #b8a89f;
+  --fg-dim:       #806d62;
 
-  --gold:         #d4af37;
-  --gold-bright:  #f3ce65;
-  --gold-dim:     rgba(212,175,55,0.1);
-  --gold-border:  rgba(212,175,55,0.3);
-  --gold-line:    rgba(212,175,55,0.16);
-  --gold-glow:    rgba(212,175,55,0.35);
+  --gold:         #e89f5e;
+  --gold-bright:  #f4b8a8;
+  --gold-dim:     rgba(232, 159, 94, 0.12);
+  --gold-border:  rgba(232, 159, 94, 0.32);
+  --gold-line:    rgba(232, 159, 94, 0.18);
+  --gold-glow:    rgba(232, 159, 94, 0.35);
 
-  --section-bg:   rgba(8, 8, 8, 0.92);
-  --card-bg:      rgba(12, 12, 12, 0.90);
-  --nav-bg:       rgba(6, 6, 6, 0.88);
-  --input-bg:     rgba(255, 255, 255, 0.03);
+  --border:       #524840;
+  --ring:         #a8c3b5;
 
-  --font-display: 'Orbitron', 'Cormorant Garamond', sans-serif;
-  --font-sc:      'Orbitron', sans-serif;
-  --font-body:    'Roboto Mono', monospace;
-  --font-mono:    'Roboto Mono', monospace;
+  --section-bg:   rgba(10, 10, 10, 0.92);
+  --card-bg:      rgba(28, 22, 18, 0.94);
+  --nav-bg:       rgba(10, 10, 10, 0.90);
+  --input-bg:     rgba(245, 237, 228, 0.04);
+
+  --font-display: 'GeistPixelSquare', 'Geist Mono', 'Orbitron', monospace;
+  --font-sc:      'GeistPixelSquare', 'Geist Mono', monospace;
+  --font-body:    'Geist', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-mono:    'Geist Mono', 'Roboto Mono', ui-monospace, monospace;
 
   --nav-h:   72px;
   --gutter:  clamp(20px, 7vw, 120px);
@@ -40,35 +58,38 @@
   --ease-in: cubic-bezier(0.4, 0, 1, 1);
 }
 
-/* ── LIGHT MODE (matching theaxolotlmusic.com design tokens) ── */
+/* ── LIGHT MODE (matching oneko.dhrv.pw light palette & coffee ink) ── */
 [data-theme="light"] {
-  --bg:           #f7f7f9;
+  --bg:           #fbf8f4;
   --bg-raised:    #ffffff;
-  --surface:      rgba(0,0,0,0.03);
-  --surface-alt:  rgba(0,0,0,0.06);
+  --surface:      rgba(92, 64, 51, 0.04);
+  --surface-alt:  rgba(92, 64, 51, 0.08);
 
-  /* High contrast light mode foreground tokens */
-  --fg:           #0c0c0c;
-  --fg-mid:       #3a3a3a;
-  --fg-dim:       #686868;
+  /* Oneko Light Palette tokens */
+  --fg:           #5c4033;
+  --fg-mid:       #806d62;
+  --fg-dim:       #a58b76;
 
-  --gold:         #9e7714;
-  --gold-bright:  #805c06;
-  --gold-dim:     rgba(158,119,20,0.10);
-  --gold-border:  rgba(158,119,20,0.35);
-  --gold-line:    rgba(158,119,20,0.20);
-  --gold-glow:    rgba(158,119,20,0.22);
+  --gold:         #c37e40;
+  --gold-bright:  #9b4f22;
+  --gold-dim:     rgba(195, 126, 64, 0.12);
+  --gold-border:  rgba(195, 126, 64, 0.35);
+  --gold-line:    rgba(195, 126, 64, 0.20);
+  --gold-glow:    rgba(195, 126, 64, 0.24);
 
-  --section-bg:   rgba(252, 252, 254, 0.95);
-  --card-bg:      rgba(255, 255, 255, 0.96);
-  --nav-bg:       rgba(247, 247, 249, 0.92);
-  --input-bg:     rgba(0, 0, 0, 0.03);
+  --border:       #d9cec4;
+  --ring:         #a8c3b5;
+
+  --section-bg:   rgba(248, 245, 239, 0.95);
+  --card-bg:      rgba(240, 230, 217, 0.96);
+  --nav-bg:       rgba(251, 248, 244, 0.92);
+  --input-bg:     rgba(92, 64, 51, 0.04);
 }
 
 /* Light mode celestial background inversion */
 [data-theme="light"] #cc {
   opacity: 0.38;
-  filter: invert(0.96) hue-rotate(180deg);
+  filter: invert(0.96) hue-rotate(180deg) sepia(25%);
 }
 
 /* Glyph preservation helper */
@@ -98,7 +119,7 @@ a      { color: inherit; text-decoration: none; transition: color 0.4s var(--eas
 img    { display: block; max-width: 100%; }
 button { background: none; border: none; cursor: pointer; color: inherit; font-family: inherit; }
 
-::selection { background: rgba(201,168,76,0.2); color: var(--fg); }
+::selection { background: var(--gold-dim); color: var(--gold-bright); }
 ::-webkit-scrollbar { width: 3px; }
 ::-webkit-scrollbar-track { background: transparent; }
 ::-webkit-scrollbar-thumb { background: var(--gold-border); border-radius: 2px; }

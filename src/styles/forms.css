@@ -37,7 +37,7 @@
   resize: none;
   appearance: none;
   -webkit-appearance: none;
-  border-radius: 0;
+  border-radius: 6px;
   width: 100%;
 }
 .form-field input::placeholder,
@@ -47,7 +47,7 @@
 .form-field select:focus {
   border-color: var(--gold);
   background: var(--bg-raised, rgba(20, 20, 20, 0.95));
-  box-shadow: 0 0 12px rgba(212, 175, 55, 0.2);
+  box-shadow: 0 0 12px var(--gold-glow);
 }
 
 .form-field textarea { min-height: 160px; }
@@ -66,7 +66,8 @@
 /* Success state */
 .form-success {
   display: none; text-align: center; padding: 60px 40px;
-  border: 1px solid var(--gold-border); background: rgba(14, 14, 14, 0.95);
+  border: 1px solid var(--gold-border); background: var(--card-bg);
+  border-radius: 8px;
 }
 .form-success.show { display: block; }
 .form-success .fs-icon {

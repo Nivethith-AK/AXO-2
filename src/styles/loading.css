@@ -47,7 +47,7 @@
   font-size: clamp(1.8rem, 4.5vw, 3.2rem);
   letter-spacing: 0.25em;
   text-transform: uppercase;
-  color: #ffffff;
+  color: var(--fg);
   text-align: center;
   white-space: nowrap;
   margin-bottom: 2.4rem;
@@ -77,7 +77,7 @@
 .ls-bar-wrap {
   width: min(260px, 55vw);
   height: 2px;
-  background: rgba(212,175,55,0.2);
+  background: var(--gold-border);
   overflow: hidden;
   margin-bottom: 1.4rem;
   opacity: 0;

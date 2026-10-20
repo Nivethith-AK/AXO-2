@@ -7,19 +7,20 @@
   display: inline-flex; align-items: center; gap: 0.8rem;
   padding: 14px 36px; border: 1px solid var(--gold-border);
   color: var(--fg); font-family: var(--font-display);
-  font-size: 0.8rem; font-weight: 700; letter-spacing: 0.22em; text-transform: uppercase;
+  font-size: 0.82rem; font-weight: 700; letter-spacing: 0.22em; text-transform: uppercase;
   transition: all 0.4s var(--ease); position: relative;
   background: var(--gold-dim); overflow: hidden; cursor: pointer;
+  border-radius: 6px;
 }
 .btn::before {
   content: ''; position: absolute; inset: 0;
-  background: rgba(212,175,55,0.12);
+  background: var(--gold-glow);
   transform: scaleX(0); transform-origin: left; transition: transform 0.44s var(--ease);
 }
 .btn:hover {
-  border-color: rgba(212,175,55,0.6); color: var(--gold-bright);
+  border-color: var(--gold-bright); color: var(--gold-bright);
   transform: translateY(-2px);
-  box-shadow: 0 8px 30px rgba(0,0,0,0.6), 0 0 16px var(--gold-dim);
+  box-shadow: 0 8px 30px rgba(0,0,0,0.6), 0 0 16px var(--gold-glow);
 }
 .btn:hover::before { transform: scaleX(1); }
 .btn span { position: relative; z-index: 1; }
@@ -179,7 +180,7 @@
   padding: 8px 20px;
   background: var(--card-bg, rgba(14, 14, 14, 0.88));
   border: 1px solid var(--gold-border);
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4), inset 0 0 12px rgba(212, 175, 55, 0.05);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4), inset 0 0 12px var(--gold-dim);
   margin-bottom: 2rem;
   backdrop-filter: blur(12px);
   -webkit-backdrop-filter: blur(12px);
@@ -360,8 +361,8 @@
 }
 .telemetry-card:hover {
   transform: translateY(-4px);
-  border-color: rgba(212, 175, 55, 0.7);
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6), 0 0 20px rgba(212, 175, 55, 0.15);
+  border-color: var(--gold-bright);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6), 0 0 20px var(--gold-dim);
 }
 /* Corner notched tech brackets */
 .tc-corner {

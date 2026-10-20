@@ -42,12 +42,12 @@ export default function CelestialCanvas({ geomReady = true }) {
     window.addEventListener('resize', resize);
     window.addEventListener('mousemove', onMouseMove);
 
-    /* ── Colors ── */
-    const cStar = (a) => `rgba(215,215,215,${a})`;
-    const cWarm = (a) => `rgba(238,222,195,${a})`;
-    const cCool = (a) => `rgba(195,195,205,${a})`;
-    const cGold = (a) => `rgba(201,168,76,${a})`;
-    const cGray = (a) => `rgba(88,88,88,${a})`;
+    /* ── Colors (harmonized with oneko.dhrv.pw warm palette) ── */
+    const cStar = (a) => `rgba(245,237,228,${a})`;
+    const cWarm = (a) => `rgba(244,184,168,${a})`;
+    const cCool = (a) => `rgba(168,195,181,${a})`;
+    const cGold = (a) => `rgba(232,159,94,${a})`;
+    const cGray = (a) => `rgba(128,109,98,${a})`;
 
     /* ── Star ── */
     class Star {

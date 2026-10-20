@@ -204,6 +204,7 @@
   cursor: pointer;
   transition: all 0.28s;
   text-decoration: none;
+  border-radius: 6px;
 }
 .ch-nav-btn:hover:not([disabled]) {
   border-color: var(--gold);

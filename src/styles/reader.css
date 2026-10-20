@@ -58,6 +58,7 @@
   text-transform: uppercase; z-index: 9600;
   transition: color 0.3s; background: var(--card-bg, rgba(14,14,14,0.8));
   border: 1px solid var(--gold-border); padding: 8px 16px; cursor: pointer;
+  border-radius: 6px;
 }
 .reader-close:hover { color: var(--gold); border-color: var(--gold); }
 
@@ -70,6 +71,7 @@
   padding: 22px 26px; border: 1px solid var(--gold-border);
   background: var(--card-bg, rgba(14,14,14,0.6)); cursor: pointer;
   transition: all 0.42s var(--ease); color: var(--fg);
+  border-radius: 6px;
 }
 .rnav-btn:hover { border-color: var(--gold); background: var(--gold-dim); color: var(--gold-bright); }
 .rnav-btn .dir {

@@ -19,12 +19,12 @@
   font-weight: 600;
 }
 
-/* Title in Orbitron */
+/* Title in GeistPixelSquare */
 .hero-title {
   font-family: var(--font-display);
-  font-size: clamp(2.4rem, 7vw, 5.5rem);
-  font-weight: 700; letter-spacing: 0.14em;
-  text-transform: uppercase; line-height: 1.1;
+  font-size: clamp(2.4rem, 7vw, 5.2rem);
+  font-weight: 700; letter-spacing: 0.08em;
+  text-transform: uppercase; line-height: 1.15;
   margin-bottom: 0; color: var(--fg);
 }
 
