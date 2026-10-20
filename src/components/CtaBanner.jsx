@@ -27,14 +27,14 @@ export default function CtaBanner({ onReadChapter }) {
 
           <div className="cta-badge">
             <span className="dot-pulse" />
-            <span>TRANSMISSION RELAY OPEN</span>
+            <span>START EXPERIENCING NOW</span>
           </div>
 
           <h2 className="cta-title">
-            Ready to Enter the Celestial Archive?
+            Immerse Yourself in Memento Mori
           </h2>
           <p className="cta-sub">
-            Begin the journey through Volume I. Chapter <span className="glyph-preserve">α</span> — "When We Met" is unlocked and available to read now.
+            Begin the journey through Volume I. Chapter <span className="glyph-preserve">α</span> — "When We Met" is unlocked and waiting to be read alongside the original score.
           </p>
 
           <div className="cta-actions">

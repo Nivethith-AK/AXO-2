@@ -48,7 +48,31 @@
   }
 }
 
-/* ── HERO DUAL CTAS ───────────────────────────────────────── */
+/* ── HERO DUAL CTAS & ARTIST BADGE ───────────────────────── */
+.hero-artist-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 22px;
+  background: var(--card-bg, rgba(14, 14, 14, 0.9));
+  border: 1px solid var(--gold-border);
+  border-radius: 20px;
+  margin-bottom: 2rem;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  color: var(--gold-bright);
+  text-transform: uppercase;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4), inset 0 0 12px var(--gold-dim);
+}
+.hero-artist-badge .artist-spark {
+  color: var(--gold);
+  font-size: 0.85rem;
+}
+
 .hero-cta-row {
   display: flex;
   align-items: center;

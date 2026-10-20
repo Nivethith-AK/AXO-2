@@ -1,12 +1,12 @@
 import React from 'react';
 
-const TELEMETRY_DATA = [
+const STORY_STATS = [
   {
     num: '02',
-    label: 'Records Archived',
+    label: 'Chapters Released',
     sub: (
       <>
-        Chapter <span className="glyph-preserve">α</span> &amp; I Live
+        Chapter <span className="glyph-preserve">α</span> &amp; Chapter I
       </>
     ),
   },
@@ -16,22 +16,21 @@ const TELEMETRY_DATA = [
     sub: 'To Eternity and After',
   },
   {
-    num: '100%',
-    label: 'Timeline Recursion',
-    sub: 'Adoniel × Azrael Paradox',
+    num: 'Vol. I',
+    label: 'Current Volume',
+    sub: 'The Awakening',
   },
   {
-    num: 'VOL. I',
-    label: 'Celestial Chronicle',
-    sub: 'Project Eden Relay',
+    num: '100%',
+    label: 'Free Reading',
+    sub: 'No Login or Paywall Required',
   },
 ];
 
-export default function About() {
-  const scrollToArchive = (e) => {
+export default function About({ onReadChapter }) {
+  const handleReadAlpha = (e) => {
     e.preventDefault();
-    const el = document.getElementById('archive');
-    if (el) el.scrollIntoView({ behavior: 'smooth' });
+    if (onReadChapter) onReadChapter('0');
   };
 
   return (
@@ -40,7 +39,7 @@ export default function About() {
         <div className="grid-2-fixed">
           <div>
             <div className="fi vis">
-              <div className="sec-label">The Series</div>
+              <div className="sec-label">The Story</div>
             </div>
             <div className="fi vis d1">
               <h2 className="sec-title">
@@ -55,10 +54,9 @@ export default function About() {
                   fontFamily: 'var(--font-mono)',
                   fontSize: '0.8rem',
                   fontWeight: 600,
-                  letterSpacing: '0.3em',
+                  letterSpacing: '0.25em',
                   textTransform: 'uppercase',
                   color: 'var(--gold)',
-                  opacity: 1,
                 }}
               >
                 [ SYNOPSIS ]
@@ -78,36 +76,36 @@ export default function About() {
                 <span style={{ color: 'var(--gold)', fontStyle: 'normal' }}>
                   "Archangel of Death"
                 </span>
-                , who appears not to take his life but to ensure he keeps it.
+                , who appears on his balcony not to take his life, but to ensure he keeps it.
                 <br />
-                However, something far more sinister lies beneath the surface...
+                Yet beneath their quiet encounters lies a deeper mystery waiting to unfold...
               </p>
             </div>
-            <div className="fi vis d3">
-              <a href="#archive" className="btn" onClick={scrollToArchive}>
-                <span>Access Archives</span>
-              </a>
+            <div className="fi vis d3" style={{ marginTop: '24px' }}>
+              <button className="btn" onClick={handleReadAlpha}>
+                <span>Read Chapter α</span>
+              </button>
             </div>
           </div>
 
           <div className="fi vis d2">
-            <div className="video-label">The Visuals</div>
+            <div className="video-label">The Visuals &amp; Trailer</div>
             <div className="video-wrap">
               <video id="series-video" autoPlay muted loop playsInline />
               <div className="video-placeholder" id="video-ph">
-                <span className="vp-bracket">[ To Be Added ]</span>
-                <span className="vp-sub">Video or YouTube Embed</span>
+                <span className="vp-bracket">[ Official Trailer ]</span>
+                <span className="vp-sub">Original Score by Δxolotl</span>
               </div>
             </div>
             <div className="video-credit">
-              Visuals by <a href="#">Project Eden</a>
+              Visuals by <a href="https://theaxolotlmusic.com/" target="_blank" rel="noopener noreferrer">Project Eden</a> &nbsp;//&nbsp; Music by Δxolotl
             </div>
           </div>
         </div>
 
-        {/* Chronicle Telemetry Stat Grid */}
-        <div className="telemetry-grid fi vis d3">
-          {TELEMETRY_DATA.map((t, idx) => (
+        {/* Clean Story & Music Stats Grid */}
+        <div className="telemetry-grid fi vis d3" style={{ marginTop: '48px' }}>
+          {STORY_STATS.map((t, idx) => (
             <div key={idx} className="telemetry-card">
               <div className="tc-corner tl" />
               <div className="tc-corner tr" />

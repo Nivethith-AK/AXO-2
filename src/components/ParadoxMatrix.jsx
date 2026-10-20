@@ -1,25 +1,27 @@
 import React from 'react';
 
-const COMPARISON_ROWS = [
+const CHARACTERS = [
   {
-    topic: 'Core Reality',
-    mortal: 'Human isolation, finite lifespan, endless lines of cold code',
-    celestial: 'Archangel of Death, eternal consciousness, sacred geometry',
+    name: 'Adoniel Togami',
+    role: 'The Recluse Programmer',
+    badge: 'MORTAL WORLD',
+    desc: 'Buried beneath lines of code long past midnight, Adoniel is trapped in quiet isolation and grief over his mother’s passing. When an accidental line of text halts his screen, he questions why he continues to exist.',
+    highlights: [
+      { label: 'Origin', val: 'Human Programmer' },
+      { label: 'Struggle', val: 'Existential Despair & Grief' },
+      { label: 'Encounter', val: 'Finds Azrael waiting on his balcony' },
+    ],
   },
   {
-    topic: 'Existential Struggle',
-    mortal: 'Despair, grief over lost mother, longing for reason to exist',
-    celestial: 'Binding mandate to protect Adoniel’s life at all costs',
-  },
-  {
-    topic: 'Perception of Time',
-    mortal: 'Linear exhaustion, midnight compiler errors, ticking clocks',
-    celestial: 'Timeline recursion, orbital relays, infinite recurrence',
-  },
-  {
-    topic: 'Cosmic Threat',
-    mortal: 'Unseen encroaching shadows beneath the surface of reality',
-    celestial: 'Sinister forces threatening to collapse Project Eden',
+    name: 'Azrael',
+    role: 'The Archangel of Death',
+    badge: 'CELESTIAL REALM',
+    desc: 'With hair as dark as a raven and calm eyes of glowing amber, Azrael descends from the celestial expanse. Though bearing the title of Death, she arrives not to take Adoniel’s life, but to guard it.',
+    highlights: [
+      { label: 'Origin', val: 'Celestial Archangel' },
+      { label: 'Purpose', val: 'Preserving Adoniel’s Life' },
+      { label: 'Nature', val: 'Quiet devotion, subtle warmth & mystery' },
+    ],
   },
 ];
 
@@ -28,47 +30,41 @@ export default function ParadoxMatrix() {
     <section className="sec" id="lore">
       <div className="sec-inner">
         <div className="fi vis" style={{ textAlign: 'center', marginBottom: '52px' }}>
-          <div className="sec-label c">The Dual Realities</div>
-          <h2 className="sec-title">The Paradox: Two Worlds</h2>
+          <div className="sec-label c">The Characters</div>
+          <h2 className="sec-title">Two Worlds in Collision</h2>
           <p className="sec-body" style={{ margin: '0 auto', maxWidth: '640px' }}>
-            Where fragile human mortality collides with the timeless mandates of the celestial expanse.
+            At the heart of Memento Mori is the quiet bond between a solitary human and an immortal guardian.
           </p>
         </div>
 
         <div className="clario-matrix-wrapper">
-          <div className="matrix-col mortal-col">
-            <div className="matrix-col-header">
-              <span className="matrix-badge mortal">MORTAL HORIZON</span>
-              <h3 className="matrix-col-title">Adoniel Togami</h3>
-              <p className="matrix-col-sub">The Recluse Programmer</p>
-            </div>
-            <div className="matrix-rows">
-              {COMPARISON_ROWS.map((row, idx) => (
-                <div key={idx} className="matrix-item">
-                  <span className="matrix-topic-label">{row.topic}</span>
-                  <p className="matrix-item-text">{row.mortal}</p>
+          {CHARACTERS.map((char, idx) => (
+            <React.Fragment key={char.name}>
+              {idx > 0 && <div className="matrix-divider-glow" />}
+              <div className={`matrix-col ${idx === 0 ? 'mortal-col' : 'celestial-col'}`}>
+                <div className="matrix-col-header">
+                  <span className={`matrix-badge ${idx === 0 ? 'mortal' : 'celestial'}`}>
+                    {char.badge}
+                  </span>
+                  <h3 className="matrix-col-title">{char.name}</h3>
+                  <p className="matrix-col-sub">{char.role}</p>
                 </div>
-              ))}
-            </div>
-          </div>
 
-          <div className="matrix-divider-glow" />
+                <p className="matrix-item-text" style={{ marginBottom: '28px', lineHeight: 1.8 }}>
+                  {char.desc}
+                </p>
 
-          <div className="matrix-col celestial-col">
-            <div className="matrix-col-header">
-              <span className="matrix-badge celestial">CELESTIAL REALM</span>
-              <h3 className="matrix-col-title">Azrael</h3>
-              <p className="matrix-col-sub">Archangel of Death</p>
-            </div>
-            <div className="matrix-rows">
-              {COMPARISON_ROWS.map((row, idx) => (
-                <div key={idx} className="matrix-item highlighted">
-                  <span className="matrix-topic-label">{row.topic}</span>
-                  <p className="matrix-item-text">{row.celestial}</p>
+                <div className="matrix-rows">
+                  {char.highlights.map((h, hi) => (
+                    <div key={hi} className="matrix-item">
+                      <span className="matrix-topic-label">{h.label}</span>
+                      <span className="matrix-item-text">{h.val}</span>
+                    </div>
+                  ))}
                 </div>
-              ))}
-            </div>
-          </div>
+              </div>
+            </React.Fragment>
+          ))}
         </div>
       </div>
     </section>

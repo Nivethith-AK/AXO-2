@@ -1,21 +1,9 @@
 import React, { useState, useEffect } from 'react';
+import { useAudio } from '../context/AudioContext';
 
 export default function Hero({ onReadChapter }) {
-  const [utcTime, setUtcTime] = useState('');
+  const { togglePlay, isPlaying } = useAudio();
   const [scrollY, setScrollY] = useState(0);
-
-  useEffect(() => {
-    const tick = () => {
-      const d = new Date();
-      const hh = String(d.getUTCHours()).padStart(2, '0');
-      const mm = String(d.getUTCMinutes()).padStart(2, '0');
-      const ss = String(d.getUTCSeconds()).padStart(2, '0');
-      setUtcTime(`${hh}:${mm}:${ss} UTC`);
-    };
-    tick();
-    const interval = setInterval(tick, 1000);
-    return () => clearInterval(interval);
-  }, []);
 
   useEffect(() => {
     const onScroll = () => {
@@ -25,18 +13,19 @@ export default function Hero({ onReadChapter }) {
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
-  const parallaxTransform = `translateY(${scrollY * 0.18}px)`;
-  const parallaxOpacity = Math.max(0.15, 1 - scrollY / 950);
-
-  const scrollToArchive = (e) => {
-    e.preventDefault();
-    const el = document.getElementById('archive');
-    if (el) el.scrollIntoView({ behavior: 'smooth' });
-  };
+  const parallaxTransform = `translateY(${scrollY * 0.16}px)`;
+  const parallaxOpacity = Math.max(0.2, 1 - scrollY / 900);
 
   const handleReadAlpha = (e) => {
     e.preventDefault();
     if (onReadChapter) onReadChapter('0');
+  };
+
+  const handleSoundtrack = (e) => {
+    e.preventDefault();
+    const el = document.getElementById('soundtracks');
+    if (el) el.scrollIntoView({ behavior: 'smooth' });
+    if (!isPlaying) togglePlay();
   };
 
   return (
@@ -50,23 +39,13 @@ export default function Hero({ onReadChapter }) {
       }}
     >
       <div className="fi vis d1">
-        <div className="hud-pill">
-          <span className="hud-dot" />
-          <span className="hud-status">TRANSMISSION: ACTIVE</span>
-          <span className="hud-sep">//</span>
-          <span className="hud-metric">NODE_01</span>
-          <span className="hud-sep">//</span>
-          <span className="hud-time" id="hud-clock">
-            {utcTime || '00:00:00 UTC'}
-          </span>
+        <div className="hero-artist-badge">
+          <span className="artist-spark">✦</span>
+          <span>AN ORIGINAL WEB NOVEL &amp; SOUNDTRACK BY ΔXOLOTL</span>
         </div>
       </div>
 
       <div className="fi vis d2">
-        <span className="hero-eyebrow">&#916;xolotl Presents</span>
-      </div>
-
-      <div className="fi vis d3">
         <h1 className="hero-title">
           Memento
           <br />
@@ -78,16 +57,16 @@ export default function Hero({ onReadChapter }) {
 
       <div className="fi vis d4">
         <p className="hero-desc">
-          A chronicle of celestial grief, quiet devotion, and the breathless space between Adoniel and the Archangel of Death.
+          A narrative and musical chronicle of existential grief, quiet devotion, and the archangel who appeared not to take a life, but to save it.
         </p>
       </div>
 
       <div className="fi vis d5 hero-cta-row">
-        <a href="#archive" className="btn btn-hero-primary" onClick={scrollToArchive}>
-          <span>Access Archives</span>
-        </a>
-        <button className="btn btn-hero-secondary" onClick={handleReadAlpha}>
+        <button className="btn btn-hero-primary" onClick={handleReadAlpha}>
           <span>Read Chapter α</span>
+        </button>
+        <button className="btn btn-hero-secondary" onClick={handleSoundtrack}>
+          <span>Listen to Soundtrack</span>
         </button>
       </div>
     </section>

@@ -1,75 +1,82 @@
 import React from 'react';
+import { useAudio } from '../context/AudioContext';
 
 const EDITIONS = [
   {
-    tier: 'Digital Archive',
-    badge: 'ACTIVE ACCESS',
+    tier: 'Web Novel',
+    badge: 'FREE & UNLOCKED',
     price: 'Free',
-    period: 'forever',
-    desc: 'Unrestricted access to all released chapters, web reading experience, and soundtrack streaming.',
+    period: 'online access',
+    desc: 'Read all released chapters directly in your browser with our responsive manuscript reader.',
     features: [
-      'Full web manuscript access',
-      'Interactive manga reader overlay',
-      'Lossless master soundtrack streaming',
-      'Zero advertisements or paywalls',
+      'Full access to Chapter α & Chapter I',
+      'Distraction-free manuscript reader',
+      'Works on mobile, tablet, and desktop',
+      'Zero paywalls, logins, or ads',
     ],
-    buttonText: 'Read Records Now',
-    buttonAction: '#archive',
+    buttonText: 'Start Reading Now',
+    actionType: 'read',
     isPrimary: false,
   },
   {
-    tier: 'Illustrated Manuscript',
-    badge: 'COMING SOON',
-    price: 'TBA',
-    period: 'collector book',
-    desc: 'Limited physical hardcover featuring restored high-resolution illustrations and exclusive colored art plates.',
+    tier: 'Original Soundtrack',
+    badge: 'STREAMING NOW',
+    price: 'Stream',
+    period: 'high-fidelity',
+    desc: 'Listen to the master score "To Eternity and After" composed and produced by Δxolotl.',
     features: [
-      'Hardcover with gold-foil typography',
-      'Exclusive full-color concept art',
-      'Author annotations by Δxolotl',
-      'Archival acid-free paper',
+      'Stream master audio on this site',
+      'Integrated planetary visual player',
+      'Lossless master audio dynamic range',
+      'Cinematic companion to the story',
     ],
-    buttonText: 'Join Waitlist',
-    buttonAction: '#contact',
+    buttonText: 'Play Master Soundtrack',
+    actionType: 'music',
     isPrimary: true,
   },
   {
-    tier: 'Master Score Vinyl',
+    tier: 'Collector’s Edition',
     badge: 'COMING SOON',
     price: 'TBA',
-    period: 'audiophile edition',
-    desc: 'Original soundtrack pressed on heavyweight obsidian vinyl with celestial gatefold artwork.',
+    period: 'physical bundle',
+    desc: 'Limited physical hardcover book and vinyl record bundle featuring restored artwork.',
     features: [
-      '180g heavyweight obsidian vinyl',
-      'Mastered for audiophile dynamic range',
-      'Sacred geometry fold-out poster',
-      'Includes 24-bit lossless FLAC download',
+      'Hardcover book with gold-foil embossing',
+      'Exclusive full-color art plates',
+      '180g heavyweight obsidian vinyl record',
+      'Author annotations & signed print',
     ],
-    buttonText: 'Notify Me',
-    buttonAction: '#contact',
+    buttonText: 'Get Notified',
+    actionType: 'contact',
     isPrimary: false,
   },
 ];
 
 export default function Shop({ onReadChapter }) {
-  const handleClick = (e, action) => {
+  const { togglePlay, isPlaying } = useAudio();
+
+  const handleAction = (e, actionType) => {
     e.preventDefault();
-    if (action === '#archive' && onReadChapter) {
-      onReadChapter('0');
-      return;
+    if (actionType === 'read') {
+      if (onReadChapter) onReadChapter('0');
+    } else if (actionType === 'music') {
+      const el = document.getElementById('soundtracks');
+      if (el) el.scrollIntoView({ behavior: 'smooth' });
+      if (!isPlaying) togglePlay();
+    } else if (actionType === 'contact') {
+      const el = document.getElementById('contact');
+      if (el) el.scrollIntoView({ behavior: 'smooth' });
     }
-    const target = document.querySelector(action);
-    if (target) target.scrollIntoView({ behavior: 'smooth' });
   };
 
   return (
     <section className="sec" id="shop">
       <div className="sec-inner">
         <div className="fi vis" style={{ textAlign: 'center', marginBottom: '56px' }}>
-          <div className="sec-label c">Artifacts &amp; Editions</div>
-          <h2 className="sec-title">Archive Editions</h2>
+          <div className="sec-label c">Releases &amp; Formats</div>
+          <h2 className="sec-title">How to Experience Memento Mori</h2>
           <p className="sec-body" style={{ margin: '0 auto', maxWidth: '640px' }}>
-            Choose how you experience Memento Mori — from digital transmission to physical artifacts.
+            Choose how you explore the universe — read online for free, stream the original score, or look forward to physical releases.
           </p>
         </div>
 
@@ -80,7 +87,7 @@ export default function Shop({ onReadChapter }) {
               className={`clario-pricing-card ${ed.isPrimary ? 'popular' : ''}`}
             >
               {ed.isPrimary && (
-                <div className="pricing-badge-popular">MOST ANTICIPATED</div>
+                <div className="pricing-badge-popular">FEATURED RELEASE</div>
               )}
               <div className="card-top">
                 <span className="pricing-badge">{ed.badge}</span>
@@ -103,14 +110,13 @@ export default function Shop({ onReadChapter }) {
                 ))}
               </ul>
 
-              <a
-                href={ed.buttonAction}
+              <button
                 className={`btn ${ed.isPrimary ? 'btn-primary-highlight' : ''}`}
                 style={{ width: '100%', justifyContent: 'center', marginTop: '24px' }}
-                onClick={(e) => handleClick(e, ed.buttonAction)}
+                onClick={(e) => handleAction(e, ed.actionType)}
               >
                 <span>{ed.buttonText}</span>
-              </a>
+              </button>
             </div>
           ))}
         </div>

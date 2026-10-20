@@ -12,19 +12,19 @@ export default function Testimonial() {
 
           <div className="testimonial-eyebrow">
             <span className="dot-pulse" />
-            <span>INTERCEPTED TRANSMISSION LOG // RELAY_09</span>
+            <span>COMMUNITY REFLECTION</span>
           </div>
 
           <blockquote className="testimonial-quote">
             “A hauntingly beautiful collision of modern existential isolation and ancient celestial mythology.
-            The prose, sacred geometry, and original soundtrack breathe together as one living cosmic entity.”
+            The original soundtrack and prose breathe together as one living, emotional work of art.”
           </blockquote>
 
           <div className="testimonial-author">
             <div className="author-avatar">✦</div>
             <div className="author-meta">
-              <span className="author-name">Project Eden Relay</span>
-              <span className="author-role">Celestial Archive Observer · Sector 4</span>
+              <span className="author-name">Project Eden Reader</span>
+              <span className="author-role">Listener &amp; Reader Community</span>
             </div>
           </div>
         </div>

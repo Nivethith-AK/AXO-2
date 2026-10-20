@@ -3,26 +3,26 @@ import React from 'react';
 const STEPS = [
   {
     step: '01',
-    phase: 'Step 1',
-    title: 'The Existential Despair',
-    desc: 'Adoniel Togami isolates himself before a glowing terminal screen. Long past midnight, an accidental syntax confession freezes the compiler: "Why am I even alive?"',
-    tag: 'NODE_CODE // ISOLATION',
-    icon: '⬡',
+    phase: 'The Novel',
+    title: 'The Written Story',
+    desc: 'Immerse yourself in the story of Adoniel and Azrael. Chapters are released online for free, formatted for reading on any screen or device.',
+    tag: 'VOLUME I · THE AWAKENING',
+    icon: '📖',
   },
   {
     step: '02',
-    phase: 'Step 2',
-    title: 'The Celestial Descent',
-    desc: 'On a moonlit balcony sits Azrael — raven-haired, with amber eyes that pierce the soul. She has appeared not to take his life, but to ensure he holds onto it.',
-    tag: 'AZRAEL // THE ARCHANGEL',
-    icon: '◈',
+    phase: 'The Music',
+    title: 'Original Soundtracks',
+    desc: 'Each arc is paired with custom music composed and produced by Δxolotl — designed to be listened to while reading for a cinematic experience.',
+    tag: 'MASTER SCORES BY ΔXOLOTL',
+    icon: '🎵',
   },
   {
     step: '03',
-    phase: 'Step 3',
-    title: 'The Relays of Eden',
-    desc: 'As memory fragments collide with ancient sacred geometry, something sinister awakens. A cosmic recurrence where mortality and eternity intertwine.',
-    tag: 'PROJECT EDEN // VOL. I',
+    phase: 'The Visuals',
+    title: 'Illustrated Artwork',
+    desc: 'Visual artwork, trailers, and manga panels created in partnership with Project Eden bring the characters and celestial backdrops to life.',
+    tag: 'PROJECT EDEN COLLABORATION',
     icon: '✦',
   },
 ];
@@ -32,10 +32,10 @@ export default function Journey({ onReadChapter }) {
     <section className="sec" id="journey">
       <div className="sec-inner">
         <div className="fi vis" style={{ textAlign: 'center', marginBottom: '56px' }}>
-          <div className="sec-label c">The Narrative Arc</div>
-          <h2 className="sec-title">How the Chronicle Unfolds</h2>
+          <div className="sec-label c">The Experience</div>
+          <h2 className="sec-title">Music, Words &amp; Visuals</h2>
           <p className="sec-body" style={{ margin: '0 auto', maxWidth: '640px' }}>
-            Follow the journey from terminal despair to celestial intervention in three pivotal phases.
+            Memento Mori is crafted as an integrated narrative — combining written chapters, original music, and visual art.
           </p>
         </div>
 
