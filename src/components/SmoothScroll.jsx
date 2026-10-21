@@ -62,25 +62,8 @@ export default function SmoothScroll({ children }) {
 
     document.addEventListener('click', handleAnchorClick);
 
-    // 3. Clario-style interactive spotlight cursor tracking on cards
-    const handleMouseMove = (e) => {
-      const card = e.target.closest(
-        '.cl-interactive-card, .cl-step-card, .cl-bento-card, .cl-edition-card, .archive-card, .track-card, .shop-card, .cl-feature-card, .cl-metric-card'
-      );
-      if (card) {
-        const rect = card.getBoundingClientRect();
-        const x = e.clientX - rect.left;
-        const y = e.clientY - rect.top;
-        card.style.setProperty('--mouse-x', `${x}px`);
-        card.style.setProperty('--mouse-y', `${y}px`);
-      }
-    };
-
-    window.addEventListener('mousemove', handleMouseMove, { passive: true });
-
     return () => {
       document.removeEventListener('click', handleAnchorClick);
-      window.removeEventListener('mousemove', handleMouseMove);
       cancelAnimationFrame(rafId);
       lenis.destroy();
       lenisRef.current = null;
@@ -88,7 +71,7 @@ export default function SmoothScroll({ children }) {
     };
   }, []);
 
-  // 4. Framer scroll reveal observer on route change & content mount
+  // 3. Framer scroll reveal observer on route change & content mount
   useEffect(() => {
     if (lenisRef.current) {
       lenisRef.current.scrollTo(0, { immediate: true });

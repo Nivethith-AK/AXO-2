@@ -47,7 +47,7 @@
 .form-field select:focus {
   border-color: var(--gold);
   background: var(--bg-raised, rgba(20, 20, 20, 0.95));
-  box-shadow: 0 0 12px var(--gold-glow);
+  box-shadow: none;
 }
 
 .form-field textarea { min-height: 160px; }

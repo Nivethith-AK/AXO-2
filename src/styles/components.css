@@ -14,13 +14,13 @@
 }
 .btn::before {
   content: ''; position: absolute; inset: 0;
-  background: var(--gold-glow);
+  background: var(--gold-dim);
   transform: scaleX(0); transform-origin: left; transition: transform 0.44s var(--ease);
 }
 .btn:hover {
   border-color: var(--gold-bright); color: var(--gold-bright);
   transform: translateY(-2px);
-  box-shadow: 0 8px 30px rgba(0,0,0,0.6), 0 0 16px var(--gold-glow);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.35);
 }
 .btn:hover::before { transform: scaleX(1); }
 .btn span { position: relative; z-index: 1; }
@@ -362,7 +362,7 @@
 .telemetry-card:hover {
   transform: translateY(-4px);
   border-color: var(--gold-bright);
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6), 0 0 20px var(--gold-dim);
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.35);
 }
 /* Corner notched tech brackets */
 .tc-corner {
@@ -399,7 +399,6 @@
   letter-spacing: 0.05em;
   line-height: 1;
   margin-bottom: 10px;
-  text-shadow: 0 0 15px rgba(212, 175, 55, 0.25);
 }
 .tc-label {
   font-family: var(--font-mono);

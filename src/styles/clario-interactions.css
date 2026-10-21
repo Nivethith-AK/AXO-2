@@ -1,6 +1,6 @@
 /* ============================================================
    CLARIO INTERACTIVE ANIMATIONS & SPRING PHYSICS
-   Derived from https://clario.framer.website/
+   Derived from https://clario.framer.website/ (Clean Matte Edition)
    ============================================================ */
 
 /* ── Scroll Reveals (Framer-style Appear) ──────────────────── */
@@ -25,7 +25,7 @@
 .cl-stagger-5 { transition-delay: 0.40s; }
 .cl-stagger-6 { transition-delay: 0.48s; }
 
-/* ── Interactive Spotlight Cards ───────────────────────────── */
+/* ── Interactive Cards (Clean Elevation, No Glow) ─────────── */
 .cl-interactive-card,
 .cl-step-card,
 .cl-bento-card,
@@ -35,45 +35,12 @@
 .shop-card {
   position: relative;
   overflow: hidden;
-  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
-              box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1),
-              border-color 0.4s cubic-bezier(0.16, 1, 0.3, 1) !important;
+  transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+              border-color 0.35s cubic-bezier(0.16, 1, 0.3, 1) !important;
 }
 
-/* Radial spotlight following cursor */
-.cl-interactive-card::before,
-.cl-step-card::before,
-.cl-bento-card::before,
-.cl-edition-card::before,
-.archive-card::before,
-.track-card::before,
-.shop-card::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  border-radius: inherit;
-  background: radial-gradient(
-    520px circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
-    rgba(232, 159, 94, 0.12),
-    transparent 45%
-  );
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 0.35s cubic-bezier(0.16, 1, 0.3, 1);
-  z-index: 1;
-}
-
-.cl-interactive-card:hover::before,
-.cl-step-card:hover::before,
-.cl-bento-card:hover::before,
-.cl-edition-card:hover::before,
-.archive-card:hover::before,
-.track-card:hover::before,
-.shop-card:hover::before {
-  opacity: 1;
-}
-
-/* Hover elevation lift and delicate border shimmer */
+/* Hover elevation lift with crisp, non-glowing subtle shadow */
 .cl-interactive-card:hover,
 .cl-step-card:hover,
 .cl-bento-card:hover,
@@ -81,13 +48,12 @@
 .archive-card:hover,
 .track-card:hover,
 .shop-card:hover {
-  transform: translateY(-4px) scale(1.006);
-  border-color: rgba(232, 159, 94, 0.45) !important;
-  box-shadow: 0 1px 0 0 rgba(232, 159, 94, 0.22) inset,
-              0 18px 40px -10px rgba(0, 0, 0, 0.55) !important;
+  transform: translateY(-4px) scale(1.004);
+  border-color: var(--gold-border) !important;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.35) !important;
 }
 
-/* ── Magnetic / Spring Hover Buttons ──────────────────────── */
+/* ── Magnetic / Spring Hover Buttons (No Glow Halos) ──────── */
 .cl-btn-magnetic,
 .btn-primary,
 .cl-btn-primary,
@@ -106,8 +72,8 @@
 .cl-btn-primary:hover,
 .nav-cta-btn:hover,
 .btn-hero-primary:hover {
-  transform: translateY(-2px) scale(1.025) !important;
-  box-shadow: 0 0 24px -2px rgba(232, 159, 94, 0.38) !important;
+  transform: translateY(-2px) scale(1.02) !important;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.3) !important;
 }
 
 .cl-btn-magnetic:active,
@@ -116,6 +82,7 @@
 .nav-cta-btn:active,
 .btn-hero-primary:active {
   transform: translateY(0) scale(0.97) !important;
+  box-shadow: none !important;
 }
 
 /* ── Floating Ambient Badges (Clario Floating Motion) ──────── */

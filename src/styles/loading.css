@@ -24,17 +24,6 @@
   left: 0 !important;
 }
 
-/* Ambient celestial glow behind decrypting title */
-#ls-overlay::before {
-  content: '';
-  position: absolute;
-  width: 460px;
-  height: 460px;
-  border-radius: 50%;
-  background: radial-gradient(circle, rgba(232, 159, 94, 0.12) 0%, transparent 70%);
-  pointer-events: none;
-}
-
 #ls-overlay::after {
   content: '';
   position: absolute;
@@ -180,5 +169,5 @@
   border-color: var(--gold-border);
   background: rgba(232, 159, 94, 0.15);
   transform: translateY(-2px);
-  box-shadow: 0 0 16px -2px rgba(232, 159, 94, 0.35);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
 }

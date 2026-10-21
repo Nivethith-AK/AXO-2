@@ -352,9 +352,9 @@
   transition: all 0.3s !important;
 }
 .p-btn-play:hover {
-  background: var(--gold-glow) !important;
+  background: var(--gold-dim) !important;
   border-color: var(--gold) !important;
-  box-shadow: 0 0 20px var(--gold-glow);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.3);
 }
 .p-btn-play svg {
   width: 18px;

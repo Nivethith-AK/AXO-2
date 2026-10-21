@@ -30,7 +30,7 @@
   margin-right: 6px;
 }
 .nav-cta-btn:hover {
-  background: var(--gold-glow);
+  background: var(--gold-dim);
   border-color: var(--gold);
   color: #ffffff;
   transform: translateY(-1px);
@@ -66,7 +66,7 @@
   letter-spacing: 0.22em;
   color: var(--gold-bright);
   text-transform: uppercase;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4), inset 0 0 12px var(--gold-dim);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.25);
 }
 .hero-artist-badge .artist-spark {
   color: var(--gold);
@@ -87,7 +87,7 @@
   color: var(--fg);
 }
 .btn-hero-primary:hover {
-  background: var(--gold-glow);
+  background: var(--gold-dim);
   border-color: var(--gold-bright);
   color: var(--gold-bright);
 }
@@ -124,7 +124,7 @@
 .clario-step-card:hover {
   transform: translateY(-4px);
   border-color: var(--gold-border);
-  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.4), 0 0 16px var(--gold-dim);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.3);
 }
 
 .step-card-header {
@@ -259,7 +259,7 @@
 }
 .matrix-badge.celestial {
   color: var(--gold-bright);
-  background: var(--gold-glow);
+  background: var(--gold-dim);
   border: 1px solid var(--gold);
 }
 
@@ -330,7 +330,7 @@
   position: relative;
   text-align: center;
   backdrop-filter: blur(16px);
-  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.4), 0 0 24px var(--gold-dim);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.25);
 }
 
 .testimonial-eyebrow {
@@ -430,7 +430,7 @@
 .clario-pricing-card.popular {
   border-color: var(--gold);
   background: linear-gradient(180deg, var(--gold-dim) 0%, var(--card-bg) 60%);
-  box-shadow: 0 0 30px var(--gold-dim);
+  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.3);
 }
 
 .pricing-badge-popular {
@@ -535,7 +535,7 @@
 .btn-primary-highlight:hover {
   background: var(--gold-bright) !important;
   color: #0a0a0a !important;
-  box-shadow: 0 0 20px var(--gold-glow);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.3);
 }
 
 @media (max-width: 960px) {
@@ -629,7 +629,7 @@
   text-align: center;
   position: relative;
   backdrop-filter: blur(20px);
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5), 0 0 30px var(--gold-dim);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.35);
 }
 
 .cta-corner {
@@ -696,7 +696,7 @@
 .cta-btn-primary:hover {
   background: var(--gold-bright) !important;
   transform: translateY(-2px);
-  box-shadow: 0 0 24px var(--gold-glow);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.3);
 }
 
 .cta-btn-secondary {
@@ -876,7 +876,7 @@
   border: 1px solid var(--border);
   border-radius: 16px;
   overflow: hidden;
-  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4), 0 0 24px var(--gold-dim);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.25);
   backdrop-filter: blur(16px);
   text-align: left;
 }
