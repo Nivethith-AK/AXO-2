@@ -2,22 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { useLenis } from './SmoothScroll';
 
 export default function Hero() {
-  const [utcTime, setUtcTime] = useState('');
   const [scrollY, setScrollY] = useState(0);
   const lenis = useLenis();
-
-  useEffect(() => {
-    const tick = () => {
-      const d = new Date();
-      const hh = String(d.getUTCHours()).padStart(2, '0');
-      const mm = String(d.getUTCMinutes()).padStart(2, '0');
-      const ss = String(d.getUTCSeconds()).padStart(2, '0');
-      setUtcTime(`${hh}:${mm}:${ss} UTC`);
-    };
-    tick();
-    const interval = setInterval(tick, 1000);
-    return () => clearInterval(interval);
-  }, []);
 
   useEffect(() => {
     const onScroll = () => {
@@ -51,23 +37,10 @@ export default function Hero() {
       }}
     >
       <div className="fi vis d1">
-        <div className="hud-pill cl-float">
-          <span className="hud-dot" />
-          <span className="hud-status">TRANSMISSION: ACTIVE</span>
-          <span className="hud-sep">//</span>
-          <span className="hud-metric">NODE_01</span>
-          <span className="hud-sep">//</span>
-          <span className="hud-time" id="hud-clock">
-            {utcTime || '00:00:00 UTC'}
-          </span>
-        </div>
-      </div>
-
-      <div className="fi vis d2">
         <span className="hero-eyebrow">&#916;xolotl Presents</span>
       </div>
 
-      <div className="fi vis d3">
+      <div className="fi vis d2">
         <h1 className="hero-title">
           Memento
           <br />
