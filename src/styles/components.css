@@ -2,27 +2,56 @@
    COMPONENTS — buttons, video, coming-soon, countdown
    ============================================================ */
 
-/* ── BUTTON ───────────────────────────────────────────────── */
+/* ── BUTTON (Minimal Modern Design) ───────────────────────── */
 .btn {
-  display: inline-flex; align-items: center; gap: 0.8rem;
-  padding: 14px 36px; border: 1px solid var(--gold-border);
-  color: var(--fg); font-family: var(--font-display);
-  font-size: 0.82rem; font-weight: 700; letter-spacing: 0.22em; text-transform: uppercase;
-  transition: all 0.4s var(--ease); position: relative;
-  background: var(--gold-dim); overflow: hidden; cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  padding: 10px 22px;
+  border: 1px solid var(--gold-border);
   border-radius: 6px;
-}
-.btn::before {
-  content: ''; position: absolute; inset: 0;
   background: var(--gold-dim);
-  transform: scaleX(0); transform-origin: left; transition: transform 0.44s var(--ease);
+  color: var(--fg);
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-decoration: none;
+  cursor: pointer;
+  position: relative;
+  outline: none;
+  box-shadow: none;
+  transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease, transform 0.2s ease;
 }
+
 .btn:hover {
-  border-color: var(--gold-bright); color: var(--gold-bright);
-  transform: translateY(-2px);
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.35);
+  background: rgba(232, 159, 94, 0.2);
+  border-color: var(--gold);
+  color: var(--gold-bright);
+  transform: translateY(-1px);
+  box-shadow: none;
 }
-.btn:hover::before { transform: scaleX(1); }
+
+.btn:active {
+  transform: translateY(0);
+  opacity: 0.85;
+}
+
+.btn-secondary {
+  background: transparent;
+  border: 1px solid var(--border);
+  color: var(--fg-mid);
+}
+
+.btn-secondary:hover {
+  background: rgba(255, 255, 255, 0.03);
+  border-color: var(--gold-border);
+  color: var(--fg);
+  transform: translateY(-1px);
+}
+
 .btn span { position: relative; z-index: 1; }
 
 /* ── VIDEO BLOCK ──────────────────────────────────────────── */

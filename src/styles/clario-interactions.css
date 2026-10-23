@@ -53,18 +53,19 @@
   box-shadow: 0 12px 30px rgba(0, 0, 0, 0.35) !important;
 }
 
-/* ── Magnetic / Spring Hover Buttons (No Glow Halos) ──────── */
+/* ── Magnetic / Spring Hover Buttons (Minimal Modern, No Glow Halos) ── */
 .cl-btn-magnetic,
 .btn-primary,
 .cl-btn-primary,
 .nav-cta-btn,
 .hero-cta,
 .btn-hero-primary {
-  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1),
-              box-shadow 0.3s cubic-bezier(0.16, 1, 0.3, 1),
-              background 0.3s cubic-bezier(0.16, 1, 0.3, 1),
-              border-color 0.3s cubic-bezier(0.16, 1, 0.3, 1) !important;
+  transition: transform 0.2s ease,
+              background 0.2s ease,
+              border-color 0.2s ease,
+              color 0.2s ease !important;
   cursor: pointer;
+  box-shadow: none !important;
 }
 
 .cl-btn-magnetic:hover,
@@ -72,8 +73,8 @@
 .cl-btn-primary:hover,
 .nav-cta-btn:hover,
 .btn-hero-primary:hover {
-  transform: translateY(-2px) scale(1.02) !important;
-  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.3) !important;
+  transform: translateY(-1px) !important;
+  box-shadow: none !important;
 }
 
 .cl-btn-magnetic:active,
@@ -81,7 +82,8 @@
 .cl-btn-primary:active,
 .nav-cta-btn:active,
 .btn-hero-primary:active {
-  transform: translateY(0) scale(0.97) !important;
+  transform: translateY(0) !important;
+  opacity: 0.85 !important;
   box-shadow: none !important;
 }
 

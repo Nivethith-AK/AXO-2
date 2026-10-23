@@ -15,25 +15,27 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: 8px 18px;
-  background: var(--gold-dim);
+  padding: 6px 15px;
+  background: transparent;
   border: 1px solid var(--gold-border);
   border-radius: 6px;
   color: var(--gold-bright);
-  font-family: var(--font-display);
-  font-size: 0.76rem;
-  font-weight: 700;
-  letter-spacing: 0.12em;
+  font-family: var(--font-mono);
+  font-size: 0.74rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
   cursor: pointer;
-  transition: all 0.3s var(--ease);
+  transition: all 0.2s ease;
   margin-right: 6px;
+  box-shadow: none;
 }
 .nav-cta-btn:hover {
   background: var(--gold-dim);
   border-color: var(--gold);
   color: #ffffff;
   transform: translateY(-1px);
+  box-shadow: none;
 }
 .desktop-only { display: inline-flex; }
 .mobile-only { display: none; }
@@ -82,25 +84,33 @@
 }
 
 .btn-hero-primary {
-  background: var(--gold-dim);
-  border-color: var(--gold-border);
-  color: var(--fg);
+  background: var(--gold) !important;
+  border: 1px solid var(--gold) !important;
+  color: #0a0a0a !important;
+  font-weight: 600 !important;
+  box-shadow: none !important;
 }
 .btn-hero-primary:hover {
-  background: var(--gold-dim);
-  border-color: var(--gold-bright);
-  color: var(--gold-bright);
+  background: var(--gold-bright) !important;
+  border-color: var(--gold-bright) !important;
+  color: #050505 !important;
+  transform: translateY(-1px) !important;
+  box-shadow: none !important;
 }
 
 .btn-hero-secondary {
-  background: rgba(255, 255, 255, 0.03);
-  border: 1px solid var(--border);
-  color: var(--fg-mid);
+  background: transparent !important;
+  border: 1px solid var(--border) !important;
+  color: var(--fg-mid) !important;
+  font-weight: 500 !important;
+  box-shadow: none !important;
 }
 .btn-hero-secondary:hover {
-  border-color: var(--gold);
-  color: var(--fg);
-  background: var(--gold-dim);
+  border-color: var(--gold-border) !important;
+  color: var(--fg) !important;
+  background: rgba(255, 255, 255, 0.03) !important;
+  transform: translateY(-1px) !important;
+  box-shadow: none !important;
 }
 
 /* ── HOW IT UNFOLDS (Clario 3-Step Grid) ──────────────────── */
@@ -529,13 +539,16 @@
 .btn-primary-highlight {
   background: var(--gold) !important;
   color: #0a0a0a !important;
-  border-color: var(--gold-bright) !important;
-  font-weight: 800 !important;
+  border: 1px solid var(--gold) !important;
+  font-weight: 600 !important;
+  box-shadow: none !important;
 }
 .btn-primary-highlight:hover {
   background: var(--gold-bright) !important;
+  border-color: var(--gold-bright) !important;
   color: #0a0a0a !important;
-  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.3);
+  transform: translateY(-1px) !important;
+  box-shadow: none !important;
 }
 
 @media (max-width: 960px) {
@@ -690,24 +703,31 @@
 .cta-btn-primary {
   background: var(--gold) !important;
   color: #0a0a0a !important;
-  border-color: var(--gold-bright) !important;
-  font-weight: 800 !important;
+  border: 1px solid var(--gold) !important;
+  font-weight: 600 !important;
+  box-shadow: none !important;
 }
 .cta-btn-primary:hover {
   background: var(--gold-bright) !important;
-  transform: translateY(-2px);
-  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.3);
+  border-color: var(--gold-bright) !important;
+  color: #050505 !important;
+  transform: translateY(-1px) !important;
+  box-shadow: none !important;
 }
 
 .cta-btn-secondary {
-  background: rgba(255, 255, 255, 0.04) !important;
-  border-color: var(--border) !important;
-  color: var(--fg) !important;
+  background: transparent !important;
+  border: 1px solid var(--border) !important;
+  color: var(--fg-mid) !important;
+  font-weight: 500 !important;
+  box-shadow: none !important;
 }
 .cta-btn-secondary:hover {
-  border-color: var(--gold) !important;
-  background: var(--gold-dim) !important;
-  color: var(--gold-bright) !important;
+  border-color: var(--gold-border) !important;
+  background: rgba(255, 255, 255, 0.03) !important;
+  color: var(--fg) !important;
+  transform: translateY(-1px) !important;
+  box-shadow: none !important;
 }
 
 /* ── COMPREHENSIVE FOOTER (Clario Multi-Column Layout) ───── */
@@ -947,15 +967,20 @@
 }
 
 .cp-play-btn {
-  padding: 12px 28px;
+  padding: 10px 22px;
   background: var(--gold) !important;
   color: #0a0a0a !important;
-  font-weight: 800 !important;
-  border-radius: 8px;
+  border: 1px solid var(--gold) !important;
+  font-weight: 600 !important;
+  border-radius: 6px;
+  box-shadow: none !important;
 }
 .cp-play-btn:hover {
   background: var(--gold-bright) !important;
-  transform: translateY(-2px);
+  border-color: var(--gold-bright) !important;
+  color: #050505 !important;
+  transform: translateY(-1px) !important;
+  box-shadow: none !important;
 }
 
 /* ── CLARIO BENTO GRID ───────────────────────────────────── */

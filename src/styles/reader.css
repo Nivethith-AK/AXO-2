@@ -52,15 +52,21 @@
 
 .reader-close {
   position: fixed; top: 24px; right: var(--gutter);
-  font-family: var(--font-mono); font-size: 0.82rem;
-  font-weight: 600;
-  letter-spacing: 0.25em; color: var(--fg);
+  font-family: var(--font-mono); font-size: 0.76rem;
+  font-weight: 500;
+  letter-spacing: 0.15em; color: var(--fg);
   text-transform: uppercase; z-index: 9600;
-  transition: color 0.3s; background: var(--card-bg, rgba(14,14,14,0.8));
-  border: 1px solid var(--gold-border); padding: 8px 16px; cursor: pointer;
+  transition: all 0.2s ease; background: var(--card-bg, rgba(14,14,14,0.85));
+  border: 1px solid var(--gold-border); padding: 7px 16px; cursor: pointer;
   border-radius: 6px;
+  box-shadow: none;
 }
-.reader-close:hover { color: var(--gold); border-color: var(--gold); }
+.reader-close:hover {
+  color: var(--gold-bright);
+  border-color: var(--gold);
+  background: var(--gold-dim);
+  transform: translateY(-1px);
+}
 
 .reader-nav {
   margin-top: 80px; padding-top: 48px;

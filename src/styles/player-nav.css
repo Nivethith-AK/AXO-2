@@ -343,18 +343,21 @@
   fill: currentColor;
 }
 .p-btn-play {
-  width: 48px;
-  height: 48px;
+  width: 44px;
+  height: 44px;
   border: 1px solid var(--gold-border) !important;
   border-radius: 50%;
   background: var(--gold-dim) !important;
   color: var(--gold-bright) !important;
-  transition: all 0.3s !important;
+  box-shadow: none !important;
+  transition: all 0.25s ease !important;
 }
 .p-btn-play:hover {
-  background: var(--gold-dim) !important;
+  background: rgba(232, 159, 94, 0.22) !important;
   border-color: var(--gold) !important;
-  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.3);
+  color: #ffffff !important;
+  transform: translateY(-1px);
+  box-shadow: none !important;
 }
 .p-btn-play svg {
   width: 18px;
