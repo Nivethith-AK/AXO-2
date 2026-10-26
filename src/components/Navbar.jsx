@@ -1,5 +1,4 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Link } from 'react-router-dom';
 import { useTheme } from '../context/ThemeContext';
 import { useAudio } from '../context/AudioContext';
 import { useLenis } from './SmoothScroll';
@@ -95,9 +94,6 @@ export default function Navbar() {
             {sec.charAt(0).toUpperCase() + sec.slice(1)}
           </a>
         ))}
-        <Link to="/clario" className="nav-link" style={{ color: 'var(--gold-bright)' }}>
-          Clario View ↗
-        </Link>
       </div>
 
       <button
