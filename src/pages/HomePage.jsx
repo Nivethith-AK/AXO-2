@@ -1,7 +1,6 @@
 import React, { useState, useCallback } from 'react';
 import Navbar from '../components/Navbar';
 import Hero from '../components/Hero';
-import InfiniteTicker from '../components/InfiniteTicker';
 import About from '../components/About';
 import Archive from '../components/Archive';
 import SoundtrackPlayer from '../components/SoundtrackPlayer';
@@ -37,7 +36,6 @@ export default function HomePage() {
 
         <main>
           <Hero />
-          <InfiniteTicker />
           <About />
           <Archive onOpenChapter={(id) => setSelectedChapterId(id)} />
           <SoundtrackPlayer />
