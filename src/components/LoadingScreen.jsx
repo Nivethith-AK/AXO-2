@@ -38,6 +38,10 @@ export default function LoadingScreen({ onDismiss }) {
     if (dismissedRef.current) return;
     dismissedRef.current = true;
 
+    // Notify listeners and remove loading class so cat & site unveil together
+    document.body.classList.remove('loading-active');
+    window.dispatchEvent(new CustomEvent('loading-screen-done'));
+
     // 1. Unlock interactions & scroll
     document.body.style.overflow = '';
     if (lenis) lenis.start();
@@ -58,17 +62,11 @@ export default function LoadingScreen({ onDismiss }) {
   }, [lenis]);
 
   useEffect(() => {
-    // Lock scroll during loading screen
+    // Mark body as loading-active and lock scroll
+    document.body.classList.add('loading-active');
+    window.dispatchEvent(new CustomEvent('loading-screen-start'));
     document.body.style.overflow = 'hidden';
     if (lenis) lenis.stop();
-
-    // Interactive skip on keypress (ESC, Space, Enter)
-    const handleKeyDown = (e) => {
-      if (e.key === 'Escape' || e.key === ' ' || e.key === 'Enter') {
-        dismiss();
-      }
-    };
-    window.addEventListener('keydown', handleKeyDown);
 
     const tStart = performance.now();
     let msgIdx = 0;
@@ -160,9 +158,10 @@ export default function LoadingScreen({ onDismiss }) {
     timersRef.current.push(startTimer);
 
     return () => {
+      document.body.classList.remove('loading-active');
+      window.dispatchEvent(new CustomEvent('loading-screen-done'));
       document.body.style.overflow = '';
       if (lenis) lenis.start();
-      window.removeEventListener('keydown', handleKeyDown);
       cipherRunning = false;
       timersRef.current.forEach(clearTimeout);
       animIdsRef.current.forEach(cancelAnimationFrame);
@@ -175,10 +174,7 @@ export default function LoadingScreen({ onDismiss }) {
     <div
       id="ls-overlay"
       className={isExiting ? 'exit' : ''}
-      onClick={dismiss}
-      role="button"
-      tabIndex={0}
-      title="Click or press ESC to enter"
+      aria-hidden="true"
     >
       <span className="ls-presents">&#916;xolotl Presents</span>
       <h1 className="ls-title" id="ls-title">
@@ -193,17 +189,6 @@ export default function LoadingScreen({ onDismiss }) {
       <span className={`ls-sub ${subVisible ? 'show' : ''}`} id="ls-sub">
         Accessing Archives
       </span>
-
-      <button
-        type="button"
-        className="ls-skip-btn"
-        onClick={(e) => {
-          e.stopPropagation();
-          dismiss();
-        }}
-      >
-        Skip &rarr;
-      </button>
     </div>
   );
 }
