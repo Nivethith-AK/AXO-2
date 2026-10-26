@@ -6,6 +6,7 @@ import SmoothScroll from './components/SmoothScroll';
 import HomePage from './pages/HomePage';
 import ChapterPage from './pages/ChapterPage';
 import ClarioPage from './pages/ClarioPage';
+import CatLayer from './components/CatLayer';
 
 export default function App() {
   return (
@@ -13,6 +14,7 @@ export default function App() {
       <AudioProvider>
         <BrowserRouter>
           <SmoothScroll>
+            <CatLayer />
             <Routes>
               {/* The Original Memento Mori Home Page — Untouched */}
               <Route path="/" element={<HomePage />} />
