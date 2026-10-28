@@ -47,15 +47,44 @@ export default function CatLayer() {
 
   return (
     <Oneko
+      bubbleScale={0.7}
       skin={"tuxedo"}
-      speed={20}
-      idleThreshold={2500}
+      speed={5}
+      scale={2}
+      idleThreshold={500}
       meow
-      followDistance={15}
-      animationSpeed={1.4}
-      bubbleText={"purr patrol"}
-      freerunChance={0.15}
-      freerunDuration={80}
+      volume={0.2}
+      bubbleChance={0.05}
+      followDistance={60}
+      animationSpeed={0.7}
+      bubbleText={[
+        "Hungy!!",
+        "Nya~",
+        "Smells like coffee...",
+        "Rules are for dogs",
+        "Has anyone seen Azrael?",
+        "Adoniel is busy again...",
+        "Is Azrael a hooman?",
+        "I should go on my own adventures",
+        "Need scratch-scratch",
+        "Upppies?",
+        "Boundaries are a social construct",
+        "Your furniture is expensive... that's a threat",
+      ]}
+      freerunChance={0.01}
+      freerunDuration={20}
+      bubbleDisplayFrames={80}
+      bubbleCooldown={300}
+      zoneAttractionChance={0.8}
+      napWhileTyping
+      followFocus
+      perchOnHover
+      pettable
+      seasonal={false}
+      grabbable
+      treats
+      timeOfDay
+      affection
     />
   );
 }
