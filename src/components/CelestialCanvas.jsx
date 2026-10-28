@@ -44,11 +44,230 @@ export default function CelestialCanvas({ geomReady = true }) {
 
     /* ── Colors (dynamically adapting to Dark Crimson & Light Gold Marble) ── */
     const isLight = () => document.documentElement.getAttribute('data-theme') === 'light';
-    const cStar = (a) => (isLight() ? `rgba(40,30,25,${a * 0.65})` : `rgba(255,235,235,${a})`);
-    const cWarm = (a) => (isLight() ? `rgba(212,175,55,${a})` : `rgba(255,50,70,${a})`);
-    const cCool = (a) => (isLight() ? `rgba(184,134,11,${a})` : `rgba(200,25,45,${a})`);
-    const cGold = (a) => (isLight() ? `rgba(197,154,39,${a})` : `rgba(240,30,55,${a})`);
-    const cGray = (a) => (isLight() ? `rgba(140,115,85,${a})` : `rgba(120,40,50,${a})`);
+    const cStar = (a) => (isLight() ? `rgba(195,150,55,${a * 0.45})` : `rgba(255,235,235,${a})`);
+    const cWarm = (a) => (isLight() ? `rgba(180,130,25,${a * 0.75})` : `rgba(255,50,70,${a})`);
+    const cCool = (a) => (isLight() ? `rgba(160,110,20,${a * 0.70})` : `rgba(200,25,45,${a})`);
+    const cGold = (a) => (isLight() ? `rgba(166,115,2,${a})` : `rgba(240,30,55,${a})`);
+    const cGray = (a) => (isLight() ? `rgba(180,145,105,${a * 0.4})` : `rgba(120,40,50,${a})`);
+
+    /* ── Procedural Generative Marble Vein Engine ── */
+    const offscreenMarble = document.createElement('canvas');
+    const mctx = offscreenMarble.getContext('2d');
+    let veinPaths = [];
+    let mineralClouds = [];
+    let shimmerPhase = 0;
+
+    const buildVeinPaths = () => {
+      veinPaths = [];
+      mineralClouds = [];
+
+      // 3 majestic geological fault lines leaving space for hero typography
+      const fissureDefs = [
+        {
+          x0: -W * 0.08, y0: H * 0.12,
+          x1: W * 1.08,  y1: H * 0.82,
+          ctrl1X: W * 0.22, ctrl1Y: H * 0.05,
+          ctrl2X: W * 0.82, ctrl2Y: H * 0.65,
+          branches: 4, seed: 1.5
+        },
+        {
+          x0: W * 0.28,  y0: -H * 0.08,
+          x1: W * 1.10,  y1: H * 0.32,
+          ctrl1X: W * 0.55, ctrl1Y: H * 0.02,
+          ctrl2X: W * 0.85, ctrl2Y: H * 0.18,
+          branches: 3, seed: 3.2
+        },
+        {
+          x0: -W * 0.06, y0: H * 0.74,
+          x1: W * 0.78,  y1: H * 1.10,
+          ctrl1X: W * 0.18, ctrl1Y: H * 0.88,
+          ctrl2X: W * 0.52, ctrl2Y: H * 0.98,
+          branches: 3, seed: 4.8
+        },
+      ];
+
+      fissureDefs.forEach((f, fIdx) => {
+        const pts = [];
+        const steps = 48;
+        const dx = (f.x1 - f.x0) / steps;
+        const dy = (f.y1 - f.y0) / steps;
+        const nx = -dy;
+        const ny = dx;
+        const nLen = Math.sqrt(nx * nx + ny * ny) || 1;
+        const normX = nx / nLen;
+        const normY = ny / nLen;
+
+        for (let i = 0; i <= steps; i++) {
+          const t = i / steps;
+          // Organic sinusoidal meandering
+          const disp =
+            Math.sin(t * Math.PI * 2.2 + f.seed) * 48 +
+            Math.cos(t * Math.PI * 4.8 - f.seed * 1.5) * 22 +
+            Math.sin(t * Math.PI * 9.5 + f.seed * 3) * 9;
+
+          const px = f.x0 + dx * i + normX * disp;
+          const py = f.y0 + dy * i + normY * disp;
+          pts.push({ x: px, y: py });
+
+          // Spawn soft mineral cloud clusters along key nodes
+          if (i % 7 === 3) {
+            mineralClouds.push({
+              x: px + (Math.sin(i * 4) * 25),
+              y: py + (Math.cos(i * 3) * 25),
+              r: 60 + ((i * 11) % 55),
+              seed: f.seed + i
+            });
+          }
+        }
+
+        const branches = [];
+        for (let b = 0; b < f.branches; b++) {
+          const attachIdx = Math.floor(6 + (b / f.branches) * (steps - 12));
+          const origin = pts[attachIdx];
+          if (!origin) continue;
+
+          const bPts = [origin];
+          const bSteps = 14 + Math.floor(((fIdx * 5 + b * 7) % 8));
+          const bSide = b % 2 === 0 ? 1 : -1;
+          const baseAng = Math.atan2(dy, dx) + bSide * (0.55 + ((f.seed + b) % 0.3));
+          const bSpd = 20 + ((fIdx * 6 + b * 9) % 14);
+
+          let cx = origin.x;
+          let cy = origin.y;
+          for (let s = 1; s <= bSteps; s++) {
+            const st = s / bSteps;
+            const curl = Math.sin(st * Math.PI * 2.2 + f.seed) * 12;
+            cx += Math.cos(baseAng) * bSpd + normX * curl;
+            cy += Math.sin(baseAng) * bSpd + normY * curl;
+            bPts.push({ x: cx, y: cy });
+          }
+          branches.push(bPts);
+        }
+
+        veinPaths.push({ pts, branches, seed: f.seed });
+      });
+    };
+
+    const renderMarbleOffscreen = () => {
+      offscreenMarble.width = W;
+      offscreenMarble.height = H;
+      mctx.clearRect(0, 0, W, H);
+      const light = isLight();
+
+      const drawPath = (points) => {
+        if (!points || points.length < 2) return;
+        mctx.beginPath();
+        mctx.moveTo(points[0].x, points[0].y);
+        for (let i = 1; i < points.length - 1; i++) {
+          const xc = (points[i].x + points[i + 1].x) / 2;
+          const yc = (points[i].y + points[i + 1].y) / 2;
+          mctx.quadraticCurveTo(points[i].x, points[i].y, xc, yc);
+        }
+        mctx.lineTo(points[points.length - 1].x, points[points.length - 1].y);
+        mctx.stroke();
+      };
+
+      mctx.lineCap = 'round';
+      mctx.lineJoin = 'round';
+
+      // Pass 0: Soft smoky mineral clouds along fissures
+      mineralClouds.forEach((c) => {
+        const cg = mctx.createRadialGradient(c.x, c.y, 0, c.x, c.y, c.r);
+        if (light) {
+          cg.addColorStop(0, 'rgba(215, 172, 70, 0.055)');
+          cg.addColorStop(0.5, 'rgba(200, 155, 50, 0.025)');
+          cg.addColorStop(1, 'transparent');
+        } else {
+          cg.addColorStop(0, 'rgba(215, 25, 45, 0.075)');
+          cg.addColorStop(0.5, 'rgba(170, 15, 30, 0.035)');
+          cg.addColorStop(1, 'transparent');
+        }
+        mctx.fillStyle = cg;
+        mctx.beginPath();
+        mctx.arc(c.x, c.y, c.r, 0, Math.PI * 2);
+        mctx.fill();
+      });
+
+      // Pass 1: Broad diffuse mineral wash
+      mctx.strokeStyle = light
+        ? 'rgba(212, 168, 65, 0.06)'
+        : 'rgba(225, 25, 45, 0.08)';
+      mctx.lineWidth = 55;
+      veinPaths.forEach((v) => {
+        drawPath(v.pts);
+      });
+
+      // Pass 2: Secondary mineral vein
+      mctx.strokeStyle = light
+        ? 'rgba(184, 134, 11, 0.18)'
+        : 'rgba(240, 30, 55, 0.28)';
+      mctx.lineWidth = 14;
+      veinPaths.forEach((v) => {
+        drawPath(v.pts);
+        v.branches.forEach((b) => {
+          mctx.lineWidth = 6;
+          drawPath(b);
+        });
+      });
+
+      // Pass 3: Core crisp quartz / magma fissure
+      mctx.strokeStyle = light
+        ? 'rgba(150, 105, 10, 0.60)'
+        : 'rgba(255, 55, 75, 0.85)';
+      mctx.lineWidth = 2.2;
+      veinPaths.forEach((v) => {
+        mctx.lineWidth = 2.2;
+        drawPath(v.pts);
+        mctx.lineWidth = 1.1;
+        mctx.strokeStyle = light
+          ? 'rgba(166, 115, 2, 0.38)'
+          : 'rgba(235, 30, 55, 0.52)';
+        v.branches.forEach((b) => drawPath(b));
+      });
+
+      // Pass 4: Calcite & crystalline flecks
+      const fleckCount = 60;
+      for (let i = 0; i < fleckCount; i++) {
+        const v = veinPaths[i % veinPaths.length];
+        const pIdx = Math.floor(((i * 9 + 17) % v.pts.length));
+        const pt = v.pts[pIdx];
+        if (!pt) continue;
+        const ox = (Math.sin(i * 3.7) * 22);
+        const oy = (Math.cos(i * 4.3) * 22);
+        const r = 0.8 + ((i * 3) % 4) * 0.45;
+        mctx.fillStyle = light
+          ? `rgba(215, 175, 75, ${0.30 + ((i % 4) * 0.08)})`
+          : `rgba(255, 75, 95, ${0.40 + ((i % 4) * 0.1)})`;
+        mctx.beginPath();
+        mctx.arc(pt.x + ox, pt.y + oy, r, 0, Math.PI * 2);
+        mctx.fill();
+      }
+    };
+
+    const drawVeinShimmer = (phase) => {
+      const light = isLight();
+      ctx.save();
+      veinPaths.forEach((v) => {
+        const cycle = (phase * 0.6 + v.seed * 0.35) % 1;
+        const pLen = v.pts.length;
+        const centerIdx = Math.floor(cycle * (pLen - 1));
+        const p = v.pts[centerIdx];
+        if (!p) return;
+
+        const rad = 75;
+        const g = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, rad);
+        const shimmerCol = light
+          ? 'rgba(225, 185, 75, 0.16)'
+          : 'rgba(255, 75, 95, 0.28)';
+        g.addColorStop(0, shimmerCol);
+        g.addColorStop(1, 'transparent');
+        ctx.fillStyle = g;
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, rad, 0, Math.PI * 2);
+        ctx.fill();
+      });
+      ctx.restore();
+    };
 
     /* ── Star ── */
     class Star {
@@ -110,7 +329,7 @@ export default function CelestialCanvas({ geomReady = true }) {
             ? cCool(a)
             : cStar(a);
         ctx.save();
-        ctx.globalCompositeOperation = 'lighter';
+        ctx.globalCompositeOperation = isLight() ? 'source-over' : 'lighter';
         if (this.layer === 2 && this.r > 0.6) {
           const g = ctx.createRadialGradient(
             this.x,
@@ -421,26 +640,11 @@ export default function CelestialCanvas({ geomReady = true }) {
         new OrbitalRing(S * 0.58, 0.5, 0.0001, 0.035),
       ];
       buildConstellations();
+      buildVeinPaths();
+      renderMarbleOffscreen();
     };
 
     buildAll();
-
-    const drawBG = () => {
-      const g = ctx.createRadialGradient(
-        W / 2,
-        H * 0.44,
-        0,
-        W / 2,
-        H / 2,
-        Math.max(W, H) * 0.9
-      );
-      g.addColorStop(0, '#111111');
-      g.addColorStop(0.3, '#0a0a0a');
-      g.addColorStop(0.7, '#050505');
-      g.addColorStop(1, '#020202');
-      ctx.fillStyle = g;
-      ctx.fillRect(0, 0, W, H);
-    };
 
     const drawConstellations = () => {
       ctx.save();
@@ -463,7 +667,15 @@ export default function CelestialCanvas({ geomReady = true }) {
       geomAlpha += (target - geomAlpha) * 0.018;
 
       ctx.clearRect(0, 0, W, H);
-      drawBG();
+
+      // 1. Procedural generative marble veins
+      ctx.drawImage(offscreenMarble, 0, 0);
+
+      // 2. Animated mineral shimmer along the fissures
+      shimmerPhase += 0.005;
+      drawVeinShimmer(shimmerPhase);
+
+      // 3. Ambient celestial geometry & stars
       nebulae.forEach((n) => n.draw());
       drawConstellations();
       geom.forEach((g) => g.draw(geomAlpha));
@@ -495,9 +707,22 @@ export default function CelestialCanvas({ geomReady = true }) {
 
     frame();
 
+    const themeObserver = new MutationObserver((mutations) => {
+      for (const m of mutations) {
+        if (m.attributeName === 'data-theme') {
+          renderMarbleOffscreen();
+        }
+      }
+    });
+    themeObserver.observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ['data-theme'],
+    });
+
     return () => {
       cancelAnimationFrame(animId);
       clearTimeout(mTimer);
+      themeObserver.disconnect();
       window.removeEventListener('resize', resize);
       window.removeEventListener('mousemove', onMouseMove);
     };

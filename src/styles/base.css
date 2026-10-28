@@ -1,38 +1,62 @@
 /* ============================================================
    BASE — variables, reset, typography
-   Themes inspired by Calacatta Gold & Crimson Obsidian Marble:
-   • Dark Mode: Obsidian Black with glowing Crimson/Blood-Red marble veins
-   • Light Mode: Alabaster White with Calacatta Gold marble veins
+   Generative Themes (Programmatic Calacatta Gold & Crimson Obsidian):
+   • Light Mode (DEFAULT): Alabaster Ivory White with generative Calacatta Gold & Amber veining
+   • Dark Mode: Deep Obsidian Onyx with generative glowing Crimson & Molten Scarlet veining
    • Typography: Classical Roman Inscriptional 'Cinzel' & 'Plus Jakarta Sans'
    ============================================================ */
 
-:root, [data-theme="dark"] {
-  --bg:           #070506;
-  --bg-raised:    #12080b;
-  --bg-texture:   url('/assets/images/marble-dark.png');
-  --surface:      rgba(230, 25, 48, 0.05);
-  --surface-alt:  rgba(230, 25, 48, 0.09);
+/* ── LIGHT MODE (DEFAULT PALETTE: Calacatta Gold Marble Design) ── */
+:root,
+[data-theme="light"] {
+  --bg:           #fbfaf7;
+  --bg-raised:    #ffffff;
+  --surface:      rgba(180, 130, 20, 0.04);
+  --surface-alt:  rgba(180, 130, 20, 0.08);
 
-  /* Dark Crimson Marble Palette tokens */
-  --fg:           #faf4f2;
-  --fg-mid:       #cfbbb6;
-  --fg-dim:       #8f7976;
+  /* Generative Ambient Stone Illumination */
+  --bg-gradient:
+    radial-gradient(ellipse 75% 55% at 16% 14%, rgba(212, 168, 65, 0.08) 0%, transparent 60%),
+    radial-gradient(ellipse 65% 75% at 84% 82%, rgba(180, 130, 20, 0.06) 0%, transparent 65%),
+    radial-gradient(ellipse 60% 45% at 50% 50%, rgba(245, 238, 224, 0.35) 0%, transparent 70%),
+    linear-gradient(145deg, #fbfaf7 0%, #f6f1e8 40%, #f2eae0 75%, #fbfaf7 100%);
 
-  --gold:         #e61930;
-  --gold-bright:  #ff384f;
-  --gold-dim:     rgba(230, 25, 48, 0.14);
-  --gold-border:  rgba(230, 25, 48, 0.42);
-  --gold-line:    rgba(230, 25, 48, 0.24);
-  --gold-glow:    rgba(230, 25, 48, 0.38);
+  /* Light Marble Palette Tokens */
+  --fg:           #14100d; /* Crisp deep charcoal for immaculate readability */
+  --fg-mid:       #3a3129;
+  --fg-dim:       #6e5f54;
 
-  --border:       #421a20;
-  --ring:         #ff2a44;
+  /* Imperial Antique Gold Veining & Accents */
+  --gold:         #a67302;
+  --gold-bright:  #825900;
+  --gold-dim:     rgba(166, 115, 2, 0.09);
+  --gold-border:  rgba(166, 115, 2, 0.35);
+  --gold-line:    rgba(166, 115, 2, 0.22);
+  --gold-glow:    rgba(166, 115, 2, 0.20);
+
+  --border:       #dfd4c5;
+  --ring:         #a67302;
   --btn-primary-fg: #ffffff;
 
-  --section-bg:   rgba(8, 5, 7, 0.88);
-  --card-bg:      rgba(16, 9, 12, 0.92);
-  --nav-bg:       rgba(8, 5, 7, 0.92);
-  --input-bg:     rgba(247, 240, 237, 0.04);
+  --section-bg:   rgba(253, 251, 248, 0.86);
+  --card-bg:      rgba(255, 255, 255, 0.88);
+  --card-border:  rgba(166, 115, 2, 0.20);
+  --nav-bg:       rgba(253, 251, 248, 0.90);
+
+  --text-primary:   #14100d;
+  --text-secondary: #3a3129;
+  --text-muted:     #6e5f54;
+
+  --accent-gold:    #a67302;
+  --accent-crimson: #c4273c;
+
+  --color-warm-white: #14100d;
+  --color-cool-white: #3a3129;
+  --color-mid-gray:   #6e5f54;
+  --color-dark-gray:  #a8998c;
+  --color-deep-black: #fbfaf7;
+
+  --input-bg:     rgba(20, 16, 13, 0.03);
 
   --font-display: 'Cinzel', 'Cinzel Decorative', Georgia, serif;
   --font-sc:      'Cinzel', 'Cinzel Decorative', serif;
@@ -47,46 +71,67 @@
   --ease-in: cubic-bezier(0.4, 0, 1, 1);
 }
 
-/* ── LIGHT MODE (Calacatta Gold White Marble Palette) ── */
-[data-theme="light"] {
-  --bg:           #fbfaf8;
-  --bg-raised:    #ffffff;
-  --bg-texture:   url('/assets/images/marble-light.jpg');
-  --surface:      rgba(166, 115, 2, 0.04);
-  --surface-alt:  rgba(166, 115, 2, 0.08);
+/* ── DARK MODE (Crimson Obsidian Marble Design) ── */
+[data-theme="dark"] {
+  --bg:           #070506;
+  --bg-raised:    #12080b;
+  --surface:      rgba(230, 25, 48, 0.05);
+  --surface-alt:  rgba(230, 25, 48, 0.09);
 
-  /* Light Gold Marble Palette tokens */
-  --fg:           #14100d;
-  --fg-mid:       #362e28;
-  --fg-dim:       #66584e;
+  /* Generative Ambient Volcanic Stone Illumination */
+  --bg-gradient:
+    radial-gradient(ellipse 75% 55% at 16% 14%, rgba(230, 25, 48, 0.12) 0%, transparent 60%),
+    radial-gradient(ellipse 65% 75% at 84% 82%, rgba(255, 40, 65, 0.08) 0%, transparent 65%),
+    radial-gradient(ellipse 60% 45% at 50% 50%, rgba(36, 10, 18, 0.50) 0%, transparent 70%),
+    linear-gradient(145deg, #070506 0%, #0d070a 40%, #050304 75%, #070506 100%);
 
-  --gold:         #a67302;
-  --gold-bright:  #825900;
-  --gold-dim:     rgba(166, 115, 2, 0.10);
-  --gold-border:  rgba(166, 115, 2, 0.40);
-  --gold-line:    rgba(166, 115, 2, 0.25);
-  --gold-glow:    rgba(166, 115, 2, 0.22);
+  /* Dark Obsidian Palette Tokens */
+  --fg:           #faf4f2;
+  --fg-mid:       #cfbbb6;
+  --fg-dim:       #8f7976;
 
-  --border:       #dfd4c5;
-  --ring:         #a67302;
+  /* Fiery Crimson Veining & Accents */
+  --gold:         #e61930;
+  --gold-bright:  #ff384f;
+  --gold-dim:     rgba(230, 25, 48, 0.14);
+  --gold-border:  rgba(230, 25, 48, 0.42);
+  --gold-line:    rgba(230, 25, 48, 0.24);
+  --gold-glow:    rgba(230, 25, 48, 0.38);
+
+  --border:       #421a20;
+  --ring:         #ff2a44;
   --btn-primary-fg: #ffffff;
 
-  --section-bg:   rgba(253, 251, 248, 0.88);
-  --card-bg:      rgba(255, 255, 255, 0.92);
-  --nav-bg:       rgba(255, 255, 255, 0.94);
-  --input-bg:     rgba(28, 23, 20, 0.04);
+  --section-bg:   rgba(8, 5, 7, 0.88);
+  --card-bg:      rgba(16, 9, 12, 0.90);
+  --card-border:  rgba(230, 25, 48, 0.24);
+  --nav-bg:       rgba(8, 5, 7, 0.92);
+
+  --text-primary:   #faf4f2;
+  --text-secondary: #cfbbb6;
+  --text-muted:     #8f7976;
+
+  --accent-gold:    #e61930;
+  --accent-crimson: #ff334b;
+
+  --color-warm-white: #faf4f2;
+  --color-cool-white: #e8e2e4;
+  --color-mid-gray:   #cfbbb6;
+  --color-dark-gray:  #8f7976;
+  --color-deep-black: #070506;
+
+  --input-bg:     rgba(247, 240, 237, 0.04);
 }
 
 /* Celestial background blending */
 [data-theme="dark"] #cc {
-  opacity: 0.75;
+  opacity: 0.95;
   mix-blend-mode: screen;
 }
 
 [data-theme="light"] #cc {
-  opacity: 0.40;
+  opacity: 0.85;
   mix-blend-mode: multiply;
-  filter: contrast(1.1) brightness(0.9);
 }
 
 /* Glyph preservation helper */
@@ -113,12 +158,10 @@ html {
 body {
   min-height: 100vh;
   overflow-x: hidden;
+  background: var(--bg-gradient);
   background-color: var(--bg);
-  background-image: var(--bg-texture);
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
   background-attachment: fixed;
+  color: var(--fg);
   transition: background-color 0.4s ease, color 0.4s ease;
 }
 
@@ -128,18 +171,6 @@ button { background: none; border: none; cursor: pointer; color: inherit; font-f
 
 ::selection { background: var(--gold-dim); color: var(--gold-bright); }
 ::-webkit-scrollbar { width: 4px; }
-::-webkit-scrollbar-track { background: transparent; }
-::-webkit-scrollbar-thumb { background: var(--gold-border); border-radius: 2px; }
-
-#cc { position: fixed; inset: 0; z-index: 0; pointer-events: none; }
-body > *:not(#cc):not(.mm-nav):not(#reader-overlay):not(#ls-overlay) { position: relative; z-index: 1; }
-
-a      { color: inherit; text-decoration: none; transition: color 0.4s var(--ease), opacity 0.4s; }
-img    { display: block; max-width: 100%; }
-button { background: none; border: none; cursor: pointer; color: inherit; font-family: inherit; }
-
-::selection { background: var(--gold-dim); color: var(--gold-bright); }
-::-webkit-scrollbar { width: 3px; }
 ::-webkit-scrollbar-track { background: transparent; }
 ::-webkit-scrollbar-thumb { background: var(--gold-border); border-radius: 2px; }
 
