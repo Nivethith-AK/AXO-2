@@ -42,12 +42,13 @@ export default function CelestialCanvas({ geomReady = true }) {
     window.addEventListener('resize', resize);
     window.addEventListener('mousemove', onMouseMove);
 
-    /* ── Colors (harmonized with oneko.dhrv.pw warm palette) ── */
-    const cStar = (a) => `rgba(245,237,228,${a})`;
-    const cWarm = (a) => `rgba(244,184,168,${a})`;
-    const cCool = (a) => `rgba(168,195,181,${a})`;
-    const cGold = (a) => `rgba(232,159,94,${a})`;
-    const cGray = (a) => `rgba(128,109,98,${a})`;
+    /* ── Colors (dynamically adapting to Dark Crimson & Light Gold Marble) ── */
+    const isLight = () => document.documentElement.getAttribute('data-theme') === 'light';
+    const cStar = (a) => (isLight() ? `rgba(40,30,25,${a * 0.65})` : `rgba(255,235,235,${a})`);
+    const cWarm = (a) => (isLight() ? `rgba(212,175,55,${a})` : `rgba(255,50,70,${a})`);
+    const cCool = (a) => (isLight() ? `rgba(184,134,11,${a})` : `rgba(200,25,45,${a})`);
+    const cGold = (a) => (isLight() ? `rgba(197,154,39,${a})` : `rgba(240,30,55,${a})`);
+    const cGray = (a) => (isLight() ? `rgba(140,115,85,${a})` : `rgba(120,40,50,${a})`);
 
     /* ── Star ── */
     class Star {

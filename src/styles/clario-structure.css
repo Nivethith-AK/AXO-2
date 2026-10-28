@@ -86,14 +86,14 @@
 .btn-hero-primary {
   background: var(--gold) !important;
   border: 1px solid var(--gold) !important;
-  color: #0a0a0a !important;
+  color: var(--btn-primary-fg, #ffffff) !important;
   font-weight: 600 !important;
   box-shadow: none !important;
 }
 .btn-hero-primary:hover {
   background: var(--gold-bright) !important;
   border-color: var(--gold-bright) !important;
-  color: #050505 !important;
+  color: var(--btn-primary-fg, #ffffff) !important;
   transform: translateY(-1px) !important;
   box-shadow: none !important;
 }
@@ -538,7 +538,7 @@
 
 .btn-primary-highlight {
   background: var(--gold) !important;
-  color: #0a0a0a !important;
+  color: var(--btn-primary-fg, #ffffff) !important;
   border: 1px solid var(--gold) !important;
   font-weight: 600 !important;
   box-shadow: none !important;
@@ -546,7 +546,7 @@
 .btn-primary-highlight:hover {
   background: var(--gold-bright) !important;
   border-color: var(--gold-bright) !important;
-  color: #0a0a0a !important;
+  color: var(--btn-primary-fg, #ffffff) !important;
   transform: translateY(-1px) !important;
   box-shadow: none !important;
 }
@@ -635,7 +635,7 @@
 .clario-cta-card {
   max-width: 1000px;
   margin: 0 auto;
-  background: linear-gradient(135deg, var(--card-bg) 0%, rgba(232, 159, 94, 0.08) 100%);
+  background: linear-gradient(135deg, var(--card-bg) 0%, var(--gold-dim) 100%);
   border: 1px solid var(--gold-border);
   border-radius: 16px;
   padding: 72px clamp(24px, 6vw, 80px);
@@ -702,7 +702,7 @@
 
 .cta-btn-primary {
   background: var(--gold) !important;
-  color: #0a0a0a !important;
+  color: var(--btn-primary-fg, #ffffff) !important;
   border: 1px solid var(--gold) !important;
   font-weight: 600 !important;
   box-shadow: none !important;
@@ -710,7 +710,7 @@
 .cta-btn-primary:hover {
   background: var(--gold-bright) !important;
   border-color: var(--gold-bright) !important;
-  color: #050505 !important;
+  color: var(--btn-primary-fg, #ffffff) !important;
   transform: translateY(-1px) !important;
   box-shadow: none !important;
 }
@@ -969,7 +969,7 @@
 .cp-play-btn {
   padding: 10px 22px;
   background: var(--gold) !important;
-  color: #0a0a0a !important;
+  color: var(--btn-primary-fg, #ffffff) !important;
   border: 1px solid var(--gold) !important;
   font-weight: 600 !important;
   border-radius: 6px;
@@ -978,7 +978,7 @@
 .cp-play-btn:hover {
   background: var(--gold-bright) !important;
   border-color: var(--gold-bright) !important;
-  color: #050505 !important;
+  color: var(--btn-primary-fg, #ffffff) !important;
   transform: translateY(-1px) !important;
   box-shadow: none !important;
 }

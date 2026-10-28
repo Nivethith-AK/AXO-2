@@ -8,15 +8,17 @@
   align-items: center;
   justify-content: center;
   gap: 0.6rem;
-  padding: 10px 22px;
+  padding: 10px 24px;
   border: 1px solid var(--gold-border);
   border-radius: 6px;
   background: var(--gold-dim);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
   color: var(--fg);
   font-family: var(--font-mono);
-  font-size: 0.78rem;
-  font-weight: 500;
-  letter-spacing: 0.08em;
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
   text-decoration: none;
   cursor: pointer;
@@ -27,7 +29,7 @@
 }
 
 .btn:hover {
-  background: rgba(232, 159, 94, 0.2);
+  background: var(--gold-dim);
   border-color: var(--gold);
   color: var(--gold-bright);
   transform: translateY(-1px);

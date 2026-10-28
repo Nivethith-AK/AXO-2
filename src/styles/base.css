@@ -1,54 +1,43 @@
 /* ============================================================
    BASE — variables, reset, typography
-   Fonts & colors inspired by oneko.dhrv.pw (Geist, GeistPixelSquare, Warm Palette)
+   Themes inspired by Calacatta Gold & Crimson Obsidian Marble:
+   • Dark Mode: Obsidian Black with glowing Crimson/Blood-Red marble veins
+   • Light Mode: Alabaster White with Calacatta Gold marble veins
+   • Typography: Classical Roman Inscriptional 'Cinzel' & 'Plus Jakarta Sans'
    ============================================================ */
 
-@font-face {
-  font-family: 'GeistPixelSquare';
-  src: url('/assets/fonts/GeistPixel_Square.woff2') format('woff2');
-  font-weight: 400 900;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'GeistPixelGrid';
-  src: url('/assets/fonts/GeistPixel_Grid.woff2') format('woff2');
-  font-weight: 400 900;
-  font-style: normal;
-  font-display: swap;
-}
-
 :root, [data-theme="dark"] {
-  --bg:           #0a0a0a;
-  --bg-raised:    #14100e;
-  --surface:      rgba(245, 237, 228, 0.04);
-  --surface-alt:  rgba(245, 237, 228, 0.07);
+  --bg:           #070506;
+  --bg-raised:    #12080b;
+  --bg-texture:   url('/assets/images/marble-dark.png');
+  --surface:      rgba(230, 25, 48, 0.05);
+  --surface-alt:  rgba(230, 25, 48, 0.09);
 
-  /* Oneko Dark Palette tokens */
-  --fg:           #f5ede4;
-  --fg-mid:       #b8a89f;
-  --fg-dim:       #806d62;
+  /* Dark Crimson Marble Palette tokens */
+  --fg:           #faf4f2;
+  --fg-mid:       #cfbbb6;
+  --fg-dim:       #8f7976;
 
-  --gold:         #e89f5e;
-  --gold-bright:  #f4b8a8;
-  --gold-dim:     rgba(232, 159, 94, 0.12);
-  --gold-border:  rgba(232, 159, 94, 0.32);
-  --gold-line:    rgba(232, 159, 94, 0.18);
-  --gold-glow:    rgba(232, 159, 94, 0.35);
+  --gold:         #e61930;
+  --gold-bright:  #ff384f;
+  --gold-dim:     rgba(230, 25, 48, 0.14);
+  --gold-border:  rgba(230, 25, 48, 0.42);
+  --gold-line:    rgba(230, 25, 48, 0.24);
+  --gold-glow:    rgba(230, 25, 48, 0.38);
 
-  --border:       #524840;
-  --ring:         #a8c3b5;
+  --border:       #421a20;
+  --ring:         #ff2a44;
+  --btn-primary-fg: #ffffff;
 
-  --section-bg:   rgba(10, 10, 10, 0.92);
-  --card-bg:      rgba(28, 22, 18, 0.94);
-  --nav-bg:       rgba(10, 10, 10, 0.90);
-  --input-bg:     rgba(245, 237, 228, 0.04);
+  --section-bg:   rgba(8, 5, 7, 0.88);
+  --card-bg:      rgba(16, 9, 12, 0.92);
+  --nav-bg:       rgba(8, 5, 7, 0.92);
+  --input-bg:     rgba(247, 240, 237, 0.04);
 
-  --font-display: 'GeistPixelSquare', 'Geist Mono', 'Orbitron', monospace;
-  --font-sc:      'GeistPixelSquare', 'Geist Mono', monospace;
-  --font-body:    'Geist', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-  --font-mono:    'Geist Mono', 'Roboto Mono', ui-monospace, monospace;
+  --font-display: 'Cinzel', 'Cinzel Decorative', Georgia, serif;
+  --font-sc:      'Cinzel', 'Cinzel Decorative', serif;
+  --font-body:    'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-mono:    'Space Mono', 'Geist Mono', monospace;
 
   --nav-h:   72px;
   --gutter:  clamp(20px, 7vw, 120px);
@@ -58,38 +47,46 @@
   --ease-in: cubic-bezier(0.4, 0, 1, 1);
 }
 
-/* ── LIGHT MODE (matching oneko.dhrv.pw light palette & coffee ink) ── */
+/* ── LIGHT MODE (Calacatta Gold White Marble Palette) ── */
 [data-theme="light"] {
-  --bg:           #fbf8f4;
+  --bg:           #fbfaf8;
   --bg-raised:    #ffffff;
-  --surface:      rgba(92, 64, 51, 0.04);
-  --surface-alt:  rgba(92, 64, 51, 0.08);
+  --bg-texture:   url('/assets/images/marble-light.jpg');
+  --surface:      rgba(166, 115, 2, 0.04);
+  --surface-alt:  rgba(166, 115, 2, 0.08);
 
-  /* Oneko Light Palette tokens */
-  --fg:           #5c4033;
-  --fg-mid:       #806d62;
-  --fg-dim:       #a58b76;
+  /* Light Gold Marble Palette tokens */
+  --fg:           #14100d;
+  --fg-mid:       #362e28;
+  --fg-dim:       #66584e;
 
-  --gold:         #c37e40;
-  --gold-bright:  #9b4f22;
-  --gold-dim:     rgba(195, 126, 64, 0.12);
-  --gold-border:  rgba(195, 126, 64, 0.35);
-  --gold-line:    rgba(195, 126, 64, 0.20);
-  --gold-glow:    rgba(195, 126, 64, 0.24);
+  --gold:         #a67302;
+  --gold-bright:  #825900;
+  --gold-dim:     rgba(166, 115, 2, 0.10);
+  --gold-border:  rgba(166, 115, 2, 0.40);
+  --gold-line:    rgba(166, 115, 2, 0.25);
+  --gold-glow:    rgba(166, 115, 2, 0.22);
 
-  --border:       #d9cec4;
-  --ring:         #a8c3b5;
+  --border:       #dfd4c5;
+  --ring:         #a67302;
+  --btn-primary-fg: #ffffff;
 
-  --section-bg:   rgba(248, 245, 239, 0.95);
-  --card-bg:      rgba(240, 230, 217, 0.96);
-  --nav-bg:       rgba(251, 248, 244, 0.92);
-  --input-bg:     rgba(92, 64, 51, 0.04);
+  --section-bg:   rgba(253, 251, 248, 0.88);
+  --card-bg:      rgba(255, 255, 255, 0.92);
+  --nav-bg:       rgba(255, 255, 255, 0.94);
+  --input-bg:     rgba(28, 23, 20, 0.04);
 }
 
-/* Light mode celestial background inversion */
+/* Celestial background blending */
+[data-theme="dark"] #cc {
+  opacity: 0.75;
+  mix-blend-mode: screen;
+}
+
 [data-theme="light"] #cc {
-  opacity: 0.38;
-  filter: invert(0.96) hue-rotate(180deg) sepia(25%);
+  opacity: 0.40;
+  mix-blend-mode: multiply;
+  filter: contrast(1.1) brightness(0.9);
 }
 
 /* Glyph preservation helper */
@@ -113,7 +110,29 @@ html {
   transition: background-color 0.4s ease, color 0.4s ease;
 }
 
-body { min-height: 100vh; overflow-x: hidden; }
+body {
+  min-height: 100vh;
+  overflow-x: hidden;
+  background-color: var(--bg);
+  background-image: var(--bg-texture);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  transition: background-color 0.4s ease, color 0.4s ease;
+}
+
+a      { color: inherit; text-decoration: none; transition: color 0.4s var(--ease), opacity 0.4s; }
+img    { display: block; max-width: 100%; }
+button { background: none; border: none; cursor: pointer; color: inherit; font-family: inherit; }
+
+::selection { background: var(--gold-dim); color: var(--gold-bright); }
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--gold-border); border-radius: 2px; }
+
+#cc { position: fixed; inset: 0; z-index: 0; pointer-events: none; }
+body > *:not(#cc):not(.mm-nav):not(#reader-overlay):not(#ls-overlay) { position: relative; z-index: 1; }
 
 a      { color: inherit; text-decoration: none; transition: color 0.4s var(--ease), opacity 0.4s; }
 img    { display: block; max-width: 100%; }

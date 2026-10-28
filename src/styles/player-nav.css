@@ -353,9 +353,9 @@
   transition: all 0.25s ease !important;
 }
 .p-btn-play:hover {
-  background: rgba(232, 159, 94, 0.22) !important;
+  background: var(--gold-dim) !important;
   border-color: var(--gold) !important;
-  color: #ffffff !important;
+  color: var(--gold-bright) !important;
   transform: translateY(-1px);
   box-shadow: none !important;
 }
