@@ -16,14 +16,14 @@ export default function InfiniteTicker() {
       <div className="ticker-track">
         {TICKER_ITEMS.map((item, idx) => (
           <span key={`a-${idx}`} className="ticker-item">
-            <span className="ticker-glyph">✦</span>
+            <span className="ticker-glyph">•</span>
             {item}
           </span>
         ))}
         {/* Duplicate items for seamless continuous loop */}
         {TICKER_ITEMS.map((item, idx) => (
           <span key={`b-${idx}`} className="ticker-item">
-            <span className="ticker-glyph">✦</span>
+            <span className="ticker-glyph">•</span>
             {item}
           </span>
         ))}

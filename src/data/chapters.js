@@ -67,7 +67,7 @@ export const VOLUMES = [
           <p>"W-wait, huh?!" she exclaimed, her voice abandoning its previous calm composure. Now, it was infused with bewildered disbelief, rising in pitch as if she had been physically bitch-slapped in public.</p>
           <p>I slid into my bed, under the sheets of both clean and dirty laundry — which I couldn't tell apart. My eyelids weighed heavy with exhaustion, as Azrael's rants from across the room demanded a response. With a sigh, all I could muster up was a defeated whisper:</p>
           <p><em>"Well, fuck my life."</em></p>
-          <p style="text-align:center;color:var(--gold);letter-spacing:0.5em;font-size:0.8rem;">✦ ✦ ✦</p>
+          <p style="text-align:center;color:var(--gold);letter-spacing:0.5em;font-size:0.8rem;">— · —</p>
           <p style="text-align:center;font-family:var(--font-mono);font-size:0.78rem;letter-spacing:0.35em;text-transform:uppercase;color:var(--fg-dim);margin-top:2rem;">End of Record <span class="glyph-preserve">α</span></p>
         `,
       },
@@ -102,18 +102,18 @@ export const VOLUMES = [
           <p>Finally, the brewing process was complete. I poured the steaming brew into my mug, a broken black one fixed using kintsugi; its vine-like cracks were filled in by gold.</p>
           <p><em>"Lesser than humans, who are afraid to live."</em></p>
           <p>As the rays of sunlight bathed the room in golden hues, with my mind finally free of its chains of drowsiness, I walked over with the cup of coffee in my hand to the small circular dining table to take a seat.</p>
-          <p style="text-align:center;color:var(--gold);letter-spacing:0.5em;font-size:0.8rem;">✦ ✦ ✦</p>
+          <p style="text-align:center;color:var(--gold);letter-spacing:0.5em;font-size:0.8rem;">— · —</p>
           <p>I took another sip of coffee, allowing its warmth to spread through my body, grounding me in the present moment. Despite my initial shock, curiosity gnawed at me. Why me? Why now?</p>
           <p>With these questions swirling in my mind, I couldn't simply dismiss Azrael as a figment of my imagination. I needed data.</p>
           <p>I ran a quick search on the Nexus browser. I typed 'Azrael Archangel of Death' and any other keyword I could find. Nothing useful.</p>
           <p>I reached for my mug and took a large gulp of coffee, the intensity of the flavour momentarily cutting through the mental fog. I stared into the bottom of the empty mug, my reflection — a distorted, tired version of myself — staring back.</p>
           <p><em>"What is there to even gain from someone like me?"</em></p>
           <p><em>"After all, why else would she be willing to keep me alive?"</em></p>
-          <p style="text-align:center;color:var(--gold);letter-spacing:0.5em;font-size:0.8rem;">✦ ✦ ✦</p>
+          <p style="text-align:center;color:var(--gold);letter-spacing:0.5em;font-size:0.8rem;">— · —</p>
           <p>"Goo' morf'ing!" she greeted me, with a plain slice of bread hanging from her mouth, and the whole damn half-a-loaf wrapped under her arm. I went tumbling backward in shock, with a tiny squeak following a gasp.</p>
           <p>The mug in my hand slipped through my fingers, and all that I could feel the very next moment, was my schlong being boiled by the hot coffee seeping into my pants.</p>
           <p><em>"I-I I'm so sorry! L-Let me help you with that!"</em></p>
-          <p style="text-align:center;color:var(--gold);letter-spacing:0.5em;font-size:0.8rem;">✦ ✦ ✦</p>
+          <p style="text-align:center;color:var(--gold);letter-spacing:0.5em;font-size:0.8rem;">— · —</p>
           <p>"Let's… cut the chase and get to the point, Azrael."</p>
           <p>"Why exactly are you here?"</p>
           <p>She closed her eyes, and relaxed her face into a gentle smile before answering. "It's like I said, I'm here to make sure you stay alive."</p>

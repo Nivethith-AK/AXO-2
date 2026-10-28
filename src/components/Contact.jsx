@@ -100,7 +100,7 @@ export default function Contact() {
           </form>
         ) : (
           <div className="form-success show" id="form-success">
-            <div className="fs-icon">✦</div>
+            <div className="fs-icon">•</div>
             <div className="fs-title">Transmission Received</div>
             <div className="fs-sub">
               We'll respond to business inquiries, please wait 4-5 business days.

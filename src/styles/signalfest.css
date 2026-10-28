@@ -1,0 +1,1054 @@
+/* ============================================================
+   SIGNAL FEST AESTHETIC STYLESHEET
+   Cloning the exact layout, typography, tickets, and structure
+   from https://signalfest.framer.website/ for Memento Mori
+   ============================================================ */
+
+/* ── CONTAINER & GLOBAL LAYOUT ────────────────────────────── */
+.sf-wrap {
+  width: 100%;
+  max-width: var(--max-w);
+  margin: 0 auto;
+  padding: 0 var(--gutter);
+}
+
+.sf-section {
+  position: relative;
+  padding: 100px 0;
+  border-bottom: 1px solid var(--border);
+}
+
+.sf-section-header {
+  margin-bottom: 48px;
+}
+
+.sf-pill {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  color: var(--fg-muted);
+  text-transform: uppercase;
+  margin-bottom: 24px;
+}
+
+/* ── NAVBAR ───────────────────────────────────────────────── */
+.sf-nav-fixed {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: var(--nav-h);
+  background: var(--nav-bg);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--border);
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+}
+
+.sf-nav-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.sf-nav-brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--fg);
+  text-decoration: none;
+}
+
+.sf-brand-badge {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--accent);
+  display: inline-block;
+  animation: sfPulse 2s infinite ease-in-out;
+}
+
+@keyframes sfPulse {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.4); opacity: 0.6; }
+}
+
+.sf-nav-links {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+}
+
+.sf-nav-link {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--fg);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.sf-nav-link:hover {
+  color: var(--accent);
+}
+
+.sf-nav-link-sub {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--fg-muted);
+  font-weight: 400;
+}
+
+.sf-nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.sf-theme-btn {
+  width: 38px;
+  height: 38px;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--fg);
+  background: var(--bg-raised);
+  cursor: pointer;
+  transition: border-color 0.2s, background 0.2s;
+}
+
+.sf-theme-btn:hover {
+  border-color: var(--fg);
+}
+
+.sf-ticket-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 20px;
+  background: var(--fg);
+  color: var(--bg) !important;
+  font-family: var(--font-display);
+  font-size: 1rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  text-decoration: none;
+  border-radius: 6px;
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.sf-ticket-btn:hover {
+  transform: translateY(-2px);
+  opacity: 0.92;
+}
+
+/* ── HERO SECTION ─────────────────────────────────────────── */
+.sf-hero {
+  padding-top: calc(var(--nav-h) + 60px);
+  padding-bottom: 80px;
+  border-bottom: 1px solid var(--border);
+}
+
+.sf-hero-meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 24px;
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 40px;
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  color: var(--fg-mid);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.sf-hero-tag-red {
+  color: var(--accent);
+  font-weight: 600;
+}
+
+.sf-hero-title {
+  font-family: var(--font-display);
+  font-size: clamp(3.8rem, 13vw, 11rem);
+  line-height: 0.92;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  color: var(--fg);
+  margin: 0 0 32px 0;
+  word-break: break-word;
+}
+
+.sf-hero-footer-grid {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr auto;
+  align-items: end;
+  gap: 40px;
+  padding-top: 32px;
+  border-top: 1px solid var(--border);
+}
+
+.sf-hero-subline {
+  font-family: var(--font-body);
+  font-size: clamp(1rem, 2vw, 1.25rem);
+  line-height: 1.6;
+  color: var(--fg);
+  font-weight: 500;
+  max-width: 520px;
+}
+
+.sf-hero-countdown {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-family: var(--font-mono);
+}
+
+.sf-cd-label {
+  font-size: 0.75rem;
+  color: var(--fg-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.sf-cd-digits {
+  font-size: clamp(1.4rem, 2.5vw, 2rem);
+  font-weight: 700;
+  color: var(--fg);
+  letter-spacing: 0.04em;
+}
+
+.sf-hero-cta-group {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.sf-btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 14px 28px;
+  background: var(--accent);
+  color: #ffffff !important;
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  text-decoration: none;
+  border-radius: 6px;
+  border: 1px solid var(--accent);
+  cursor: pointer;
+  transition: background 0.2s, transform 0.2s;
+}
+
+.sf-btn-primary:hover {
+  background: var(--accent-bright);
+  transform: translateY(-2px);
+}
+
+.sf-btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 14px 26px;
+  background: transparent;
+  color: var(--fg);
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  text-decoration: none;
+  border-radius: 6px;
+  border: 1px solid var(--border);
+  cursor: pointer;
+  transition: border-color 0.2s, transform 0.2s;
+}
+
+.sf-btn-secondary:hover {
+  border-color: var(--fg);
+  transform: translateY(-2px);
+}
+
+/* ── TICKER MARQUEE ───────────────────────────────────────── */
+.sf-ticker {
+  width: 100%;
+  overflow: hidden;
+  background: var(--bg-subtle);
+  border-bottom: 1px solid var(--border);
+  padding: 18px 0;
+  display: flex;
+  white-space: nowrap;
+}
+
+.sf-ticker-track {
+  display: inline-flex;
+  align-items: center;
+  animation: sfScroll 24s linear infinite;
+}
+
+.sf-ticker-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 24px;
+  padding: 0 24px;
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--fg);
+}
+
+.sf-ticker-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--accent);
+  display: inline-block;
+}
+
+@keyframes sfScroll {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+
+/* ── (ABOUT) MANIFESTO SECTION ────────────────────────────── */
+.sf-manifesto-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 60px;
+  align-items: start;
+}
+
+.sf-manifesto-text {
+  font-family: var(--font-body);
+  font-size: clamp(1.4rem, 2.8vw, 2.4rem);
+  line-height: 1.35;
+  font-weight: 400;
+  color: var(--fg);
+  letter-spacing: -0.01em;
+}
+
+.sf-manifesto-text strong {
+  font-weight: 700;
+  color: var(--fg);
+}
+
+.sf-manifesto-text em {
+  font-style: normal;
+  color: var(--accent);
+}
+
+.sf-manifesto-side {
+  border-left: 1px solid var(--border);
+  padding-left: 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 36px;
+}
+
+.sf-stat-box {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.sf-stat-num {
+  font-family: var(--font-display);
+  font-size: 2.8rem;
+  line-height: 1;
+  color: var(--fg);
+}
+
+.sf-stat-label {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: var(--fg-muted);
+  text-transform: uppercase;
+}
+
+/* ── LINEUP DRAG THE BELT ─────────────────────────────────── */
+.sf-lineup-header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  margin-bottom: 32px;
+}
+
+.sf-lineup-title {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 5vw, 3.8rem);
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+  color: var(--fg);
+}
+
+.sf-belt-container {
+  display: flex;
+  gap: 24px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  padding-bottom: 24px;
+  scrollbar-width: thin;
+  scrollbar-color: var(--border) transparent;
+}
+
+.sf-belt-card {
+  flex: 0 0 clamp(280px, 30vw, 380px);
+  scroll-snap-align: start;
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.25s ease, border-color 0.25s ease;
+  text-decoration: none;
+  color: inherit;
+}
+
+.sf-belt-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--fg);
+}
+
+.sf-belt-img-wrap {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  background: var(--bg-subtle);
+  overflow: hidden;
+  position: relative;
+}
+
+.sf-belt-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
+
+.sf-belt-card:hover .sf-belt-img {
+  transform: scale(1.05);
+}
+
+.sf-belt-tag-overlay {
+  position: absolute;
+  top: 14px;
+  left: 14px;
+  background: rgba(17, 17, 16, 0.85);
+  color: #ffffff;
+  padding: 4px 10px;
+  border-radius: 4px;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.sf-belt-body {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  flex-grow: 1;
+}
+
+.sf-belt-name {
+  font-family: var(--font-display);
+  font-size: 1.6rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--fg);
+  margin: 0;
+}
+
+.sf-belt-meta {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  color: var(--fg-muted);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-top: 1px solid var(--border);
+  padding-top: 10px;
+  margin-top: auto;
+}
+
+/* ── AUTO-SLIDE BANNER ────────────────────────────────────── */
+.sf-giant-banner {
+  background: var(--fg);
+  color: var(--bg);
+  padding: 80px 0;
+  overflow: hidden;
+}
+
+.sf-giant-banner-title {
+  font-family: var(--font-display);
+  font-size: clamp(2.5rem, 7vw, 6.5rem);
+  line-height: 0.95;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  margin: 0 0 20px 0;
+}
+
+.sf-giant-banner-sub {
+  font-family: var(--font-mono);
+  font-size: clamp(0.9rem, 1.8vw, 1.2rem);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+/* ── PROGRAM / TIMELINE SCHEDULE (TABBED) ─────────────────── */
+.sf-program-tabs {
+  display: flex;
+  gap: 12px;
+  border-bottom: 1px solid var(--border);
+  padding-bottom: 20px;
+  margin-bottom: 40px;
+  overflow-x: auto;
+}
+
+.sf-tab-btn {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 12px 24px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: var(--bg-raised);
+  color: var(--fg);
+  cursor: pointer;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+
+.sf-tab-btn.active {
+  background: var(--fg);
+  color: var(--bg);
+  border-color: var(--fg);
+}
+
+.sf-tab-day {
+  font-family: var(--font-display);
+  font-size: 1.15rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.sf-tab-date {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  opacity: 0.8;
+}
+
+.sf-schedule-list {
+  display: flex;
+  flex-direction: column;
+  border-top: 1px solid var(--border);
+}
+
+.sf-schedule-item {
+  display: grid;
+  grid-template-columns: 140px 1.5fr 2fr auto;
+  align-items: center;
+  gap: 32px;
+  padding: 24px 0;
+  border-bottom: 1px solid var(--border);
+  transition: background 0.2s ease;
+}
+
+.sf-schedule-item:hover {
+  background: var(--surface);
+}
+
+.sf-item-time {
+  font-family: var(--font-mono);
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--accent);
+}
+
+.sf-item-title {
+  font-family: var(--font-display);
+  font-size: 1.6rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--fg);
+}
+
+.sf-item-desc {
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  color: var(--fg-mid);
+  line-height: 1.5;
+}
+
+.sf-item-tag {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  padding: 6px 12px;
+  border-radius: 4px;
+  border: 1px solid var(--border);
+  color: var(--fg-mid);
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+/* ── PERFORATED TICKETS / PASSES ──────────────────────────── */
+.sf-tickets-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 24px;
+}
+
+.sf-ticket-card {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.2s ease, border-color 0.2s ease;
+}
+
+.sf-ticket-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--fg);
+}
+
+.sf-ticket-card-header {
+  padding: 28px 24px 20px;
+  border-bottom: 1px dashed var(--border);
+  position: relative;
+}
+
+/* Perforation punch holes */
+.sf-ticket-card-header::before,
+.sf-ticket-card-header::after {
+  content: '';
+  position: absolute;
+  bottom: -10px;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: var(--bg);
+  border: 1px solid var(--border);
+}
+
+.sf-ticket-card-header::before { left: -10px; }
+.sf-ticket-card-header::after  { right: -10px; }
+
+.sf-ticket-type {
+  font-family: var(--font-display);
+  font-size: 1.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--fg);
+  margin-bottom: 6px;
+}
+
+.sf-ticket-sub {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: var(--fg-muted);
+}
+
+.sf-ticket-price-row {
+  margin-top: 16px;
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+}
+
+.sf-ticket-price {
+  font-family: var(--font-display);
+  font-size: 2.4rem;
+  color: var(--accent);
+}
+
+.sf-ticket-price-sub {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  color: var(--fg-muted);
+}
+
+.sf-ticket-card-body {
+  padding: 28px 24px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  flex-grow: 1;
+}
+
+.sf-ticket-features {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 0;
+  margin: 0;
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  color: var(--fg-mid);
+}
+
+.sf-ticket-features li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.sf-check-dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--accent);
+  display: inline-block;
+  flex-shrink: 0;
+}
+
+/* ── DISCOGRAPHY GRID ─────────────────────────────────────── */
+.sf-disco-filters {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 36px;
+  flex-wrap: wrap;
+}
+
+.sf-filter-btn {
+  padding: 8px 18px;
+  border-radius: 20px;
+  border: 1px solid var(--border);
+  background: var(--bg-raised);
+  color: var(--fg);
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.sf-filter-btn.active {
+  background: var(--fg);
+  color: var(--bg);
+  border-color: var(--fg);
+}
+
+.sf-disco-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 24px;
+}
+
+.sf-disco-card {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.2s, border-color 0.2s;
+  text-decoration: none;
+  color: inherit;
+}
+
+.sf-disco-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--fg);
+}
+
+.sf-disco-thumb-wrap {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  background: var(--bg-subtle);
+  overflow: hidden;
+  position: relative;
+}
+
+.sf-disco-thumb {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.sf-disco-card:hover .sf-disco-thumb {
+  transform: scale(1.04);
+}
+
+.sf-disco-card-body {
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  flex-grow: 1;
+}
+
+.sf-disco-card-title {
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+  color: var(--fg);
+  margin: 0;
+  line-height: 1.2;
+}
+
+.sf-disco-card-notes {
+  font-family: var(--font-body);
+  font-size: 0.8rem;
+  color: var(--fg-dim);
+  line-height: 1.4;
+  margin-top: 4px;
+}
+
+.sf-disco-card-footer {
+  margin-top: auto;
+  padding-top: 10px;
+  border-top: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--fg-muted);
+}
+
+/* ── FAQ ACCORDION ────────────────────────────────────────── */
+.sf-faq-list {
+  border-top: 1px solid var(--border);
+  display: flex;
+  flex-direction: column;
+}
+
+.sf-faq-item {
+  border-bottom: 1px solid var(--border);
+}
+
+.sf-faq-trigger {
+  width: 100%;
+  padding: 28px 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  text-align: left;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--fg);
+}
+
+.sf-faq-left {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+}
+
+.sf-faq-num {
+  font-family: var(--font-mono);
+  font-size: 0.9rem;
+  color: var(--accent);
+  font-weight: 600;
+}
+
+.sf-faq-question {
+  font-family: var(--font-display);
+  font-size: clamp(1.3rem, 2.5vw, 1.9rem);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.sf-faq-icon {
+  font-family: var(--font-mono);
+  font-size: 1.4rem;
+  color: var(--fg);
+  transition: transform 0.25s ease;
+}
+
+.sf-faq-item.open .sf-faq-icon {
+  transform: rotate(45deg);
+}
+
+.sf-faq-answer {
+  padding: 0 0 28px 70px;
+  font-family: var(--font-body);
+  font-size: 1.05rem;
+  line-height: 1.7;
+  color: var(--fg-mid);
+  max-width: 780px;
+}
+
+/* ── COUNTDOWN & NEWSLETTER ───────────────────────────────── */
+.sf-newsletter-box {
+  background: var(--bg-subtle);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: clamp(32px, 6vw, 64px);
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 48px;
+  align-items: center;
+}
+
+.sf-nl-title {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 4.5vw, 3.5rem);
+  line-height: 1;
+  text-transform: uppercase;
+  color: var(--fg);
+  margin-bottom: 16px;
+}
+
+.sf-nl-desc {
+  font-family: var(--font-body);
+  font-size: 1rem;
+  color: var(--fg-mid);
+  line-height: 1.6;
+}
+
+.sf-nl-form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.sf-input-capsule {
+  display: flex;
+  background: var(--bg-raised);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.sf-input-field {
+  flex-grow: 1;
+  padding: 14px 18px;
+  border: none;
+  background: transparent;
+  color: var(--fg);
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  outline: none;
+}
+
+.sf-input-submit {
+  padding: 0 24px;
+  background: var(--fg);
+  color: var(--bg);
+  border: none;
+  font-family: var(--font-display);
+  font-size: 1rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+
+.sf-input-submit:hover {
+  opacity: 0.9;
+}
+
+/* ── FOOTER ───────────────────────────────────────────────── */
+.sf-footer {
+  padding: 80px 0 40px;
+  background: var(--bg);
+  border-top: 1px solid var(--border);
+}
+
+.sf-footer-top {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr;
+  gap: 48px;
+  margin-bottom: 80px;
+}
+
+.sf-footer-about {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  max-width: 380px;
+}
+
+.sf-footer-col-title {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  color: var(--fg-muted);
+  text-transform: uppercase;
+  margin-bottom: 18px;
+}
+
+.sf-footer-links {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.sf-footer-link {
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  color: var(--fg-mid);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.sf-footer-link:hover {
+  color: var(--accent);
+}
+
+.sf-footer-huge-brand {
+  font-family: var(--font-display);
+  font-size: clamp(3.5rem, 15vw, 15rem);
+  line-height: 0.85;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  color: var(--fg);
+  margin-bottom: 40px;
+  word-break: break-word;
+}
+
+.sf-footer-bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-top: 1px solid var(--border);
+  padding-top: 24px;
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  color: var(--fg-muted);
+}
+
+/* ── RESPONSIVE ───────────────────────────────────────────── */
+@media (max-width: 900px) {
+  .sf-nav-links { display: none; }
+  .sf-hero-footer-grid { grid-template-columns: 1fr; gap: 24px; }
+  .sf-manifesto-grid { grid-template-columns: 1fr; gap: 32px; }
+  .sf-manifesto-side { border-left: none; padding-left: 0; border-top: 1px solid var(--border); padding-top: 32px; flex-direction: row; flex-wrap: wrap; gap: 24px; }
+  .sf-schedule-item { grid-template-columns: 1fr; gap: 12px; }
+  .sf-newsletter-box { grid-template-columns: 1fr; gap: 32px; }
+  .sf-footer-top { grid-template-columns: 1fr 1fr; }
+}
+
+@media (max-width: 600px) {
+  .sf-footer-top { grid-template-columns: 1fr; }
+  .sf-footer-bottom { flex-direction: column; gap: 12px; align-items: flex-start; }
+}

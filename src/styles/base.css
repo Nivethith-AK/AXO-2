@@ -6,131 +6,122 @@
    • Typography: Classical Roman Inscriptional 'Cinzel' & 'Plus Jakarta Sans'
    ============================================================ */
 
-/* ── LIGHT MODE (DEFAULT PALETTE: Calacatta Gold Marble Design) ── */
+/* ============================================================
+   BASE — variables, reset, typography
+   SignalFest Architectural Theme for Memento Mori:
+   • Light Mode (DEFAULT): Pure #fafaf9 editorial alabaster with #111110 type and #fa0b29 accent
+   • Dark Mode: Deep #0d0c0c obsidian with #fafaf9 type and #fa0b29 accent
+   • Typography: Anton Display, Be Vietnam Pro Body, IBM Plex Mono Labels
+   ============================================================ */
+
+/* ── LIGHT MODE (DEFAULT PALETTE) ── */
 :root,
 [data-theme="light"] {
-  --bg:           #fbfaf7;
+  --bg:           #fafaf9;
   --bg-raised:    #ffffff;
-  --surface:      rgba(180, 130, 20, 0.04);
-  --surface-alt:  rgba(180, 130, 20, 0.08);
+  --bg-subtle:    #f1f1ef;
+  --surface:      rgba(17, 17, 16, 0.03);
+  --surface-alt:  rgba(17, 17, 16, 0.06);
 
-  /* Generative Ambient Stone Illumination */
-  --bg-gradient:
-    radial-gradient(ellipse 75% 55% at 16% 14%, rgba(212, 168, 65, 0.08) 0%, transparent 60%),
-    radial-gradient(ellipse 65% 75% at 84% 82%, rgba(180, 130, 20, 0.06) 0%, transparent 65%),
-    radial-gradient(ellipse 60% 45% at 50% 50%, rgba(245, 238, 224, 0.35) 0%, transparent 70%),
-    linear-gradient(145deg, #fbfaf7 0%, #f6f1e8 40%, #f2eae0 75%, #fbfaf7 100%);
+  --fg:           #111110;
+  --fg-mid:       #484844;
+  --fg-dim:       #767670;
+  --fg-muted:     #9e9e96;
 
-  /* Light Marble Palette Tokens */
-  --fg:           #14100d; /* Crisp deep charcoal for immaculate readability */
-  --fg-mid:       #3a3129;
-  --fg-dim:       #6e5f54;
+  --accent:        #fa0b29;
+  --accent-bright: #ff2541;
+  --accent-dim:    rgba(250, 11, 41, 0.08);
 
-  /* Imperial Antique Gold Veining & Accents */
-  --gold:         #a67302;
-  --gold-bright:  #825900;
-  --gold-dim:     rgba(166, 115, 2, 0.09);
-  --gold-border:  rgba(166, 115, 2, 0.35);
-  --gold-line:    rgba(166, 115, 2, 0.22);
-  --gold-glow:    rgba(166, 115, 2, 0.20);
+  /* Legacy aliases mapped to clean SignalFest tokens */
+  --gold:         #fa0b29;
+  --gold-bright:  #ff2541;
+  --gold-dim:     rgba(250, 11, 41, 0.08);
+  --gold-border:  rgba(250, 11, 41, 0.35);
+  --gold-line:    rgba(250, 11, 41, 0.20);
+  --gold-glow:    rgba(250, 11, 41, 0.25);
 
-  --border:       #dfd4c5;
-  --ring:         #a67302;
+  --border:       #e4e3de;
+  --border-strong:#dbdbdb;
+  --ring:         #fa0b29;
   --btn-primary-fg: #ffffff;
 
-  --section-bg:   rgba(253, 251, 248, 0.86);
-  --card-bg:      rgba(255, 255, 255, 0.88);
-  --card-border:  rgba(166, 115, 2, 0.20);
-  --nav-bg:       rgba(253, 251, 248, 0.90);
+  --section-bg:   #f1f1ef;
+  --card-bg:      #ffffff;
+  --card-border:  #e4e3de;
+  --nav-bg:       rgba(250, 250, 249, 0.94);
 
-  --text-primary:   #14100d;
-  --text-secondary: #3a3129;
-  --text-muted:     #6e5f54;
+  --text-primary:   #111110;
+  --text-secondary: #484844;
+  --text-muted:     #767670;
 
-  --accent-gold:    #a67302;
-  --accent-crimson: #c4273c;
+  --font-display: 'Anton', -apple-system, sans-serif;
+  --font-serif:   'Cinzel', serif;
+  --font-body:    'Be Vietnam Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-mono:    'IBM Plex Mono', 'Space Mono', monospace;
 
-  --color-warm-white: #14100d;
-  --color-cool-white: #3a3129;
-  --color-mid-gray:   #6e5f54;
-  --color-dark-gray:  #a8998c;
-  --color-deep-black: #fbfaf7;
-
-  --input-bg:     rgba(20, 16, 13, 0.03);
-
-  --font-display: 'Cinzel', 'Cinzel Decorative', Georgia, serif;
-  --font-sc:      'Cinzel', 'Cinzel Decorative', serif;
-  --font-body:    'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-  --font-mono:    'Space Mono', 'Geist Mono', monospace;
-
-  --nav-h:   72px;
-  --gutter:  clamp(20px, 7vw, 120px);
-  --max-w:   1200px;
-  --read-w:  680px;
-  --ease:    cubic-bezier(0.19, 1, 0.22, 1);
+  --nav-h:   68px;
+  --gutter:  clamp(20px, 5vw, 80px);
+  --max-w:   1320px;
+  --read-w:  720px;
+  --ease:    cubic-bezier(0.16, 1, 0.3, 1);
   --ease-in: cubic-bezier(0.4, 0, 1, 1);
 }
 
-/* ── DARK MODE (Crimson Obsidian Marble Design) ── */
+/* ── DARK MODE ── */
 [data-theme="dark"] {
-  --bg:           #070506;
-  --bg-raised:    #12080b;
-  --surface:      rgba(230, 25, 48, 0.05);
-  --surface-alt:  rgba(230, 25, 48, 0.09);
+  --bg:           #0d0c0c;
+  --bg-raised:    #161515;
+  --bg-subtle:    #1f1d1d;
+  --surface:      rgba(255, 255, 255, 0.04);
+  --surface-alt:  rgba(255, 255, 255, 0.08);
 
-  /* Generative Ambient Volcanic Stone Illumination */
-  --bg-gradient:
-    radial-gradient(ellipse 75% 55% at 16% 14%, rgba(230, 25, 48, 0.12) 0%, transparent 60%),
-    radial-gradient(ellipse 65% 75% at 84% 82%, rgba(255, 40, 65, 0.08) 0%, transparent 65%),
-    radial-gradient(ellipse 60% 45% at 50% 50%, rgba(36, 10, 18, 0.50) 0%, transparent 70%),
-    linear-gradient(145deg, #070506 0%, #0d070a 40%, #050304 75%, #070506 100%);
+  --fg:           #fafaf9;
+  --fg-mid:       #b4b4ae;
+  --fg-dim:       #787872;
+  --fg-muted:     #545450;
 
-  /* Dark Obsidian Palette Tokens */
-  --fg:           #faf4f2;
-  --fg-mid:       #cfbbb6;
-  --fg-dim:       #8f7976;
+  --accent:        #fa0b29;
+  --accent-bright: #ff334f;
+  --accent-dim:    rgba(250, 11, 41, 0.16);
 
-  /* Fiery Crimson Veining & Accents */
-  --gold:         #e61930;
-  --gold-bright:  #ff384f;
-  --gold-dim:     rgba(230, 25, 48, 0.14);
-  --gold-border:  rgba(230, 25, 48, 0.42);
-  --gold-line:    rgba(230, 25, 48, 0.24);
-  --gold-glow:    rgba(230, 25, 48, 0.38);
+  --gold:         #fa0b29;
+  --gold-bright:  #ff334f;
+  --gold-dim:     rgba(250, 11, 41, 0.16);
+  --gold-border:  rgba(250, 11, 41, 0.45);
+  --gold-line:    rgba(250, 11, 41, 0.25);
+  --gold-glow:    rgba(250, 11, 41, 0.35);
 
-  --border:       #421a20;
-  --ring:         #ff2a44;
+  --border:       #262424;
+  --border-strong:#383636;
+  --ring:         #fa0b29;
   --btn-primary-fg: #ffffff;
 
-  --section-bg:   rgba(8, 5, 7, 0.88);
-  --card-bg:      rgba(16, 9, 12, 0.90);
-  --card-border:  rgba(230, 25, 48, 0.24);
-  --nav-bg:       rgba(8, 5, 7, 0.92);
+  --section-bg:   #161515;
+  --card-bg:      #1a1818;
+  --card-border:  #2a2828;
+  --nav-bg:       rgba(13, 12, 12, 0.94);
 
-  --text-primary:   #faf4f2;
-  --text-secondary: #cfbbb6;
-  --text-muted:     #8f7976;
-
-  --accent-gold:    #e61930;
-  --accent-crimson: #ff334b;
-
-  --color-warm-white: #faf4f2;
-  --color-cool-white: #e8e2e4;
-  --color-mid-gray:   #cfbbb6;
-  --color-dark-gray:  #8f7976;
-  --color-deep-black: #070506;
-
-  --input-bg:     rgba(247, 240, 237, 0.04);
+  --text-primary:   #fafaf9;
+  --text-secondary: #b4b4ae;
+  --text-muted:     #787872;
 }
 
-/* Celestial background blending */
+/* Canvas blending */
+#cc {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  opacity: 0.18;
+}
+
 [data-theme="dark"] #cc {
-  opacity: 0.95;
+  opacity: 0.35;
   mix-blend-mode: screen;
 }
 
 [data-theme="light"] #cc {
-  opacity: 0.85;
+  opacity: 0.15;
   mix-blend-mode: multiply;
 }
 

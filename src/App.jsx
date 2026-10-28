@@ -5,7 +5,6 @@ import { AudioProvider } from './context/AudioContext';
 import SmoothScroll from './components/SmoothScroll';
 import HomePage from './pages/HomePage';
 import ChapterPage from './pages/ChapterPage';
-import ClarioPage from './pages/ClarioPage';
 import CatLayer from './components/CatLayer';
 
 export default function App() {
@@ -16,11 +15,8 @@ export default function App() {
           <SmoothScroll>
             <CatLayer />
             <Routes>
-              {/* The Original Memento Mori Home Page — Untouched */}
+              {/* Official Memento Mori Experience */}
               <Route path="/" element={<HomePage />} />
-
-              {/* The Cloned Clario Layout for the Musician */}
-              <Route path="/clario" element={<ClarioPage />} />
 
               {/* The Manga / Chapter Viewers */}
               <Route path="/chapter" element={<ChapterPage />} />

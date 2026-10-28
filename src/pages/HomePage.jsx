@@ -1,12 +1,17 @@
 import React, { useState, useCallback } from 'react';
-import Navbar from '../components/Navbar';
-import Hero from '../components/Hero';
-import About from '../components/About';
-import Archive from '../components/Archive';
-import SoundtrackPlayer from '../components/SoundtrackPlayer';
-import Shop from '../components/Shop';
-import Contact from '../components/Contact';
-import Footer from '../components/Footer';
+import SignalNav from '../components/SignalNav';
+import SignalHero from '../components/SignalHero';
+import SignalAbout from '../components/SignalAbout';
+import SignalLineup from '../components/SignalLineup';
+import SignalBanner from '../components/SignalBanner';
+import SignalProgram from '../components/SignalProgram';
+import SignalTickets from '../components/SignalTickets';
+import SignalDiscography from '../components/SignalDiscography';
+import SignalPlayer from '../components/SignalPlayer';
+import SignalPartners from '../components/SignalPartners';
+import SignalFaq from '../components/SignalFaq';
+import SignalNewsletter from '../components/SignalNewsletter';
+import SignalFooter from '../components/SignalFooter';
 import ReaderOverlay from '../components/ReaderOverlay';
 import LoadingScreen from '../components/LoadingScreen';
 import CelestialCanvas from '../components/CelestialCanvas';
@@ -32,18 +37,25 @@ export default function HomePage() {
           transition: 'opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1)',
         }}
       >
-        <Navbar />
+        <SignalNav onOpenChapter={(id) => setSelectedChapterId(id)} />
 
         <main>
-          <Hero />
-          <About />
-          <Archive onOpenChapter={(id) => setSelectedChapterId(id)} />
-          <SoundtrackPlayer />
-          <Shop />
-          <Contact />
+          <SignalHero
+            onOpenChapter={(id) => setSelectedChapterId(id)}
+          />
+          <SignalAbout />
+          <SignalLineup />
+          <SignalBanner />
+          <SignalProgram onOpenChapter={(id) => setSelectedChapterId(id)} />
+          <SignalTickets onOpenChapter={(id) => setSelectedChapterId(id)} />
+          <SignalDiscography />
+          <SignalPlayer />
+          <SignalPartners />
+          <SignalFaq />
+          <SignalNewsletter />
         </main>
 
-        <Footer />
+        <SignalFooter onOpenChapter={(id) => setSelectedChapterId(id)} />
       </div>
 
       <ReaderOverlay
