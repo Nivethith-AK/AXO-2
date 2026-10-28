@@ -11,49 +11,35 @@ export default function SignalNewsletter() {
   };
 
   return (
-    <section className="sf-section" style={{ borderBottom: 'none' }}>
+    <section className="sf-section sf-newsletter-section">
       <div className="sf-wrap">
-        <div className="sf-newsletter-box">
-          <div>
-            <span className="sf-pill">(Chronicle Dispatch)</span>
-            <h2 className="sf-nl-title">
-              Get chapter drops, soundtrack alerts &amp; manga news.
-            </h2>
-            <p className="sf-nl-desc">
-              Subscribe to the official celestial dispatch. One direct transmission per major release — no spam, unsubscribe anytime.
-            </p>
-          </div>
+        <div className="sf-newsletter-exact-box">
+          <h2 className="sf-newsletter-title">
+            Get lineup drops, ticket alerts and afterparty news.
+          </h2>
 
-          <div>
+          <div className="sf-newsletter-form-col">
             {submitted ? (
-              <div style={{
-                background: 'var(--card-bg)',
-                border: '1px solid var(--border)',
-                padding: '24px',
-                borderRadius: '6px',
-                fontFamily: 'var(--font-mono)',
-                fontSize: '0.9rem',
-                color: 'var(--accent)',
-              }}>
-                [ TRANSMISSION ESTABLISHED ] You will receive chapter alerts.
+              <div className="sf-newsletter-success">
+                [ TRANSMISSION CONFIRMED ] You’re on the alert list.
               </div>
             ) : (
-              <form className="sf-nl-form" onSubmit={handleSubmit}>
-                <div className="sf-input-capsule">
+              <form className="sf-newsletter-form" onSubmit={handleSubmit}>
+                <div className="sf-capsule-input-row">
                   <input
                     type="email"
                     required
-                    placeholder="Enter your email address..."
+                    placeholder="you@email.com"
                     value={email}
                     onChange={(e) => setEmail(e.target.value)}
-                    className="sf-input-field"
+                    className="sf-capsule-input"
                   />
-                  <button type="submit" className="sf-input-submit">
-                    Sign Up
+                  <button type="submit" className="sf-capsule-btn">
+                    SIGN UP
                   </button>
                 </div>
-                <div style={{ fontFamily: 'var(--font-mono)', fontSize: '0.75rem', color: 'var(--fg-muted)' }}>
-                  One email per release · Unsubscribe at any time
+                <div className="sf-newsletter-terms">
+                  One email a week · Unsubscribe any time
                 </div>
               </form>
             )}

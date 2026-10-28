@@ -2,119 +2,212 @@ import React from 'react';
 
 const PASSES = [
   {
-    type: 'Web Reader Pass',
-    sub: 'Volume I · Complete Access',
-    price: '$0',
-    priceSub: '100% Free · Open to All',
+    type: 'DAY PASS',
+    sub: 'One day of your choice',
+    price: '$89',
+    per: 'per person',
+    dates: 'ONE DAY · AUG 21–24',
+    stamp: 'AVAILABLE',
+    stampClass: 'sf-stamp-available',
     features: [
-      'Full Chapter α & I read-through',
-      'Distraction-free Reader overlay',
-      'Bilingual notes & character logs',
-      'Instant access on mobile & desktop',
+      'One festival day, your pick',
+      'Main stage and Yard stage',
+      'Re-entry all day',
     ],
-    cta: 'Open Reader',
-    action: 'read',
+    terms: 'Free name transfer until Aug 18 · refundable within 14 days.',
+    cta: 'GET TICKETS',
+    url: 'https://roman-koby.checkoutpage.com/signal-festival-26',
+    tilt: '-4.5deg',
+    delay: '0s',
   },
   {
-    type: 'Theme Song Single',
-    sub: 'Death Wish ft. near · VocaDuo',
-    price: 'FREE',
-    priceSub: 'Official Stream & Video',
+    type: 'FULL FESTIVAL',
+    sub: 'All four days',
+    price: '$249',
+    per: 'per person',
+    dates: 'AUG 21–24',
+    stamp: 'ALMOST GONE',
+    stampClass: 'sf-stamp-warn',
     features: [
-      'Master composition by Δxolotl',
-      'Lyrics by Allyens & Vocals by 81senear',
-      'Full Animated Music Video on YouTube',
-      'Instrumental & Vocal stems available',
+      'All four days, both stages',
+      'Re-entry the whole week',
+      'Locker rental at half price',
     ],
-    cta: 'Watch MV ↗',
-    url: 'https://www.youtube.com/watch?v=qR_bDjRskpg',
+    terms: 'Free name transfer until Aug 18 · refundable within 14 days.',
+    cta: 'GET TICKETS',
+    url: 'https://roman-koby.checkoutpage.com/signal-festival-26',
+    tilt: '4.5deg',
+    delay: '0.15s',
   },
   {
-    type: 'Full Discography',
-    sub: '21 Releases · 2022–2026',
-    price: '21',
-    priceSub: 'Tracks Indexed',
+    type: 'VIP PASS',
+    sub: 'All days · own zone',
+    price: '$459',
+    per: 'per person',
+    dates: 'AUG 21–24',
+    stamp: 'SOLD OUT',
+    stampClass: 'sf-stamp-sold',
     features: [
-      'HoYoFair & Genshin Impact suites',
-      'Chainsaw Man & AoT tributes',
-      'Lossless master tracks',
-      'Official Spotify & YouTube feeds',
+      'Everything in Full Festival',
+      'VIP deck and bar at both stages',
+      'Fast lane at every gate',
+      'Own lockers and toilets',
     ],
-    cta: 'Explore Feed ↓',
-    action: 'scroll-disco',
+    terms: 'Returned VIP passes go to the waitlist first, in order.',
+    cta: 'SOLD OUT',
+    disabled: true,
+    tilt: '-4.5deg',
+    delay: '0.30s',
   },
   {
-    type: 'Project Eden Relay',
-    sub: 'Visual Manga & Concept Art',
-    price: 'OPEN',
-    priceSub: 'Community Archive',
+    type: 'GROUP PASS',
+    sub: 'Four people, one buy',
+    price: '$796',
+    per: '$199 each · 4 people',
+    dates: 'AUG 21–24',
+    stamp: 'AVAILABLE',
+    stampClass: 'sf-stamp-available',
     features: [
-      'Illustrated character designs',
-      'Balcony & Celestial background art',
-      'Upcoming Manga adaptation panels',
-      'Direct Discord community relay',
+      'Four Full Festival passes',
+      'One shared locker, all week',
+      'Group fast lane on arrival',
     ],
-    cta: 'Join Discord ↗',
-    url: 'https://discord.gg/QRRa4mxaAm',
+    terms: 'Set the names until Aug 18 · split or transfer any of the four.',
+    cta: 'GET TICKETS',
+    url: 'https://roman-koby.checkoutpage.com/signal-festival-26',
+    tilt: '4.5deg',
+    delay: '0.45s',
   },
 ];
 
 export default function SignalTickets({ onOpenChapter }) {
-  const handleAction = (p) => (e) => {
-    if (p.url) return; // Opens normal link
-    e.preventDefault();
-    if (p.action === 'read') {
-      if (onOpenChapter) onOpenChapter('0');
-    } else if (p.action === 'scroll-disco') {
-      const el = document.getElementById('discography');
-      if (el) el.scrollIntoView({ behavior: 'smooth' });
-    }
-  };
-
   return (
-    <section className="sf-section" id="passes">
+    <section className="sf-section sf-pricing-section" id="tickets">
       <div className="sf-wrap">
-        <span className="sf-pill">(Access Passes)</span>
-        <h2 className="sf-lineup-title" style={{ marginBottom: '16px' }}>
-          Tear along the perforation
-        </h2>
-        <p style={{ fontFamily: 'var(--font-body)', fontSize: '1.1rem', color: 'var(--fg-mid)', maxWidth: '680px', marginBottom: '48px', lineHeight: 1.6 }}>
-          A chapter is only a quarter of it. Memento Mori runs original master music, web-novel chronicles, illustrated lore, and everything connecting them — one site covers the lot.
-        </p>
+        <div className="sf-pricing-head">
+          <span className="sf-pill">(Tickets)</span>
+          <h2 className="sf-lineup-title">Tear along the perforation</h2>
+          <p className="sf-pricing-subtitle">
+            A stage is a quarter of it. For four days the yard runs music, art, the street and everything cooking between them — one ticket covers the lot.
+          </p>
+        </div>
 
-        <div className="sf-tickets-grid">
-          {PASSES.map((pass) => (
-            <div key={pass.type} className="sf-ticket-card">
-              <div className="sf-ticket-card-header">
-                <div className="sf-ticket-type">{pass.type}</div>
-                <div className="sf-ticket-sub">{pass.sub}</div>
+        <div className="sp-row">
+          {PASSES.map((pass, idx) => (
+            <div
+              key={pass.type}
+              className={`sp-pass sp-landed ${pass.disabled ? 'sp-dim' : ''}`}
+              style={{ '--tilt': pass.tilt, '--dd': pass.delay }}
+            >
+              <div className="sp-rig">
+                {/* Lanyard thread */}
+                <svg className="sp-thread" viewBox="0 0 120 50" preserveAspectRatio="none" aria-hidden="true">
+                  <path d="M60 0 L60 48" stroke="currentColor" strokeWidth="1.3" fill="none" strokeLinecap="round" />
+                </svg>
 
-                <div className="sf-ticket-price-row">
-                  <span className="sf-ticket-price">{pass.price}</span>
-                  <span className="sf-ticket-price-sub">{pass.priceSub}</span>
+                {/* Safety Pin */}
+                <svg className="sp-safety" width="34" height="14" viewBox="0 0 34 14" fill="none" aria-hidden="true">
+                  <path d="M2 7 C2 4 4 2 7 2 L27 2 C30 2 32 4 32 7 C32 10 30 12 27 12 L7 12 C4 12 2 10 2 7 Z" stroke="currentColor" strokeWidth="1.2" />
+                  <circle cx="8" cy="7" r="2.5" fill="currentColor" />
+                </svg>
+
+                <div className="sp-card">
+                  <div className="sp-cut">
+                    <div className="sp-paper" />
+                    <div className="sp-sheen" />
+
+                    <div className="sp-content">
+                      <div className="sp-strip" />
+
+                      <div className="sp-band">
+                        <span>{pass.type}</span>
+                        <em>{pass.sub}</em>
+                      </div>
+
+                      <div className="sp-field">
+                        <div className="sp-price">
+                          <b>{pass.price}</b>
+                          <s>{pass.per}</s>
+                        </div>
+                        <div className="sp-dates">{pass.dates}</div>
+
+                        <div className={`sp-stamp ${pass.stampClass}`}>
+                          {pass.stamp}
+                        </div>
+                      </div>
+
+                      <div className="sp-body">
+                        <ul className="sp-incl">
+                          {pass.features.map((feat, fIdx) => (
+                            <li key={fIdx}>
+                              <i>▸</i>
+                              {feat}
+                            </li>
+                          ))}
+                        </ul>
+                        <div className="sp-fees">Includes 9.5% CA sales tax · $6 booking fee per pass</div>
+                      </div>
+
+                      {/* Perforation line */}
+                      <div className="sp-perf">
+                        <div className="sp-notch-l" />
+                        <div className="sp-notch-r" />
+                        <i />
+                      </div>
+
+                      {/* Bottom Stub */}
+                      <div className="sp-stub">
+                        <svg className="sp-bars" viewBox="0 0 200 24" preserveAspectRatio="none" aria-hidden="true">
+                          <rect x="0" y="0" width="3" height="24" fill="currentColor" />
+                          <rect x="6" y="0" width="1" height="24" fill="currentColor" />
+                          <rect x="10" y="0" width="4" height="24" fill="currentColor" />
+                          <rect x="18" y="0" width="2" height="24" fill="currentColor" />
+                          <rect x="24" y="0" width="1" height="24" fill="currentColor" />
+                          <rect x="28" y="0" width="5" height="24" fill="currentColor" />
+                          <rect x="36" y="0" width="2" height="24" fill="currentColor" />
+                          <rect x="42" y="0" width="3" height="24" fill="currentColor" />
+                          <rect x="48" y="0" width="1" height="24" fill="currentColor" />
+                          <rect x="52" y="0" width="4" height="24" fill="currentColor" />
+                          <rect x="60" y="0" width="2" height="24" fill="currentColor" />
+                          <rect x="66" y="0" width="3" height="24" fill="currentColor" />
+                          <rect x="72" y="0" width="1" height="24" fill="currentColor" />
+                          <rect x="76" y="0" width="4" height="24" fill="currentColor" />
+                          <rect x="84" y="0" width="2" height="24" fill="currentColor" />
+                          <rect x="90" y="0" width="5" height="24" fill="currentColor" />
+                          <rect x="98" y="0" width="1" height="24" fill="currentColor" />
+                          <rect x="102" y="0" width="3" height="24" fill="currentColor" />
+                          <rect x="108" y="0" width="2" height="24" fill="currentColor" />
+                          <rect x="114" y="0" width="4" height="24" fill="currentColor" />
+                          <rect x="122" y="0" width="1" height="24" fill="currentColor" />
+                          <rect x="126" y="0" width="3" height="24" fill="currentColor" />
+                          <rect x="132" y="0" width="2" height="24" fill="currentColor" />
+                          <rect x="138" y="0" width="5" height="24" fill="currentColor" />
+                          <rect x="146" y="0" width="1" height="24" fill="currentColor" />
+                          <rect x="150" y="0" width="4" height="24" fill="currentColor" />
+                          <rect x="158" y="0" width="2" height="24" fill="currentColor" />
+                          <rect x="164" y="0" width="3" height="24" fill="currentColor" />
+                          <rect x="170" y="0" width="2" height="24" fill="currentColor" />
+                          <rect x="176" y="0" width="4" height="24" fill="currentColor" />
+                          <rect x="184" y="0" width="2" height="24" fill="currentColor" />
+                          <rect x="190" y="0" width="4" height="24" fill="currentColor" />
+                          <rect x="197" y="0" width="3" height="24" fill="currentColor" />
+                        </svg>
+
+                        {pass.disabled ? (
+                          <button className="sp-buy sp-buy-disabled" disabled>
+                            {pass.cta}
+                          </button>
+                        ) : (
+                          <a href={pass.url} target="_blank" rel="noopener noreferrer" className="sp-buy">
+                            {pass.cta}
+                          </a>
+                        )}
+
+                        <div className="sp-terms">{pass.terms}</div>
+                      </div>
+                    </div>
+                  </div>
                 </div>
-              </div>
-
-              <div className="sf-ticket-card-body">
-                <ul className="sf-ticket-features">
-                  {pass.features.map((f, i) => (
-                    <li key={i}>
-                      <span className="sf-check-dot" />
-                      <span>{f}</span>
-                    </li>
-                  ))}
-                </ul>
-
-                <a
-                  href={pass.url || '#'}
-                  target={pass.url ? '_blank' : '_self'}
-                  rel={pass.url ? 'noreferrer' : ''}
-                  className="sf-btn-primary"
-                  style={{ width: '100%', marginTop: 'auto', textAlign: 'center' }}
-                  onClick={handleAction(pass)}
-                >
-                  {pass.cta}
-                </a>
               </div>
             </div>
           ))}

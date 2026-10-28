@@ -1,35 +1,33 @@
 import React from 'react';
 
-export default function SignalAbout() {
+export default function SignalAbout({ onOpenReader }) {
   return (
-    <section className="sf-section" id="about">
+    <section className="sf-section sf-about-section" id="about">
       <div className="sf-wrap">
-        <span className="sf-pill">(About)</span>
-
-        <div className="sf-manifesto-grid">
-          <div className="sf-manifesto-text">
-            <strong>Memento Mori</strong> is a celestial dark-fantasy web-novel and original master discography produced by <strong>Δxolotl</strong>. We believe the quiet space between <em>existential grief</em> and <em>unspoken devotion</em> writes the deepest stories. Adoniel Togami, an isolated programmer, and Azrael, the Archangel of Death — bound by lines of code and an oath that refuses to terminate.
+        <div className="sf-about-exact-grid">
+          {/* Left Column: Photo Target */}
+          <div className="sf-about-photo-col">
+            <div className="sf-about-photo-wrapper">
+              <img
+                src="/images/assets/profile_image.webp"
+                alt="Signal street culture & Adoniel"
+                className="sf-about-img"
+              />
+            </div>
           </div>
 
-          <div className="sf-manifesto-side">
-            <div className="sf-stat-box">
-              <span className="sf-stat-num">04</span>
-              <span className="sf-stat-label">Chapters in Volume I</span>
-            </div>
+          {/* Right Column: Statement & CTA */}
+          <div className="sf-about-copy-col">
+            <span className="sf-pill">(About)</span>
 
-            <div className="sf-stat-box">
-              <span className="sf-stat-num">21</span>
-              <span className="sf-stat-label">Master Tracks Indexed</span>
-            </div>
+            <p className="sf-about-statement">
+              Signal is a street culture forum in Los Angeles. We believe the street writes culture first. Everything else is a remix. Four days of riders, writers, musicians and makers on one site.
+            </p>
 
-            <div className="sf-stat-box">
-              <span className="sf-stat-num">100%</span>
-              <span className="sf-stat-label">Free &amp; Open Archive</span>
-            </div>
-
-            <div className="sf-stat-box">
-              <span className="sf-stat-num">2 Worlds</span>
-              <span className="sf-stat-label">Mortal Earth &amp; Celestial Expanse</span>
+            <div className="sf-about-action">
+              <a href="#tickets" className="sf-btn sf-btn-red sf-btn-pill">
+                GET TICKETS
+              </a>
             </div>
           </div>
         </div>

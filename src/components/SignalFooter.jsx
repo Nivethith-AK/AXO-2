@@ -10,84 +10,79 @@ export default function SignalFooter({ onOpenChapter }) {
   return (
     <footer className="sf-footer">
       <div className="sf-wrap">
-        <div className="sf-footer-top">
-          <div className="sf-footer-about">
-            <span style={{ fontFamily: 'var(--font-display)', fontSize: '1.8rem', color: 'var(--fg)', textTransform: 'uppercase' }}>
-              Memento Mori®
-            </span>
-            <p style={{ fontFamily: 'var(--font-body)', fontSize: '0.95rem', color: 'var(--fg-mid)', lineHeight: 1.6 }}>
-              A web-novel and original master soundtrack chronicle by Δxolotl in collaboration with Project Eden.
+        <div className="sf-footer-top-grid">
+          {/* Brand & Socials */}
+          <div className="sf-footer-brand-col">
+            <h2 className="sf-footer-logo">SIGNAL®</h2>
+            <p className="sf-footer-desc">
+              Four days of music, art and the street. North Yard, Los Angeles · 21–24 Aug 2026.
             </p>
+            <div className="sf-footer-socials">
+              <a href="https://instagram.com/" target="_blank" rel="noreferrer" className="sf-social-link">
+                INSTAGRAM
+              </a>
+              <a href="https://tiktok.com/" target="_blank" rel="noreferrer" className="sf-social-link">
+                TIKTOK
+              </a>
+              <a href="https://youtube.com/@theaxolotlmusic" target="_blank" rel="noreferrer" className="sf-social-link">
+                YOUTUBE
+              </a>
+              <a href="https://discord.gg/QRRa4mxaAm" target="_blank" rel="noreferrer" className="sf-social-link">
+                DISCORD
+              </a>
+            </div>
           </div>
 
-          <div>
-            <div className="sf-footer-col-title">Chronicle</div>
+          {/* 3 Nav Columns */}
+          <div className="sf-footer-col">
+            <span className="sf-footer-col-title">EXPLORE</span>
             <ul className="sf-footer-links">
               <li>
-                <a
-                  href="#chapter-0"
-                  className="sf-footer-link"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    if (onOpenChapter) onOpenChapter('0');
-                  }}
-                >
-                  Chapter α — When We Met
-                </a>
-              </li>
-              <li>
-                <a
-                  href="#chapter-1"
-                  className="sf-footer-link"
-                  onClick={(e) => {
-                    e.preventDefault();
-                    if (onOpenChapter) onOpenChapter('1');
-                  }}
-                >
-                  Chapter I — A Death Wish
+                <a href="#lineup" className="sf-footer-link" onClick={scrollTo('lineup')}>
+                  Lineup
                 </a>
               </li>
               <li>
                 <a href="#program" className="sf-footer-link" onClick={scrollTo('program')}>
-                  Program Timeline
+                  Program
                 </a>
               </li>
               <li>
-                <a href="#passes" className="sf-footer-link" onClick={scrollTo('passes')}>
-                  Archive Passes
+                <a href="#tickets" className="sf-footer-link" onClick={scrollTo('tickets')}>
+                  Tickets
+                </a>
+              </li>
+              <li>
+                <a href="#discography" className="sf-footer-link" onClick={scrollTo('discography')}>
+                  Discography
                 </a>
               </li>
             </ul>
           </div>
 
-          <div>
-            <div className="sf-footer-col-title">Discography</div>
+          <div className="sf-footer-col">
+            <span className="sf-footer-col-title">VISIT</span>
             <ul className="sf-footer-links">
               <li>
-                <a href="#discography" className="sf-footer-link" onClick={scrollTo('discography')}>
-                  21 Indexed Releases
+                <a href="#faq" className="sf-footer-link" onClick={scrollTo('faq')}>
+                  FAQ
                 </a>
               </li>
               <li>
-                <a href="#soundtrack" className="sf-footer-link" onClick={scrollTo('soundtrack')}>
-                  To Eternity and After
+                <a href="#visit" className="sf-footer-link" onClick={scrollTo('visit')}>
+                  Plan your visit
                 </a>
               </li>
               <li>
-                <a href="https://www.youtube.com/watch?v=qR_bDjRskpg" target="_blank" rel="noreferrer" className="sf-footer-link">
-                  Death Wish (YouTube) ↗
-                </a>
-              </li>
-              <li>
-                <a href="https://soundcloud.com/theaxolotlmusic" target="_blank" rel="noreferrer" className="sf-footer-link">
-                  SoundCloud Archive ↗
+                <a href="#map" className="sf-footer-link" onClick={scrollTo('map')}>
+                  Festival map
                 </a>
               </li>
             </ul>
           </div>
 
-          <div>
-            <div className="sf-footer-col-title">Connect</div>
+          <div className="sf-footer-col">
+            <span className="sf-footer-col-title">CONNECT</span>
             <ul className="sf-footer-links">
               <li>
                 <a href="https://twitter.com/theaxolotlmusic" target="_blank" rel="noreferrer" className="sf-footer-link">
@@ -95,32 +90,28 @@ export default function SignalFooter({ onOpenChapter }) {
                 </a>
               </li>
               <li>
-                <a href="https://youtube.com/@theaxolotlmusic" target="_blank" rel="noreferrer" className="sf-footer-link">
-                  YouTube Channel ↗
-                </a>
-              </li>
-              <li>
-                <a href="https://instagram.com/theaxolotlmusic" target="_blank" rel="noreferrer" className="sf-footer-link">
-                  Instagram ↗
-                </a>
-              </li>
-              <li>
                 <a href="https://discord.gg/QRRa4mxaAm" target="_blank" rel="noreferrer" className="sf-footer-link">
                   Discord Server ↗
+                </a>
+              </li>
+              <li>
+                <a href="https://youtube.com/@theaxolotlmusic" target="_blank" rel="noreferrer" className="sf-footer-link">
+                  YouTube Channel ↗
                 </a>
               </li>
             </ul>
           </div>
         </div>
 
-        {/* Giant Anton Wordmark */}
+        {/* Giant full-width brand wordmark */}
         <div className="sf-footer-huge-brand">
-          Memento Mori®
+          SIGNAL®
         </div>
 
+        {/* Bottom bar */}
         <div className="sf-footer-bottom">
-          <span>© 2026 Memento Mori · Web Novel &amp; Music by Δxolotl</span>
-          <span>Project Eden Collaboration · Tokyo / Celestial Expanse</span>
+          <span>© 2026 Signal Festival · Made in Los Angeles</span>
+          <span>Tickets are non-transferable after 18 Aug</span>
         </div>
       </div>
     </footer>

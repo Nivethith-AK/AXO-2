@@ -1,51 +1,67 @@
 import React from 'react';
 
-const PARTNERS = [
-  { name: 'Project Eden', role: 'Visual Artwork & Manga' },
-  { name: 'Gamesense', role: 'Official Hardware PV' },
-  { name: 'VocaDuo 2026', role: 'Theme Song Entry' },
-  { name: 'YouTube', role: 'Music & Official MVs' },
-  { name: 'Spotify', role: 'Lossless Streaming' },
-  { name: 'SoundCloud', role: 'Audio Previews & Demos' },
-  { name: 'Apple Music', role: 'Digital Distribution' },
-  { name: 'Discord', role: 'Official Community' },
+const ROW_1 = [
+  'NORTHBOUND',
+  'THE PACIFIC REVIEW',
+  'FREQUENCY',
+  'NIGHTSHIFT LA',
+  'yard notes',
+  'KESTREL SOUND',
+  'PIXEL YARD',
+  'PROJECT EDEN',
+  'GAMESENSE',
+];
+
+const ROW_2 = [
+  'HALO SYSTEMS',
+  'LOOP',
+  'ARTS DISTRICT COUNCIL',
+  '[ Open Walls ]',
+  'LA SKATE UNION',
+  'BOYLE HEIGHTS KITCHEN',
+  'VOCADUO 2026',
+  'STUDIO 199',
 ];
 
 export default function SignalPartners() {
   return (
-    <section className="sf-section" id="partners">
+    <section className="sf-section sf-partners-section" id="partners">
       <div className="sf-wrap">
-        <span className="sf-pill">(Partners &amp; Affiliates)</span>
-        <h2 className="sf-lineup-title" style={{ marginBottom: '32px' }}>
-          Made possible by
-        </h2>
+        <div className="sf-partners-head">
+          <span className="sf-pill">(Partners)</span>
+          <h2 className="sf-lineup-title">Made possible by</h2>
+        </div>
 
-        <div style={{
-          display: 'grid',
-          gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))',
-          gap: '16px',
-        }}>
-          {PARTNERS.map((p) => (
-            <div
-              key={p.name}
-              style={{
-                background: 'var(--card-bg)',
-                border: '1px solid var(--border)',
-                borderRadius: '6px',
-                padding: '24px',
-                display: 'flex',
-                flexDirection: 'column',
-                gap: '6px',
-              }}
-            >
-              <span style={{ fontFamily: 'var(--font-display)', fontSize: '1.4rem', textTransform: 'uppercase', color: 'var(--fg)' }}>
-                {p.name}
+        {/* Main Partner Highlight */}
+        <div className="sf-main-partner-card">
+          <span className="sf-main-partner-badge">Main partner</span>
+          <div className="sf-main-partner-name">NORTHBOUND</div>
+          <span className="sf-main-partner-since">With Signal since ’23</span>
+        </div>
+
+        {/* 2-row Marquee */}
+        <div className="sf-partners-marquee-wrap" aria-hidden="true">
+          <div className="sf-partners-track sf-track-left">
+            {[...ROW_1, ...ROW_1].map((p, i) => (
+              <span key={i} className="sf-partner-tag">
+                {p}
               </span>
-              <span style={{ fontFamily: 'var(--font-mono)', fontSize: '0.78rem', color: 'var(--fg-muted)' }}>
-                {p.role}
+            ))}
+          </div>
+
+          <div className="sf-partners-track sf-track-right">
+            {[...ROW_2, ...ROW_2].map((p, i) => (
+              <span key={i} className="sf-partner-tag">
+                {p}
               </span>
-            </div>
-          ))}
+            ))}
+          </div>
+        </div>
+
+        <div className="sf-partners-cta-row">
+          <a href="#faq" className="sf-btn sf-btn-outline">
+            BECOME A PARTNER
+          </a>
         </div>
       </div>
     </section>
