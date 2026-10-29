@@ -2,11 +2,9 @@ import React, { useEffect } from 'react';
 import { ALL_CHAPTERS } from '../data/chapters';
 
 export default function ReaderOverlay({ chapterId, onClose, onSelectChapter }) {
-  if (!chapterId) return null;
-
   const unlockedChapters = ALL_CHAPTERS.filter((c) => !c.locked);
-  const currentIdx = unlockedChapters.findIndex((c) => c.id === chapterId);
-  const chapter = unlockedChapters[currentIdx];
+  const currentIdx = chapterId ? unlockedChapters.findIndex((c) => c.id === chapterId) : -1;
+  const chapter = currentIdx >= 0 ? unlockedChapters[currentIdx] : null;
 
   const prevChapter = currentIdx > 0 ? unlockedChapters[currentIdx - 1] : null;
   const nextChapter =
@@ -15,6 +13,7 @@ export default function ReaderOverlay({ chapterId, onClose, onSelectChapter }) {
       : null;
 
   useEffect(() => {
+    if (!chapterId) return;
     const onKeyDown = (e) => {
       if (e.key === 'Escape') onClose();
       if (e.key === 'ArrowLeft' && prevChapter) onSelectChapter(prevChapter.id);
@@ -22,9 +21,9 @@ export default function ReaderOverlay({ chapterId, onClose, onSelectChapter }) {
     };
     window.addEventListener('keydown', onKeyDown);
     return () => window.removeEventListener('keydown', onKeyDown);
-  }, [chapterId, prevChapter, nextChapter]);
+  }, [chapterId, prevChapter, nextChapter, onClose, onSelectChapter]);
 
-  if (!chapter) return null;
+  if (!chapterId || !chapter) return null;
 
   return (
     <div id="reader-overlay" className="open" data-lenis-prevent="true">
