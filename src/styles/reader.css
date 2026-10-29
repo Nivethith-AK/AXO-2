@@ -2,13 +2,32 @@
    READER — chapter overlay
    ============================================================ */
 
+:root {
+  --read-w: 780px;
+  --gutter: 24px;
+  --gold: #b38b22;
+  --gold-bright: #d4af37;
+  --gold-line: rgba(179, 139, 34, 0.25);
+  --gold-border: rgba(179, 139, 34, 0.35);
+  --gold-dim: rgba(179, 139, 34, 0.08);
+  --fg: #111110;
+  --fg-mid: #555554;
+  --fg-dim: #888887;
+  --card-bg: #ffffff;
+  --section-bg: rgba(250, 250, 249, 0.98);
+  --font-mono: 'Fragment Mono', monospace;
+  --font-display: 'Anton', sans-serif;
+  --font-body: 'Be Vietnam Pro', sans-serif;
+  --ease: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
 #reader-overlay {
   display: none; position: fixed !important; inset: 0 !important;
   width: 100% !important; height: 100vh !important;
-  background: var(--section-bg, rgba(4,4,4,0.97));
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
-  z-index: 9500 !important; overflow-y: auto;
+  background: var(--section-bg, rgba(250, 250, 249, 0.98));
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  z-index: 95000 !important; overflow-y: auto;
   padding: 80px var(--gutter) 120px;
 }
 #reader-overlay.open { display: block !important; }
@@ -28,7 +47,7 @@
 .r-title {
   font-family: var(--font-display);
   font-size: clamp(2rem, 5vw, 3.6rem);
-  font-weight: 700; letter-spacing: 0.12em;
+  font-weight: 400; letter-spacing: 0.04em;
   text-transform: uppercase; color: var(--fg); margin-bottom: 1.4rem;
 }
 .r-date {
@@ -45,26 +64,26 @@
 .reader-body p:first-of-type::first-letter {
   font-size: 3.8rem; float: left; line-height: 0.8;
   margin: 0.2rem 0.8rem 0 0;
-  font-family: var(--font-display); color: var(--gold); font-weight: 700;
+  font-family: var(--font-display); color: var(--gold); font-weight: 400;
 }
-.reader-body em     { font-style: italic; color: var(--gold-bright); }
+.reader-body em     { font-style: italic; color: #111; }
 .reader-body strong { font-weight: 700; color: var(--fg); }
 
 .reader-close {
   position: fixed; top: 24px; right: var(--gutter);
   font-family: var(--font-mono); font-size: 0.76rem;
-  font-weight: 500;
+  font-weight: 600;
   letter-spacing: 0.15em; color: var(--fg);
-  text-transform: uppercase; z-index: 9600;
-  transition: all 0.2s ease; background: var(--card-bg, rgba(14,14,14,0.85));
-  border: 1px solid var(--gold-border); padding: 7px 16px; cursor: pointer;
+  text-transform: uppercase; z-index: 96000;
+  transition: all 0.2s ease; background: #ffffff;
+  border: 1px solid var(--gold-border); padding: 9px 18px; cursor: pointer;
   border-radius: 6px;
-  box-shadow: none;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.06);
 }
 .reader-close:hover {
-  color: var(--gold-bright);
-  border-color: var(--gold);
-  background: var(--gold-dim);
+  color: #fa0b29;
+  border-color: #fa0b29;
+  background: #fff;
   transform: translateY(-1px);
 }
 
@@ -75,17 +94,18 @@
 }
 .rnav-btn {
   padding: 22px 26px; border: 1px solid var(--gold-border);
-  background: var(--card-bg, rgba(14,14,14,0.6)); cursor: pointer;
-  transition: all 0.42s var(--ease); color: var(--fg);
+  background: #ffffff; cursor: pointer;
+  transition: all 0.25s var(--ease); color: var(--fg);
   border-radius: 6px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.04);
 }
-.rnav-btn:hover { border-color: var(--gold); background: var(--gold-dim); color: var(--gold-bright); }
+.rnav-btn:hover { border-color: #fa0b29; color: #fa0b29; }
 .rnav-btn .dir {
   font-family: var(--font-mono); font-size: 0.75rem;
   letter-spacing: 0.25em; text-transform: uppercase;
   color: var(--gold); display: block; margin-bottom: 8px;
   font-weight: 600;
 }
-.rnav-btn .rtitle { font-family: var(--font-display); font-size: 1.15rem; font-weight: 600; letter-spacing: 0.08em; }
+.rnav-btn .rtitle { font-family: var(--font-display); font-size: 1.15rem; font-weight: 400; letter-spacing: 0.04em; text-transform: uppercase; }
 .rnav-btn.prev { text-align: left; }
 .rnav-btn.next { text-align: right; }
