@@ -45,6 +45,82 @@ export default function App() {
     return () => clearInterval(interval);
   }, []);
 
+  // Homepage Scroll Animations Engine (Reveal on scroll, parallax, pass tilt physics)
+  useEffect(() => {
+    const targets = document.querySelectorAll(
+      '.sf-scroll-reveal, [data-framer-name="Card"], [data-framer-name="Slots"], [data-framer-name="Marker"], [data-framer-name^="Q0"], [data-framer-name="Sheet"], [data-framer-name="Copy"]'
+    );
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('sf-revealed');
+            observer.unobserve(entry.target);
+          }
+        });
+      },
+      {
+        threshold: 0.05,
+        rootMargin: '0px 0px -30px 0px',
+      }
+    );
+
+    targets.forEach((el) => {
+      const rect = el.getBoundingClientRect();
+      if (rect.top < window.innerHeight && rect.bottom > 0) {
+        el.classList.add('sf-revealed');
+      } else {
+        observer.observe(el);
+      }
+    });
+
+    let lastScrollY = window.scrollY;
+    let ticking = false;
+
+    const onScroll = () => {
+      if (!ticking) {
+        requestAnimationFrame(() => {
+          const currentScrollY = window.scrollY;
+          const deltaY = currentScrollY - lastScrollY;
+          lastScrollY = currentScrollY;
+
+          // Hero image parallax
+          if (currentScrollY < 1200) {
+            const heroImg = document.querySelector('.framer-t3ax4z img');
+            if (heroImg) {
+              heroImg.style.transform = `translateY(${currentScrollY * 0.16}px) scale(1.05)`;
+            }
+          }
+
+          // Hanging passes dynamic swing
+          const passesSection = document.querySelector('.sp-row');
+          if (passesSection) {
+            const rect = passesSection.getBoundingClientRect();
+            if (rect.top < window.innerHeight && rect.bottom > 0) {
+              const tiltDelta = Math.max(-6, Math.min(6, deltaY * 0.18));
+              const passes = document.querySelectorAll('.sp-pass');
+              passes.forEach((pass, i) => {
+                const base = i % 2 === 0 ? -4.5 : 4.5;
+                pass.style.transform = `rotate(${base + tiltDelta * (i % 2 === 0 ? 1 : -1)}deg)`;
+              });
+            }
+          }
+
+          ticking = false;
+        });
+        ticking = true;
+      }
+    };
+
+    window.addEventListener('scroll', onScroll, { passive: true });
+
+    return () => {
+      observer.disconnect();
+      window.removeEventListener('scroll', onScroll);
+    };
+  }, []);
+
   // Global anchor click listener for smooth scroll, chapter reader opening, and FAQ toggle
   useEffect(() => {
     const handleClick = (e) => {
