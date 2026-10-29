@@ -1,12 +1,10 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import CatLayer from './components/CatLayer';
 import ReaderOverlay from './components/ReaderOverlay';
 import '../src/styles/reader.css';
 
 export default function App() {
   const [activeChapterId, setActiveChapterId] = useState(null);
-  const [isPlayingAudio, setIsPlayingAudio] = useState(false);
-  const audioRef = useRef(null);
 
   // Live countdown timer for both Hero and Final CTA clocks
   useEffect(() => {
@@ -110,81 +108,8 @@ export default function App() {
     return () => document.removeEventListener('click', handleClick);
   }, []);
 
-  const toggleMasterAudio = () => {
-    if (!audioRef.current) return;
-    if (isPlayingAudio) {
-      audioRef.current.pause();
-      setIsPlayingAudio(false);
-    } else {
-      audioRef.current.play().then(() => setIsPlayingAudio(true)).catch(() => {});
-    }
-  };
-
   return (
     <>
-      {/* Hidden Master Audio Element */}
-      <audio
-        ref={audioRef}
-        src="/assets/media/audio/To_Eternity_and_After.m4a"
-        preload="metadata"
-        onEnded={() => setIsPlayingAudio(false)}
-      />
-
-      {/* Floating Audio Player Bar */}
-      <aside
-        id="master-audio-pill"
-        style={{
-          position: 'fixed',
-          bottom: '24px',
-          left: '24px',
-          zIndex: 9999,
-          background: 'rgba(255, 255, 255, 0.94)',
-          backdropFilter: 'blur(16px)',
-          WebkitBackdropFilter: 'blur(16px)',
-          border: '1px solid rgba(17, 17, 16, 0.12)',
-          borderRadius: '40px',
-          padding: '8px 18px 8px 12px',
-          display: 'flex',
-          alignItems: 'center',
-          gap: '12px',
-          boxShadow: '0 12px 32px rgba(0, 0, 0, 0.08)',
-          fontFamily: "'Be Vietnam Pro', sans-serif",
-          cursor: 'pointer',
-          transition: 'transform 0.2s ease, box-shadow 0.2s ease',
-        }}
-        onClick={toggleMasterAudio}
-        onMouseEnter={(e) => (e.currentTarget.style.transform = 'translateY(-2px)')}
-        onMouseLeave={(e) => (e.currentTarget.style.transform = 'none')}
-        role="button"
-        tabIndex={0}
-        aria-label="Toggle master soundtrack playback"
-      >
-        <div
-          style={{
-            width: '32px',
-            height: '32px',
-            borderRadius: '50%',
-            background: isPlayingAudio ? '#fa0b29' : '#111110',
-            color: '#ffffff',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            fontSize: '12px',
-            transition: 'background 0.2s ease',
-          }}
-        >
-          {isPlayingAudio ? '❚❚' : '▶'}
-        </div>
-        <div>
-          <div style={{ fontSize: '11px', fontWeight: 700, textTransform: 'uppercase', color: '#111110', letterSpacing: '0.04em' }}>
-            To Eternity and After
-          </div>
-          <div style={{ fontSize: '9px', color: '#777', fontFamily: "'Fragment Mono', monospace" }}>
-            {isPlayingAudio ? 'PLAYING MASTER OST · ΔXOLOTL' : 'CLICK TO LISTEN OST'}
-          </div>
-        </div>
-      </aside>
-
       {/* Novel Chapter Reader Overlay */}
       {activeChapterId && (
         <ReaderOverlay
