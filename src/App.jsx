@@ -121,6 +121,34 @@ export default function App() {
     };
   }, []);
 
+  // Handle URL hash routing (e.g. #/chapter/0 or #/chapter/1)
+  useEffect(() => {
+    const handleHash = () => {
+      const hash = window.location.hash;
+      const m = hash.match(/^#\/chapter\/([^/?]+)/);
+      if (m) {
+        setActiveChapterId(m[1]);
+      }
+    };
+    handleHash();
+    window.addEventListener('hashchange', handleHash);
+    return () => window.removeEventListener('hashchange', handleHash);
+  }, []);
+
+  // Contact form transmission handler
+  useEffect(() => {
+    const form = document.getElementById('contact-transmission-form');
+    if (!form) return;
+    const handleSubmit = (e) => {
+      e.preventDefault();
+      form.style.display = 'none';
+      const successBox = document.getElementById('contact-success-state');
+      if (successBox) successBox.style.display = 'block';
+    };
+    form.addEventListener('submit', handleSubmit);
+    return () => form.removeEventListener('submit', handleSubmit);
+  }, []);
+
   // Global anchor click listener for smooth scroll, chapter reader opening, and FAQ toggle
   useEffect(() => {
     const handleClick = (e) => {
