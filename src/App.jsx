@@ -3,8 +3,61 @@ import CatLayer from './components/CatLayer';
 import ReaderOverlay from './components/ReaderOverlay';
 import '../src/styles/reader.css';
 
+import { initDialType } from './animations/initDialType';
+import { initFisheyeBelt } from './animations/initFisheyeBelt';
+import { initFooterWarpTicker } from './animations/initFooterWarpTicker';
+import { initFilmGrain } from './animations/initFilmGrain';
+import { initTravelPhotoFlight } from './animations/initTravelPhotoFlight';
+import { initMapPins } from './animations/initMapPins';
+
 export default function App() {
   const [activeChapterId, setActiveChapterId] = useState(null);
+
+  // Initialize all interactive WebGL & 2D canvas engines, film grain, and micro-interactions
+  useEffect(() => {
+    // 1. Analog SVG turbulence film grain background
+    const cleanupGrain = initFilmGrain();
+
+    // 2. Hero WebGL DialType Text Warp Lens (Interactive drag lens)
+    const cleanupHeroDial = initDialType({
+      containerSelector: '.framer-1yj7b93-container',
+      text: 'MEMENTO MORI // VOCADUO 2026 // A REASON TO LIVE',
+      interactive: true,
+      showDial: true,
+      pinchStart: 1.05,
+    });
+
+    // 3. Lineup Fisheye Belt WebGL Droplet Lens Carousel (Draggable with auto-drift)
+    const cleanupBelt = initFisheyeBelt();
+
+    // 4. Keynote Stage WebGL DialType Text Warp Lens
+    const cleanupKeynoteDial = initDialType({
+      containerSelector: '.framer-18nsk8d-container',
+      text: 'MEMENTO MORI // CHRONICLES // VOL. I THE AWAKENING',
+      interactive: false,
+      showDial: false,
+      pinchStart: 1.45,
+    });
+
+    // 5. Footer Warped Anton Typography Marquee Ticker
+    const cleanupFooterTicker = initFooterWarpTicker();
+
+    // 6. Travel Photo Scroll Flight Animation (Hero bottom strip to About section)
+    const cleanupFlight = initTravelPhotoFlight();
+
+    // 7. Interactive Blueprint Map Pins & Tooltips
+    const cleanupPins = initMapPins();
+
+    return () => {
+      cleanupGrain();
+      cleanupHeroDial();
+      cleanupBelt();
+      cleanupKeynoteDial();
+      cleanupFooterTicker();
+      cleanupFlight();
+      cleanupPins();
+    };
+  }, []);
 
   // Live countdown timer for both Hero and Final CTA clocks
   useEffect(() => {

@@ -9,3 +9,96 @@
 #cat-root > * {
   pointer-events: auto;
 }
+
+/* Keynote Cards Showcase Row & Hover Tilt */
+.framer-1wqzfml {
+  display: flex !important;
+  flex-direction: row !important;
+  justify-content: center !important;
+  align-items: stretch !important;
+  flex-wrap: wrap !important;
+  gap: 32px !important;
+  position: relative !important;
+  width: 100% !important;
+  max-width: 1240px !important;
+  height: auto !important;
+  margin: 60px auto !important;
+  padding: 0 24px !important;
+  z-index: 10 !important;
+}
+
+.framer-k7r8ny-container,
+.framer-6ryx0o-container,
+.framer-4fadq3-container {
+  position: relative !important;
+  flex: 1 1 340px !important;
+  max-width: 392px !important;
+  height: auto !important;
+  min-height: 420px !important;
+  transition: transform 0.3s cubic-bezier(0.2, 1, 0.3, 1), box-shadow 0.3s ease !important;
+}
+
+.framer-k7r8ny-container:hover,
+.framer-6ryx0o-container:hover,
+.framer-4fadq3-container:hover {
+  transform: translateY(-8px) scale(1.02) !important;
+}
+
+/* Diagonal Hatch Stripes */
+.framer-1safm0f {
+  background: repeating-linear-gradient(
+    45deg,
+    var(--token-9b102a6d-1de4-42ff-84df-59df8692c199, rgba(17, 17, 16, 0.12)),
+    var(--token-9b102a6d-1de4-42ff-84df-59df8692c199, rgba(17, 17, 16, 0.12)) 2px,
+    transparent 2px,
+    transparent 8px
+  ) !important;
+}
+
+/* Fisheye Belt Container Cursor and Canvas */
+.framer-15nn9xp-container {
+  cursor: grab !important;
+  user-select: none !important;
+  -webkit-user-select: none !important;
+}
+
+.framer-15nn9xp-container:active {
+  cursor: grabbing !important;
+}
+
+/* Blueprint Map Interactive Pins */
+[data-framer-name^="Pin "] {
+  cursor: pointer !important;
+  user-select: none !important;
+}
+
+[data-framer-name^="Pin "] [data-framer-name="Dot"] {
+  position: relative;
+}
+
+[data-framer-name^="Pin "]:hover [data-framer-name="Dot"]::after {
+  content: '';
+  position: absolute;
+  inset: -4px;
+  border-radius: 50%;
+  border: 2px solid #FA0B28;
+  animation: pinPulse 1.4s ease-out infinite;
+}
+
+@keyframes pinPulse {
+  0% { transform: scale(0.8); opacity: 1; }
+  100% { transform: scale(2.2); opacity: 0; }
+}
+
+/* Global scroll reveal subtle transition */
+.sf-scroll-reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1) !important;
+  will-change: opacity, transform;
+}
+
+.sf-scroll-reveal.sf-revealed {
+  opacity: 1 !important;
+  transform: none !important;
+}
