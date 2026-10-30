@@ -10,6 +10,7 @@ import { initFilmGrain } from './animations/initFilmGrain';
 import { initDistortLinks } from './animations/initDistortLinks';
 import { initMarqueeRails } from './animations/initMarqueeRails';
 import { initFAQAccordion } from './animations/initFAQAccordion';
+import { initAboutScroll } from './animations/initAboutScroll';
 
 export default function App() {
   const [activeChapterId, setActiveChapterId] = useState(null);
@@ -43,6 +44,9 @@ export default function App() {
     // 7. FAQ Accordion smooth expand/collapse and rotating plus icon
     const cleanupFAQ = initFAQAccordion();
 
+    // 8. Section 2 (About) kinetic scroll scrubbing, spring entrance reveals, and photo parallax
+    const cleanupAbout = initAboutScroll();
+
     return () => {
       cleanupGrain();
       cleanupHeroDial();
@@ -51,6 +55,7 @@ export default function App() {
       cleanupDistort();
       cleanupMarquees();
       cleanupFAQ();
+      cleanupAbout();
     };
   }, []);
 
@@ -100,8 +105,15 @@ export default function App() {
     );
 
     targets.forEach((el) => {
-      // Don't reveal overlays or closed folds
-      if (el.closest('#reader-overlay-root') || el.closest('[data-framer-name="Fold"]') || el.id === 'travel-photo-flight' || el.id === 'contact-success-state') return;
+      // Don't reveal overlays, closed folds, or dedicated About scroll-animated elements
+      if (
+        el.closest('#reader-overlay-root') ||
+        el.closest('[data-framer-name="Fold"]') ||
+        el.closest('[data-framer-name="About"]') ||
+        el.id === 'travel-photo-flight' ||
+        el.id === 'contact-success-state'
+      )
+        return;
       el.classList.add('sf-revealed');
       if (el.style.opacity === '0') {
         el.style.opacity = '1';
@@ -125,6 +137,14 @@ export default function App() {
     );
 
     targets.forEach((el) => {
+      if (
+        el.closest('#reader-overlay-root') ||
+        el.closest('[data-framer-name="Fold"]') ||
+        el.closest('[data-framer-name="About"]') ||
+        el.id === 'travel-photo-flight' ||
+        el.id === 'contact-success-state'
+      )
+        return;
       const rect = el.getBoundingClientRect();
       if (rect.top < window.innerHeight && rect.bottom > 0) {
         el.classList.add('sf-revealed');

@@ -7,13 +7,14 @@ export function initDistortLinks() {
     '.framer-h92k9j',
     '.framer-8yog0e',
     '.framer-5q294k a',
-    '[data-code-component-plugin-id="api"]',
+    'a [data-code-component-plugin-id="api"]',
   ];
 
   const containers = document.querySelectorAll(targetSelectors.join(', '));
   const cleanupFns = [];
 
   containers.forEach((container, idx) => {
+    if (container.closest('[data-framer-name="Statement"]')) return;
     const span = container.querySelector('span') || container.querySelector('p');
     if (!span) return;
 
