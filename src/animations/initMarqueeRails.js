@@ -1,4 +1,4 @@
-// Infinite Marquee Rails engine for Ticker Band 1, Ticker Band 2, and Partner Tickers
+// Infinite Marquee Rails engine for Ticker Band 1 and Partner Tickers
 // Matches Signal Fest horizontal kinetic sliding physics
 export function initMarqueeRails() {
   const railsConfig = [
@@ -8,17 +8,6 @@ export function initMarqueeRails() {
       railSelector: '[data-framer-name="Ticker Band 1"] [data-framer-name="Rail"]',
       direction: -1,
       speed: 75, // px per second
-      segmentCalc: (rail) => {
-        const first = rail.children[0];
-        return first ? first.offsetWidth : 2050;
-      },
-    },
-    {
-      // Ticker Band 2: Ticket Ticker Rail (translates left)
-      containerSelector: '[data-framer-name="Ticker Band 2"]',
-      railSelector: '[data-framer-name="Ticker Band 2"] [data-framer-name="Rail"]',
-      direction: -1,
-      speed: 75,
       segmentCalc: (rail) => {
         const first = rail.children[0];
         return first ? first.offsetWidth : 2050;

@@ -8,12 +8,9 @@ import { initFisheyeBelt } from './animations/initFisheyeBelt';
 import { initFooterWarpTicker } from './animations/initFooterWarpTicker';
 import { initFilmGrain } from './animations/initFilmGrain';
 import { initTravelPhotoFlight } from './animations/initTravelPhotoFlight';
-import { initMapPins } from './animations/initMapPins';
 import { initDistortLinks } from './animations/initDistortLinks';
 import { initMarqueeRails } from './animations/initMarqueeRails';
-import { initHangingPasses } from './animations/initHangingPasses';
 import { initFAQAccordion } from './animations/initFAQAccordion';
-import { initPlanScroller } from './animations/initPlanScroller';
 
 export default function App() {
   const [activeChapterId, setActiveChapterId] = useState(null);
@@ -35,52 +32,30 @@ export default function App() {
     // 3. Lineup Fisheye Belt WebGL Droplet Lens Carousel (Draggable with auto-drift)
     const cleanupBelt = initFisheyeBelt();
 
-    // 4. Keynote Stage WebGL DialType Text Warp Lens
-    const cleanupKeynoteDial = initDialType({
-      containerSelector: '.framer-18nsk8d-container',
-      text: 'MEMENTO MORI // CHRONICLES // VOL. I THE AWAKENING',
-      interactive: false,
-      showDial: false,
-      pinchStart: 1.45,
-    });
-
-    // 5. Footer Warped Anton Typography Marquee Ticker
+    // 4. Footer Warped Anton Typography Marquee Ticker
     const cleanupFooterTicker = initFooterWarpTicker();
 
-    // 6. Travel Photo Scroll Flight Animation (Hero bottom strip to About section)
+    // 5. Travel Photo Scroll Flight Animation (Hero bottom strip to About section)
     const cleanupFlight = initTravelPhotoFlight();
 
-    // 7. Interactive Blueprint Map Pins & Tooltips
-    const cleanupPins = initMapPins();
-
-    // 8. DistortLink kinetic hover physics on Anton nav, CTAs, and footer links
+    // 6. DistortLink kinetic hover physics on Anton nav, CTAs, and footer links
     const cleanupDistort = initDistortLinks();
 
-    // 9. Infinite horizontal marquee rails for Ticker Band 1, 2, and Partner Tickers
+    // 7. Infinite horizontal marquee rails for Ticker Band 1 and Partner Tickers
     const cleanupMarquees = initMarqueeRails();
 
-    // 10. Hanging Passes sway physics and inview activation
-    const cleanupPasses = initHangingPasses();
-
-    // 11. FAQ Accordion smooth expand/collapse and rotating plus icon
+    // 8. FAQ Accordion smooth expand/collapse and rotating plus icon
     const cleanupFAQ = initFAQAccordion();
-
-    // 12. Plan Your Visit 4-column curtain scroll reveal
-    const cleanupPlan = initPlanScroller();
 
     return () => {
       cleanupGrain();
       cleanupHeroDial();
       cleanupBelt();
-      cleanupKeynoteDial();
       cleanupFooterTicker();
       cleanupFlight();
-      cleanupPins();
       cleanupDistort();
       cleanupMarquees();
-      cleanupPasses();
       cleanupFAQ();
-      cleanupPlan();
     };
   }, []);
 
