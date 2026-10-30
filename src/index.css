@@ -44,6 +44,17 @@
   transform: translateY(-8px) scale(1.02) !important;
 }
 
+/* Ensure Keynote Cards inside are fully visible and not translated off-screen */
+.framer-1wqzfml .framer-ozfmb {
+  opacity: 1 !important;
+  transform: none !important;
+  visibility: visible !important;
+  height: 100% !important;
+  width: 100% !important;
+  display: flex !important;
+  flex-direction: column !important;
+}
+
 /* Diagonal Hatch Stripes */
 .framer-1safm0f {
   background: repeating-linear-gradient(
@@ -90,15 +101,47 @@
   100% { transform: scale(2.2); opacity: 0; }
 }
 
-/* Global scroll reveal subtle transition */
+/* Global scroll reveal subtle transition & Content Visibility Enforcement */
 .sf-scroll-reveal {
-  opacity: 0;
-  transform: translateY(24px);
-  transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1) !important;
-  will-change: opacity, transform;
+  opacity: 1 !important;
+  transform: none !important;
+  transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1), transform 0.5s cubic-bezier(0.16, 1, 0.3, 1) !important;
 }
 
-.sf-scroll-reveal.sf-revealed {
+/* Ensure all major Framer SSR content blocks are fully visible */
+.framer-1a1ucqy,
+.framer-zvmxx1,
+.framer-1neqq3d,
+.framer-1wcfe6r,
+.framer-lqaq3g,
+.framer-19u8saq,
+.framer-ag52z8,
+.framer-1hwoel2,
+.framer-16c3rw0,
+.framer-xl3eh,
+.framer-3nnwbu,
+.framer-1goo15u,
+.framer-17gmilr,
+.framer-1f9ryxz,
+.framer-1t4u91k,
+.framer-1lm8kyn,
+.framer-jopnoo,
+[data-framer-name="Slots"],
+[data-framer-name="Head Row"],
+[data-framer-name="Head"],
+[data-framer-name="Legend"],
+[data-framer-name="Spotlight"],
+[data-framer-name="Sheet"],
+[data-framer-name="Torn CTA"],
+[data-framer-name="Plan"],
+[data-framer-name="Lead"] {
+  opacity: 1 !important;
+  transform: none !important;
+  visibility: visible !important;
+}
+
+/* Plan Your Visit Panel copy visibility */
+[data-framer-name="Plan Your Visit"] [data-framer-name="Copy"] {
   opacity: 1 !important;
   transform: none !important;
 }

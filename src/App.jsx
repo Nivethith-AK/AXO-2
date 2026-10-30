@@ -13,6 +13,7 @@ import { initDistortLinks } from './animations/initDistortLinks';
 import { initMarqueeRails } from './animations/initMarqueeRails';
 import { initHangingPasses } from './animations/initHangingPasses';
 import { initFAQAccordion } from './animations/initFAQAccordion';
+import { initPlanScroller } from './animations/initPlanScroller';
 
 export default function App() {
   const [activeChapterId, setActiveChapterId] = useState(null);
@@ -64,6 +65,9 @@ export default function App() {
     // 11. FAQ Accordion smooth expand/collapse and rotating plus icon
     const cleanupFAQ = initFAQAccordion();
 
+    // 12. Plan Your Visit 4-column curtain scroll reveal
+    const cleanupPlan = initPlanScroller();
+
     return () => {
       cleanupGrain();
       cleanupHeroDial();
@@ -76,6 +80,7 @@ export default function App() {
       cleanupMarquees();
       cleanupPasses();
       cleanupFAQ();
+      cleanupPlan();
     };
   }, []);
 
@@ -121,8 +126,18 @@ export default function App() {
   // Homepage Scroll Animations Engine (Reveal on scroll, parallax, pass tilt physics)
   useEffect(() => {
     const targets = document.querySelectorAll(
-      '.sf-scroll-reveal, [data-framer-name="Card"], [data-framer-name="Slots"], [data-framer-name="Marker"], [data-framer-name^="Q0"], [data-framer-name="Sheet"], [data-framer-name="Copy"]'
+      '.sf-scroll-reveal, [data-framer-name="Card"], [data-framer-name="Slots"], [data-framer-name="Marker"], [data-framer-name^="Q0"], [data-framer-name="Sheet"], [data-framer-name="Copy"], [style*="opacity: 0"], [style*="opacity:0"]'
     );
+
+    targets.forEach((el) => {
+      // Don't reveal overlays or closed folds
+      if (el.closest('#reader-overlay-root') || el.closest('[data-framer-name="Fold"]') || el.id === 'travel-photo-flight' || el.id === 'contact-success-state') return;
+      el.classList.add('sf-revealed');
+      if (el.style.opacity === '0') {
+        el.style.opacity = '1';
+        el.style.transform = 'none';
+      }
+    });
 
     const observer = new IntersectionObserver(
       (entries) => {
