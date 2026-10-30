@@ -74,13 +74,13 @@ export default function SignalHero({ onOpenChapter }) {
           <div className="sf-hero-bottom-strip">
             <div className="sf-hero-stills">
               <div className="sf-still-item">
-                <img src="/images/signalfest/hero_still_1.png" alt="Festival still 1" />
+                <img src="/images/cover_art/death_wish.jpg" alt="Death Wish — Theme Song" />
               </div>
               <div className="sf-still-item">
-                <img src="/images/signalfest/hero_still_2.png" alt="Festival still 2" />
+                <img src="/images/cover_art/SIPRSS.jpg" alt="Smiles in Puerto Rican Sunshine" />
               </div>
               <div className="sf-still-item">
-                <img src="/images/signalfest/hero_still_3.png" alt="Festival still 3" />
+                <img src="/images/cover_art/silverline_sw-ver.jpg" alt="SiLVERL!NE" />
               </div>
             </div>
 

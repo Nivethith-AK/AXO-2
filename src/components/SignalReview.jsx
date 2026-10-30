@@ -21,14 +21,14 @@ export default function SignalReview() {
               <p className="sf-review-label">Total festival attendance across all four days.</p>
             </div>
             <div className="sf-review-photo">
-              <img src="/images/signalfest/review_1.png" alt="Main stage crowd" loading="lazy" />
+              <img src="/images/collaborators/81senear.jpg" alt="Main stage crowd" loading="lazy" />
               <span className="sf-photo-tag">Main stage crowd</span>
             </div>
           </div>
 
           <div className="sf-review-col">
             <div className="sf-review-photo">
-              <img src="/images/signalfest/review_2.png" alt="Arrivals at Gate A" loading="lazy" />
+              <img src="/images/collaborators/ame.jpg" alt="Arrivals at Gate A" loading="lazy" />
               <span className="sf-photo-tag">Golden hour set</span>
             </div>
             <div className="sf-review-stat">
@@ -43,7 +43,7 @@ export default function SignalReview() {
               <p className="sf-review-label">Artists, master works and visual installations on site.</p>
             </div>
             <div className="sf-review-photo">
-              <img src="/images/signalfest/review_3.png" alt="Live visual" loading="lazy" />
+              <img src="/images/collaborators/dulcim.jpg" alt="Live visual" loading="lazy" />
               <span className="sf-photo-tag">Live visual relay</span>
             </div>
           </div>

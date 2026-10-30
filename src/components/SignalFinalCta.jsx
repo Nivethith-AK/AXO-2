@@ -29,7 +29,7 @@ export default function SignalFinalCta({ onOpenReader }) {
       <div className="sf-wrap">
         <div className="sf-final-cta-sheet">
           <div className="sf-final-cta-bg">
-            <img src="/images/signalfest/final_cta.png" alt="Signal Festival crowd" loading="lazy" />
+            <img src="/images/cover_art/SIPRSS.jpg" alt="Signal Festival crowd" loading="lazy" />
             <div className="sf-final-cta-dim" />
           </div>
 

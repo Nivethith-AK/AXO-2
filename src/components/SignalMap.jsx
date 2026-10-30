@@ -32,7 +32,7 @@ export default function SignalMap() {
 
         <div className="sf-map-display">
           <div className="sf-map-visual">
-            <img src="/images/signalfest/map.png" alt="Festival site plan" loading="lazy" />
+            <img src="/images/cover_art/death_wish.jpg" alt="Festival site plan" loading="lazy" />
             <div className="sf-map-pins-overlay">
               {pins.map((pin) => (
                 <button

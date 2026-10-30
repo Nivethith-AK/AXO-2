@@ -5,19 +5,19 @@ export default function SignalPlan() {
     {
       title: 'Getting here',
       desc: 'Metro to Little Tokyo, then eight minutes on foot. Lot C holds 400 cars and it fills by 19:00 on Saturday.',
-      image: '/images/signalfest/plan_1.png',
+      image: '/images/cover_art/yellow_boy.jpg',
       tag: 'TRANSIT & ARRIVAL',
     },
     {
       title: 'What to bring',
       desc: 'ID, a sealed bottle under 500 ml, one soft bag under 30×20 cm. Chairs, umbrellas and pro cameras stay at home.',
-      image: '/images/signalfest/plan_2.png',
+      image: '/images/cover_art/asuka.jpg',
       tag: 'BAG POLICY',
     },
     {
       title: 'Safety and care',
       desc: 'The welfare tent sits by the medical point, staffed all night. Step-free throughout, a quiet room next to Gate A, and a line you can text.',
-      image: '/images/signalfest/plan_3.png',
+      image: '/images/cover_art/tumaini.jpg',
       tag: 'ACCESSIBILITY & CARE',
     },
   ];

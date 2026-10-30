@@ -7,7 +7,6 @@ import { initDialType } from './animations/initDialType';
 import { initFisheyeBelt } from './animations/initFisheyeBelt';
 import { initFooterWarpTicker } from './animations/initFooterWarpTicker';
 import { initFilmGrain } from './animations/initFilmGrain';
-import { initTravelPhotoFlight } from './animations/initTravelPhotoFlight';
 import { initDistortLinks } from './animations/initDistortLinks';
 import { initMarqueeRails } from './animations/initMarqueeRails';
 import { initFAQAccordion } from './animations/initFAQAccordion';
@@ -35,16 +34,13 @@ export default function App() {
     // 4. Footer Warped Anton Typography Marquee Ticker
     const cleanupFooterTicker = initFooterWarpTicker();
 
-    // 5. Travel Photo Scroll Flight Animation (Hero bottom strip to About section)
-    const cleanupFlight = initTravelPhotoFlight();
-
-    // 6. DistortLink kinetic hover physics on Anton nav, CTAs, and footer links
+    // 5. DistortLink kinetic hover physics on Anton nav, CTAs, and footer links
     const cleanupDistort = initDistortLinks();
 
-    // 7. Infinite horizontal marquee rails for Ticker Band 1 and Partner Tickers
+    // 6. Infinite horizontal marquee rails for Ticker Band 1 and Partner Tickers
     const cleanupMarquees = initMarqueeRails();
 
-    // 8. FAQ Accordion smooth expand/collapse and rotating plus icon
+    // 7. FAQ Accordion smooth expand/collapse and rotating plus icon
     const cleanupFAQ = initFAQAccordion();
 
     return () => {
@@ -52,7 +48,6 @@ export default function App() {
       cleanupHeroDial();
       cleanupBelt();
       cleanupFooterTicker();
-      cleanupFlight();
       cleanupDistort();
       cleanupMarquees();
       cleanupFAQ();

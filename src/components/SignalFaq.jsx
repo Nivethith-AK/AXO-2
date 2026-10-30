@@ -72,7 +72,7 @@ export default function SignalFaq() {
         {/* Torn Pass CTA Banner */}
         <div className="sf-torn-cta-card">
           <div className="sf-torn-cta-bg">
-            <img src="/images/signalfest/torn_cta.png" alt="Signal Festival crowd" loading="lazy" />
+            <img src="/images/cover_art/SIPRSS.jpg" alt="Signal Festival crowd" loading="lazy" />
             <div className="sf-torn-cta-dim" />
           </div>
 
