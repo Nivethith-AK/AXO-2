@@ -9,6 +9,10 @@ import { initFooterWarpTicker } from './animations/initFooterWarpTicker';
 import { initFilmGrain } from './animations/initFilmGrain';
 import { initTravelPhotoFlight } from './animations/initTravelPhotoFlight';
 import { initMapPins } from './animations/initMapPins';
+import { initDistortLinks } from './animations/initDistortLinks';
+import { initMarqueeRails } from './animations/initMarqueeRails';
+import { initHangingPasses } from './animations/initHangingPasses';
+import { initFAQAccordion } from './animations/initFAQAccordion';
 
 export default function App() {
   const [activeChapterId, setActiveChapterId] = useState(null);
@@ -48,6 +52,18 @@ export default function App() {
     // 7. Interactive Blueprint Map Pins & Tooltips
     const cleanupPins = initMapPins();
 
+    // 8. DistortLink kinetic hover physics on Anton nav, CTAs, and footer links
+    const cleanupDistort = initDistortLinks();
+
+    // 9. Infinite horizontal marquee rails for Ticker Band 1, 2, and Partner Tickers
+    const cleanupMarquees = initMarqueeRails();
+
+    // 10. Hanging Passes sway physics and inview activation
+    const cleanupPasses = initHangingPasses();
+
+    // 11. FAQ Accordion smooth expand/collapse and rotating plus icon
+    const cleanupFAQ = initFAQAccordion();
+
     return () => {
       cleanupGrain();
       cleanupHeroDial();
@@ -56,6 +72,10 @@ export default function App() {
       cleanupFooterTicker();
       cleanupFlight();
       cleanupPins();
+      cleanupDistort();
+      cleanupMarquees();
+      cleanupPasses();
+      cleanupFAQ();
     };
   }, []);
 
@@ -143,20 +163,6 @@ export default function App() {
             const heroImg = document.querySelector('.framer-t3ax4z img');
             if (heroImg) {
               heroImg.style.transform = `translateY(${currentScrollY * 0.16}px) scale(1.05)`;
-            }
-          }
-
-          // Hanging passes dynamic swing
-          const passesSection = document.querySelector('.sp-row');
-          if (passesSection) {
-            const rect = passesSection.getBoundingClientRect();
-            if (rect.top < window.innerHeight && rect.bottom > 0) {
-              const tiltDelta = Math.max(-6, Math.min(6, deltaY * 0.18));
-              const passes = document.querySelectorAll('.sp-pass');
-              passes.forEach((pass, i) => {
-                const base = i % 2 === 0 ? -4.5 : 4.5;
-                pass.style.transform = `rotate(${base + tiltDelta * (i % 2 === 0 ? 1 : -1)}deg)`;
-              });
             }
           }
 

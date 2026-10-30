@@ -120,3 +120,84 @@
     grid-template-columns: 1fr !important;
   }
 }
+
+/* ==========================================================================
+   DistortLink Kinetic Hover Physics (Anton Nav Links, CTAs, Footer Links)
+   ========================================================================== */
+.framer-p8gunt a span,
+.framer-1ep0wx7 span,
+.framer-h92k9j span,
+.framer-8yog0e span,
+.framer-5q294k a span,
+[data-code-component-plugin-id="api"] span {
+  display: inline-block !important;
+  transform-origin: center bottom !important;
+  transition: transform 0.38s cubic-bezier(0.22, 1, 0.36, 1), color 0.25s ease !important;
+  cursor: pointer !important;
+  white-space: nowrap !important;
+}
+
+.framer-p8gunt a:hover span,
+.framer-h92k9j:hover span,
+.framer-8yog0e:hover span,
+.framer-5q294k a:hover span,
+[data-code-component-plugin-id="api"]:hover span {
+  transform: scaleY(1.55) skewX(-7deg) !important;
+  color: #E8321E !important;
+}
+
+.framer-p8gunt a:nth-child(even):hover span,
+.framer-5q294k a:nth-child(even):hover span {
+  transform: scaleY(1.55) skewX(7deg) !important;
+}
+
+/* ==========================================================================
+   Hanging Passes Continuous Sway (.sp-inview trigger & hover pause)
+   ========================================================================== */
+.sp-inview .sp-landed .sp-rig {
+  animation: sp-sway var(--t, 5s) ease-in-out infinite alternate !important;
+  animation-delay: var(--d, 0s) !important;
+  animation-play-state: running !important;
+}
+
+.sp-pass:hover .sp-rig {
+  animation-play-state: paused !important;
+  transform: rotate(0deg) translateY(-8px) !important;
+}
+
+/* ==========================================================================
+   FAQ Accordion Kinetic Polish & Diagonal Hatch Hover Reveal
+   ========================================================================== */
+.framer-JRMsV .framer-1y2cksb {
+  cursor: pointer !important;
+  position: relative !important;
+}
+
+.framer-JRMsV .framer-1dveem8 {
+  opacity: 0 !important;
+  transition: opacity 0.28s ease !important;
+  pointer-events: none !important;
+}
+
+.framer-JRMsV .framer-1y2cksb:hover .framer-1dveem8 {
+  opacity: 0.18 !important;
+}
+
+.framer-JRMsV .framer-922jbu p {
+  transition: transform 0.32s cubic-bezier(0.16, 1, 0.3, 1), color 0.25s ease !important;
+}
+
+@media (max-width: 809px) {
+  .framer-JRMsV .framer-m5ksiq {
+    padding-left: 24px !important;
+    padding-right: 18px !important;
+  }
+}
+
+/* ==========================================================================
+   Marquee Rails Performance Tuning
+   ========================================================================== */
+[data-framer-name="Rail"] {
+  will-change: transform;
+}
+
