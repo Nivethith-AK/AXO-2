@@ -32,50 +32,95 @@ export function initTravelPhotoFlight() {
     }, 3500);
   }
 
-  let ticking = false;
-  function updateFlight() {
-    ticking = false;
+  // Calculate target progress based on targetEl's position relative to viewport center
+  function calcProgress(el) {
+    const rect = el.getBoundingClientRect();
+    const centerOffset = (window.innerHeight - rect.height) / 2;
+    const scrollRange = Math.max(1, window.innerHeight - centerOffset);
+    const rawProgress = 1 - (rect.top - centerOffset) / scrollRange;
+    return rawProgress > 0.85 ? 1 : rawProgress < 0.05 ? 0 : rawProgress;
+  }
+
+  // Ease in-out
+  function ease(t) {
+    return t < 0.5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2;
+  }
+
+  let currentP = 0;
+  let targetP = 0;
+  let rafId = 0;
+  let isRunning = false;
+  let lastTime = 0;
+
+  function update() {
     const rectA = anchorEl.getBoundingClientRect();
     const rectB = targetEl.getBoundingClientRect();
 
-    // Calculate scroll progress between anchor passing viewport and reaching target
-    const scrollY = window.scrollY;
-    const startScroll = 100;
-    const endScroll = Math.max(startScroll + 100, targetEl.offsetTop - 120);
-    const progress = Math.min(1, Math.max(0, (scrollY - startScroll) / (endScroll - startScroll)));
+    // If target has scrolled completely above the viewport, hide fixed flight element
+    if (rectB.bottom < 0) {
+      flightEl.style.opacity = '0';
+      flightEl.style.pointerEvents = 'none';
+      return;
+    }
 
-    // Ease in-out cubic
-    const ease = progress < 0.5 ? 4 * progress * progress * progress : 1 - Math.pow(-2 * progress + 2, 3) / 2;
+    flightEl.style.opacity = '1';
+    const o = ease(currentP);
+    const curX = rectA.left + (rectB.left - rectA.left) * o;
+    const curY = rectA.top + (rectB.top - rectA.top) * o;
+    const curW = rectA.width + (rectB.width - rectA.width) * o;
+    const curH = rectA.height + (rectB.height - rectA.height) * o;
+    const tilt = Math.sin(Math.min(1, o * 1.18) * Math.PI) * -4;
 
-    const curX = rectA.left + (rectB.left - rectA.left) * ease;
-    const curY = rectA.top + (rectB.top - rectA.top) * ease;
-    const curW = rectA.width + (rectB.width - rectA.width) * ease;
-    const curH = rectA.height + (rectB.height - rectA.height) * ease;
+    flightEl.style.width = `${curW.toFixed(1)}px`;
+    flightEl.style.height = `${curH.toFixed(1)}px`;
+    flightEl.style.transform = `translate(${curX.toFixed(1)}px, ${curY.toFixed(1)}px) rotate(${tilt.toFixed(2)}deg)`;
 
-    flightEl.style.width = `${Math.round(curW)}px`;
-    flightEl.style.height = `${Math.round(curH)}px`;
-    flightEl.style.transform = `translate(${Math.round(curX)}px, ${Math.round(curY)}px)`;
-
-    // When fully docked into About target, hide duplicate border or adjust opacity
-    if (progress >= 0.98) {
+    // Fade target placeholder in when arrived
+    if (currentP >= 0.95) {
       targetEl.style.opacity = '1';
     } else {
-      targetEl.style.opacity = '0.35';
+      targetEl.style.opacity = '0';
     }
   }
 
-  const onScroll = () => {
-    if (!ticking) {
-      requestAnimationFrame(updateFlight);
-      ticking = true;
+  function loop(now) {
+    if (!isRunning) return;
+    const dt = Math.min((now - lastTime) / 1000, 0.05);
+    lastTime = now;
+
+    targetP = calcProgress(targetEl);
+    currentP += (targetP - currentP) * (1 - Math.exp(-10 * dt));
+
+    update();
+    rafId = requestAnimationFrame(loop);
+  }
+
+  function start() {
+    if (!isRunning) {
+      isRunning = true;
+      lastTime = performance.now();
+      rafId = requestAnimationFrame(loop);
     }
+  }
+
+  function stop() {
+    isRunning = false;
+    cancelAnimationFrame(rafId);
+  }
+
+  const onScroll = () => {
+    targetP = calcProgress(targetEl);
   };
 
   window.addEventListener('scroll', onScroll, { passive: true });
   window.addEventListener('resize', onScroll, { passive: true });
-  updateFlight();
+
+  targetP = currentP = calcProgress(targetEl);
+  update();
+  start();
 
   return () => {
+    stop();
     if (slideTimer) clearInterval(slideTimer);
     window.removeEventListener('scroll', onScroll);
     window.removeEventListener('resize', onScroll);

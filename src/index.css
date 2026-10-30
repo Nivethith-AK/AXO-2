@@ -102,3 +102,21 @@
   opacity: 1 !important;
   transform: none !important;
 }
+
+/* Fix Hero top-right badge alignment inside photo frame */
+.framer-bRyx9 .framer-x3ymbc {
+  left: auto !important;
+  right: 28px !important;
+}
+
+/* Travel photo target transition */
+#travel-b {
+  transition: opacity 0.4s ease;
+}
+
+/* Contact transmission form responsive grid */
+@media (max-width: 768px) {
+  #contact-transmission-form div[style*="grid-template-columns"] {
+    grid-template-columns: 1fr !important;
+  }
+}

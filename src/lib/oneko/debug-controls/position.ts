@@ -24,6 +24,8 @@ function makePosSlider(
 
   const slider = document.createElement("input");
   slider.type = "range";
+  slider.name = `oneko-debug-pos-${axis.toLowerCase()}`;
+  slider.id = `oneko-debug-pos-${axis.toLowerCase()}`;
   slider.min = "16";
   slider.style.cssText = `flex:1;cursor:pointer;accent-color:${debugColor.accent};`;
 

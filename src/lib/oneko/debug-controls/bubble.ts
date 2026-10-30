@@ -19,6 +19,8 @@ export function appendBubbleSection(
 
   const bubbleInput = document.createElement("input");
   bubbleInput.type = "text";
+  bubbleInput.name = "oneko-debug-bubble";
+  bubbleInput.id = "oneko-debug-bubble";
   bubbleInput.placeholder = "custom text...";
   bubbleInput.style.cssText = [
     `background:${debugColor.controlBg}`,
