@@ -51,8 +51,6 @@ export function appendForceStateSection(body: HTMLElement, stateRef: { current: 
   body.appendChild(sectionLabel("force state"));
 
   const stateSelect = document.createElement("select");
-  stateSelect.name = "oneko-debug-state";
-  stateSelect.id = "oneko-debug-state";
   stateSelect.style.cssText = selectStyle;
   for (const name of ALL_STATES) {
     const opt = document.createElement("option");
@@ -63,8 +61,6 @@ export function appendForceStateSection(body: HTMLElement, stateRef: { current: 
 
   const lockChk = document.createElement("input");
   lockChk.type = "checkbox";
-  lockChk.name = "oneko-debug-lock";
-  lockChk.id = "oneko-debug-lock";
   lockChk.title = "lock state (prevent auto-reset)";
   lockChk.style.cssText = `cursor:pointer;accent-color:${debugColor.accent};`;
   lockChk.addEventListener("change", () => {

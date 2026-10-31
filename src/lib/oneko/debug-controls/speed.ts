@@ -11,8 +11,6 @@ export function appendSpeedSection(body: HTMLElement, stateRef: { current: CatRu
 
   const speedSlider = document.createElement("input");
   speedSlider.type = "range";
-  speedSlider.name = "oneko-debug-speed";
-  speedSlider.id = "oneko-debug-speed";
   speedSlider.min = "1";
   speedSlider.max = "40";
   speedSlider.value = String(stateRef.current.currentSpeed);

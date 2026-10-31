@@ -21,7 +21,7 @@ export default function Testimonial() {
           </blockquote>
 
           <div className="testimonial-author">
-            <div className="author-avatar">◈</div>
+            <div className="author-avatar">✦</div>
             <div className="author-meta">
               <span className="author-name">Project Eden Reader</span>
               <span className="author-role">Listener &amp; Reader Community</span>

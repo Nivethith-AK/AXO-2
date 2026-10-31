@@ -2,7 +2,7 @@ import React, { useEffect, useState, useRef, useCallback } from 'react';
 import { useAudio } from '../context/AudioContext';
 import { useLenis } from './SmoothScroll';
 
-const GLYPHS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789ΔΨΩΞΛΘΦΣΠαβγδ∞◈⬡';
+const GLYPHS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789ΔΨΩΞΛΘΦΣΠαβγδ∞◈✦⬡';
 const CIPHER_MSGS = [
   'INITIALIZING CELESTIAL RELAY ',
   'DECRYPTING ARCHIVE RECORDS   ',

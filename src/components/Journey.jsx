@@ -23,7 +23,7 @@ const STEPS = [
     title: 'Illustrated Artwork',
     desc: 'Visual artwork, trailers, and manga panels created in partnership with Project Eden bring the characters and celestial backdrops to life.',
     tag: 'PROJECT EDEN COLLABORATION',
-    icon: '•',
+    icon: '✦',
   },
 ];
 

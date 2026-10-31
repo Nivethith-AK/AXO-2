@@ -131,7 +131,7 @@
   letter-spacing: 0.25em; text-transform: uppercase; color: var(--gold-bright);
 }
 .cs-badge::before,
-.cs-badge::after { content: '•'; font-size: 0.5rem; color: var(--gold); opacity: 0.8; }
+.cs-badge::after { content: '✦'; font-size: 0.5rem; color: var(--gold); opacity: 0.8; }
 
 /* ── VISUALS PLACEHOLDER ──────────────────────────────────── */
 .vis-grid {
